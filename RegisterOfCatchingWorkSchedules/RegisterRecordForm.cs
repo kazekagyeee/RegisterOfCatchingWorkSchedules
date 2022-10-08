@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-	public partial class RegisterRecord : Form
+	public partial class RegisterRecordForm : Form
 	{
-		public RegisterRecord()
+		public RegisterRecordForm()
 		{
 			InitializeComponent();
 		}

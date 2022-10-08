@@ -1,6 +1,6 @@
 ﻿namespace RegisterOfCatchingWorkSchedules
 {
-	partial class RegisterRecord
+	partial class RegisterRecordForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,14 +29,14 @@
 		private void InitializeComponent()
 		{
 			this.label1 = new System.Windows.Forms.Label();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.cbStatus = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.textBox3 = new System.Windows.Forms.TextBox();
-			this.textBox4 = new System.Windows.Forms.TextBox();
+			this.tbYear = new System.Windows.Forms.TextBox();
+			this.tbMonth = new System.Windows.Forms.TextBox();
+			this.tbPlace = new System.Windows.Forms.TextBox();
+			this.tbCommentary = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
@@ -49,13 +49,13 @@
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Статус";
 			// 
-			// comboBox1
+			// cbStatus
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(410, 40);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(121, 21);
-			this.comboBox1.TabIndex = 2;
+			this.cbStatus.FormattingEnabled = true;
+			this.cbStatus.Location = new System.Drawing.Point(410, 40);
+			this.cbStatus.Name = "cbStatus";
+			this.cbStatus.Size = new System.Drawing.Size(121, 21);
+			this.cbStatus.TabIndex = 2;
 			// 
 			// label2
 			// 
@@ -84,34 +84,34 @@
 			this.label4.TabIndex = 5;
 			this.label4.Text = "Населённый пункт";
 			// 
-			// textBox1
+			// tbYear
 			// 
-			this.textBox1.Location = new System.Drawing.Point(30, 41);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(100, 20);
-			this.textBox1.TabIndex = 6;
+			this.tbYear.Location = new System.Drawing.Point(30, 41);
+			this.tbYear.Name = "tbYear";
+			this.tbYear.Size = new System.Drawing.Size(100, 20);
+			this.tbYear.TabIndex = 6;
 			// 
-			// textBox2
+			// tbMonth
 			// 
-			this.textBox2.Location = new System.Drawing.Point(155, 41);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(100, 20);
-			this.textBox2.TabIndex = 7;
+			this.tbMonth.Location = new System.Drawing.Point(155, 41);
+			this.tbMonth.Name = "tbMonth";
+			this.tbMonth.Size = new System.Drawing.Size(100, 20);
+			this.tbMonth.TabIndex = 7;
 			// 
-			// textBox3
+			// tbPlace
 			// 
-			this.textBox3.Location = new System.Drawing.Point(285, 41);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(100, 20);
-			this.textBox3.TabIndex = 8;
+			this.tbPlace.Location = new System.Drawing.Point(285, 41);
+			this.tbPlace.Name = "tbPlace";
+			this.tbPlace.Size = new System.Drawing.Size(100, 20);
+			this.tbPlace.TabIndex = 8;
 			// 
-			// textBox4
+			// tbCommentary
 			// 
-			this.textBox4.Location = new System.Drawing.Point(30, 91);
-			this.textBox4.Multiline = true;
-			this.textBox4.Name = "textBox4";
-			this.textBox4.Size = new System.Drawing.Size(501, 91);
-			this.textBox4.TabIndex = 9;
+			this.tbCommentary.Location = new System.Drawing.Point(30, 91);
+			this.tbCommentary.Multiline = true;
+			this.tbCommentary.Name = "tbCommentary";
+			this.tbCommentary.Size = new System.Drawing.Size(501, 91);
+			this.tbCommentary.TabIndex = 9;
 			// 
 			// label5
 			// 
@@ -128,14 +128,14 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(564, 194);
 			this.Controls.Add(this.label5);
-			this.Controls.Add(this.textBox4);
-			this.Controls.Add(this.textBox3);
-			this.Controls.Add(this.textBox2);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.tbCommentary);
+			this.Controls.Add(this.tbPlace);
+			this.Controls.Add(this.tbMonth);
+			this.Controls.Add(this.tbYear);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.comboBox1);
+			this.Controls.Add(this.cbStatus);
 			this.Controls.Add(this.label1);
 			this.Name = "RegisterRecord";
 			this.Text = "План-график работ по отлову";
@@ -146,14 +146,14 @@
 
 		#endregion
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox cbStatus;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.TextBox textBox4;
+		private System.Windows.Forms.TextBox tbYear;
+		private System.Windows.Forms.TextBox tbMonth;
+		private System.Windows.Forms.TextBox tbPlace;
+		private System.Windows.Forms.TextBox tbCommentary;
 		private System.Windows.Forms.Label label5;
 	}
 }

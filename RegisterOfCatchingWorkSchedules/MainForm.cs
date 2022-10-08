@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void AddRecord(object sender, EventArgs e)
+        {
+            new RegisterRecordForm().ShowDialog();
         }
     }
 }
