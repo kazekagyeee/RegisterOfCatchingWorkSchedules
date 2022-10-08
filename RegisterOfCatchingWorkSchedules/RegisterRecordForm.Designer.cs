@@ -36,6 +36,7 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.dtpDate = new System.Windows.Forms.DateTimePicker();
 			this.cbPlace = new System.Windows.Forms.ComboBox();
+			this.btStatusHistory = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -107,11 +108,22 @@
 			this.cbPlace.Size = new System.Drawing.Size(121, 21);
 			this.cbPlace.TabIndex = 12;
 			// 
+			// btStatusHistory
+			// 
+			this.btStatusHistory.Location = new System.Drawing.Point(369, 188);
+			this.btStatusHistory.Name = "btStatusHistory";
+			this.btStatusHistory.Size = new System.Drawing.Size(162, 23);
+			this.btStatusHistory.TabIndex = 13;
+			this.btStatusHistory.Text = "Показать историю статусов";
+			this.btStatusHistory.UseVisualStyleBackColor = true;
+			this.btStatusHistory.Click += new System.EventHandler(this.btStatusHistory_Click);
+			// 
 			// RegisterRecordForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(564, 194);
+			this.ClientSize = new System.Drawing.Size(564, 217);
+			this.Controls.Add(this.btStatusHistory);
 			this.Controls.Add(this.cbPlace);
 			this.Controls.Add(this.dtpDate);
 			this.Controls.Add(this.label5);
@@ -136,5 +148,6 @@
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.DateTimePicker dtpDate;
 		private System.Windows.Forms.ComboBox cbPlace;
+		private System.Windows.Forms.Button btStatusHistory;
 	}
 }

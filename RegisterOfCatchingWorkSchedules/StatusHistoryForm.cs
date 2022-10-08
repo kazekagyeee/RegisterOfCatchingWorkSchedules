@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-	public partial class RegisterRecordForm : Form
+	public partial class StatusHistoryForm : Form
 	{
-		public RegisterRecordForm()
+		public StatusHistoryForm()
 		{
 			InitializeComponent();
-		}
-
-		private void btStatusHistory_Click(object sender, EventArgs e)
-		{
-			new StatusHistoryForm().ShowDialog();
 		}
 	}
 }
