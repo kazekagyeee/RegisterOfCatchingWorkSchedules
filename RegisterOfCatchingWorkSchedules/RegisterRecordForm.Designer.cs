@@ -31,13 +31,11 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.cbStatus = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
-			this.tbYear = new System.Windows.Forms.TextBox();
-			this.tbMonth = new System.Windows.Forms.TextBox();
-			this.tbPlace = new System.Windows.Forms.TextBox();
 			this.tbCommentary = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
+			this.dtpDate = new System.Windows.Forms.DateTimePicker();
+			this.cbPlace = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -62,48 +60,18 @@
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(27, 24);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(25, 13);
+			this.label2.Size = new System.Drawing.Size(33, 13);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "Год";
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(152, 24);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(40, 13);
-			this.label3.TabIndex = 4;
-			this.label3.Text = "Месяц";
+			this.label2.Text = "Дата";
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(282, 24);
+			this.label4.Location = new System.Drawing.Point(257, 24);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(102, 13);
 			this.label4.TabIndex = 5;
 			this.label4.Text = "Населённый пункт";
-			// 
-			// tbYear
-			// 
-			this.tbYear.Location = new System.Drawing.Point(30, 41);
-			this.tbYear.Name = "tbYear";
-			this.tbYear.Size = new System.Drawing.Size(100, 20);
-			this.tbYear.TabIndex = 6;
-			// 
-			// tbMonth
-			// 
-			this.tbMonth.Location = new System.Drawing.Point(155, 41);
-			this.tbMonth.Name = "tbMonth";
-			this.tbMonth.Size = new System.Drawing.Size(100, 20);
-			this.tbMonth.TabIndex = 7;
-			// 
-			// tbPlace
-			// 
-			this.tbPlace.Location = new System.Drawing.Point(285, 41);
-			this.tbPlace.Name = "tbPlace";
-			this.tbPlace.Size = new System.Drawing.Size(100, 20);
-			this.tbPlace.TabIndex = 8;
 			// 
 			// tbCommentary
 			// 
@@ -122,22 +90,37 @@
 			this.label5.TabIndex = 10;
 			this.label5.Text = "Комментарий";
 			// 
-			// RegisterRecord
+			// dtpDate
+			// 
+			this.dtpDate.CustomFormat = "MMMMyyyy";
+			this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dtpDate.Location = new System.Drawing.Point(30, 41);
+			this.dtpDate.Name = "dtpDate";
+			this.dtpDate.Size = new System.Drawing.Size(200, 20);
+			this.dtpDate.TabIndex = 11;
+			// 
+			// cbPlace
+			// 
+			this.cbPlace.FormattingEnabled = true;
+			this.cbPlace.Location = new System.Drawing.Point(260, 40);
+			this.cbPlace.Name = "cbPlace";
+			this.cbPlace.Size = new System.Drawing.Size(121, 21);
+			this.cbPlace.TabIndex = 12;
+			// 
+			// RegisterRecordForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(564, 194);
+			this.Controls.Add(this.cbPlace);
+			this.Controls.Add(this.dtpDate);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.tbCommentary);
-			this.Controls.Add(this.tbPlace);
-			this.Controls.Add(this.tbMonth);
-			this.Controls.Add(this.tbYear);
 			this.Controls.Add(this.label4);
-			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.cbStatus);
 			this.Controls.Add(this.label1);
-			this.Name = "RegisterRecord";
+			this.Name = "RegisterRecordForm";
 			this.Text = "План-график работ по отлову";
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -148,12 +131,10 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ComboBox cbStatus;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.TextBox tbYear;
-		private System.Windows.Forms.TextBox tbMonth;
-		private System.Windows.Forms.TextBox tbPlace;
 		private System.Windows.Forms.TextBox tbCommentary;
 		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.DateTimePicker dtpDate;
+		private System.Windows.Forms.ComboBox cbPlace;
 	}
 }
