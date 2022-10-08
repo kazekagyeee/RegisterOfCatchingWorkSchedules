@@ -17,15 +17,15 @@ namespace RegisterOfCatchingWorkSchedules
             InitializeComponent();
         }
         
-        private void btn_authorization_Click(object sender, EventArgs e)
-        {
-            var authorization = new AuthorizationForm();
-            authorization.ShowDialog();
-        }
-        
         private void AddRecord(object sender, EventArgs e)
         {
             new RegisterRecordForm().ShowDialog();
+        }
+
+        private void btn_autorisation_Click(object sender, EventArgs e)
+        {
+            var authorization = new AuthorizationForm();
+            authorization.ShowDialog();
         }
     }
 }
