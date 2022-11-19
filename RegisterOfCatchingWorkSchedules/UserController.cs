@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public class Role
-    {
-        public string Name { get; private set; }
-
-		//todo add  public Status[] Powers { get; private set; }
+	public class UserController
+	{
+		public void Login(string login, string password) { }
 	}
 }

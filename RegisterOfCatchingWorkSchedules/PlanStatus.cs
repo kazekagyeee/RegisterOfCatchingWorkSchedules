@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public enum Status
+    public enum PlanStatus
     {
         Editing,
         Agreement,
