@@ -52,6 +52,7 @@
     <Compile Include="AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan.cs" />
     <Compile Include="StatusHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,7 +67,7 @@
     </Compile>
     <Compile Include="Municipality.cs" />
     <Compile Include="Organisation.cs" />
-    <Compile Include="RecordStatus.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="RegisterRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>

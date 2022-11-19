@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public class Role
+    public enum Status
     {
-        public string Name { get; private set; }
-        public Status[] Powers { get; private set; }
+        Editing,
+        Agreement,
+        Approval
     }
 }

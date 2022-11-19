@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public enum RecordStatus
+    public class Plan
     {
-        Editing,
-        Agreement,
-        Approval
+        public Organisation Organisation { get; set; }
+        public Status Status { get; set; }
+        public string Name { get; set; }
     }
 }
