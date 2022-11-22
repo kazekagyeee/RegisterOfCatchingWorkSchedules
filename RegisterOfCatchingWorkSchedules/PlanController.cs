@@ -5,6 +5,8 @@ namespace RegisterOfCatchingWorkSchedules
 {
 	public class PlanController
 	{
+		public Plan[] GetAllPlans(Filter filter, Sort sort) { throw new NotImplementedException(); }
+
 		public Plan OpenPlan(int id) { throw new NotImplementedException(); }
 
 		public void CreatePlan(Plan plan) { }

@@ -52,10 +52,12 @@
     <Compile Include="AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filter.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Plan.cs" />
     <Compile Include="PlanController.cs" />
     <Compile Include="PlanStatusRecord.cs" />
+    <Compile Include="Sort.cs" />
     <Compile Include="StatusHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
