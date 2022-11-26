@@ -37,6 +37,10 @@
 			this.dtpDate = new System.Windows.Forms.DateTimePicker();
 			this.cbPlace = new System.Windows.Forms.ComboBox();
 			this.btStatusHistory = new System.Windows.Forms.Button();
+			this.dgPlan = new System.Windows.Forms.DataGridView();
+			this.Район = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			((System.ComponentModel.ISupportInitialize)(this.dgPlan)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -76,16 +80,18 @@
 			// 
 			// tbCommentary
 			// 
-			this.tbCommentary.Location = new System.Drawing.Point(30, 91);
+			this.tbCommentary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbCommentary.Location = new System.Drawing.Point(30, 470);
 			this.tbCommentary.Multiline = true;
 			this.tbCommentary.Name = "tbCommentary";
-			this.tbCommentary.Size = new System.Drawing.Size(501, 91);
+			this.tbCommentary.Size = new System.Drawing.Size(1099, 91);
 			this.tbCommentary.TabIndex = 9;
 			// 
 			// label5
 			// 
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(27, 75);
+			this.label5.Location = new System.Drawing.Point(27, 454);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(77, 13);
 			this.label5.TabIndex = 10;
@@ -110,7 +116,8 @@
 			// 
 			// btStatusHistory
 			// 
-			this.btStatusHistory.Location = new System.Drawing.Point(369, 188);
+			this.btStatusHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btStatusHistory.Location = new System.Drawing.Point(967, 567);
 			this.btStatusHistory.Name = "btStatusHistory";
 			this.btStatusHistory.Size = new System.Drawing.Size(162, 23);
 			this.btStatusHistory.TabIndex = 13;
@@ -118,11 +125,34 @@
 			this.btStatusHistory.UseVisualStyleBackColor = true;
 			this.btStatusHistory.Click += new System.EventHandler(this.btStatusHistory_Click);
 			// 
+			// dgPlan
+			// 
+			this.dgPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgPlan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Район,
+            this.Column1});
+			this.dgPlan.Location = new System.Drawing.Point(30, 89);
+			this.dgPlan.Name = "dgPlan";
+			this.dgPlan.Size = new System.Drawing.Size(1099, 338);
+			this.dgPlan.TabIndex = 14;
+			// 
+			// Район
+			// 
+			this.Район.HeaderText = "Район";
+			this.Район.Name = "Район";
+			// 
+			// Column1
+			// 
+			this.Column1.HeaderText = "1";
+			this.Column1.Name = "Column1";
+			this.Column1.Width = 25;
+			// 
 			// RegisterRecordForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(564, 217);
+			this.ClientSize = new System.Drawing.Size(1162, 596);
+			this.Controls.Add(this.dgPlan);
 			this.Controls.Add(this.btStatusHistory);
 			this.Controls.Add(this.cbPlace);
 			this.Controls.Add(this.dtpDate);
@@ -134,6 +164,7 @@
 			this.Controls.Add(this.label1);
 			this.Name = "RegisterRecordForm";
 			this.Text = "План-график работ по отлову";
+			((System.ComponentModel.ISupportInitialize)(this.dgPlan)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -149,5 +180,8 @@
 		private System.Windows.Forms.DateTimePicker dtpDate;
 		private System.Windows.Forms.ComboBox cbPlace;
 		private System.Windows.Forms.Button btStatusHistory;
+		private System.Windows.Forms.DataGridView dgPlan;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Район;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 	}
 }
