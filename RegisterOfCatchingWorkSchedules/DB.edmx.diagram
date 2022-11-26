@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d37449f921be455d8c8eb608e5fe606f" Name="Diagram1">
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Municipality" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Organisation" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Places" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Plans" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Records" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.RolePowers" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Roles" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Statuses" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Users" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.MunicipalityID" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.UserMunicipality" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.OrganisationID" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.UserOrganisation" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.PlaceID" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.PlanID" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.Status" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.RoleID" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.StatusID" ManuallyRouted="false" />
+        <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.UserRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

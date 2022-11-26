@@ -12,21 +12,13 @@ namespace RegisterOfCatchingWorkSchedules
     using System;
     using System.Collections.Generic;
     
-    public partial class Organisation
+    public partial class RolePowers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Organisation()
-        {
-            this.Plans = new HashSet<Plans>();
-            this.Users = new HashSet<Users>();
-        }
-    
         public int ID { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> RoleID { get; set; }
+        public Nullable<int> StatusID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Plans> Plans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual Roles Roles { get; set; }
+        public virtual Statuses Statuses { get; set; }
     }
 }
