@@ -9,7 +9,7 @@ namespace RegisterOfCatchingWorkSchedules
     public class Plan
     {
         public Organisation Organisation { get; set; }
-        public PlanStatus Status { get; set; }
+        public Statuses Status { get; set; }
         public string Name { get; set; }
     }
 }
