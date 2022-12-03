@@ -8,6 +8,6 @@ namespace RegisterOfCatchingWorkSchedules
 {
 	public class UserController
 	{
-		public void Login(string login, string password) { }
+		public bool TryLogin(string login, string password) { throw new NotImplementedException(); }
 	}
 }
