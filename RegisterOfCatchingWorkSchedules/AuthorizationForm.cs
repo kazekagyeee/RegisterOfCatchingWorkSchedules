@@ -16,5 +16,14 @@ namespace RegisterOfCatchingWorkSchedules
         {
             InitializeComponent();
         }
+
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            UserController userController = new UserController();
+            if (userController.TryLogin(textBox_login.Text, textBox_password.Text))
+            {
+                MessageBox.Show("Logged in");
+            }
+        }
     }
 }
