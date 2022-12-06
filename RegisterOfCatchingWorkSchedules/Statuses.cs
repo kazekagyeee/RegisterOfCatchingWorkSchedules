@@ -19,14 +19,17 @@ namespace RegisterOfCatchingWorkSchedules
         {
             this.Plans = new HashSet<Plans>();
             this.RolePowers = new HashSet<RolePowers>();
+            this.StatusHistory = new HashSet<StatusHistory>();
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string StatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Plans> Plans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RolePowers> RolePowers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StatusHistory> StatusHistory { get; set; }
     }
 }

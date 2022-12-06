@@ -10,13 +10,16 @@
 namespace RegisterOfCatchingWorkSchedules
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class StatusHistory
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
         public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public Nullable<int> HistoryStatusID { get; set; }
+        public Nullable<int> HistoryPlanID { get; set; }
+        public Nullable<System.DateTime> HistoryDate { get; set; }
+    
+        public virtual Plans Plans { get; set; }
+        public virtual Statuses Statuses { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace RegisterOfCatchingWorkSchedules
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string PlacesName { get; set; }
         public Nullable<int> MunicipalityID { get; set; }
     
         public virtual Municipality Municipality { get; set; }

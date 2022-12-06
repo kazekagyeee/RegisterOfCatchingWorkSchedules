@@ -15,8 +15,8 @@ namespace RegisterOfCatchingWorkSchedules
     public partial class Users
     {
         public int ID { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string UserLogin { get; set; }
+        public string UserPassword { get; set; }
         public Nullable<int> UserRole { get; set; }
         public Nullable<int> UserOrganisation { get; set; }
         public Nullable<int> UserMunicipality { get; set; }
