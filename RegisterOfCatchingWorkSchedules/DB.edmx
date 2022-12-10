@@ -34,6 +34,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrganisationID" Type="int" />
           <Property Name="PlanStatusID" Type="int" />
+          <Property Name="PlanMunicipalityID" Type="int" />
+          <Property Name="PlanDate" Type="date" />
           <Property Name="PlanName" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusChangeDate" Type="date" />
         </EntityType>
@@ -145,6 +147,18 @@
             </Principal>
             <Dependent Role="Records">
               <PropertyRef Name="PlaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PlanMunicipalityID">
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Plans">
+              <PropertyRef Name="PlanMunicipalityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -263,6 +277,10 @@
             <End Role="Places" EntitySet="Places" />
             <End Role="Records" EntitySet="Records" />
           </AssociationSet>
+          <AssociationSet Name="PlanMunicipalityID" Association="Self.PlanMunicipalityID">
+            <End Role="Municipality" EntitySet="Municipality" />
+            <End Role="Plans" EntitySet="Plans" />
+          </AssociationSet>
           <AssociationSet Name="PlanStatusID" Association="Self.PlanStatusID">
             <End Role="Statuses" EntitySet="Statuses" />
             <End Role="Plans" EntitySet="Plans" />
@@ -304,6 +322,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MunicipalityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Places" Relationship="Self.MunicipalityID" FromRole="Municipality" ToRole="Places" />
+          <NavigationProperty Name="Plans" Relationship="Self.PlanMunicipalityID" FromRole="Municipality" ToRole="Plans" />
           <NavigationProperty Name="Users" Relationship="Self.UserMunicipality" FromRole="Municipality" ToRole="Users" />
         </EntityType>
         <EntityType Name="Organisation">
@@ -332,8 +351,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrganisationID" Type="Int32" />
           <Property Name="PlanStatusID" Type="Int32" />
+          <Property Name="PlanMunicipalityID" Type="Int32" />
+          <Property Name="PlanDate" Type="DateTime" Precision="0" />
           <Property Name="PlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StatusChangeDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Municipality" Relationship="Self.PlanMunicipalityID" FromRole="Plans" ToRole="Municipality" />
           <NavigationProperty Name="Organisation" Relationship="Self.OrganisationID" FromRole="Plans" ToRole="Organisation" />
           <NavigationProperty Name="StatusHistory" Relationship="Self.HistoryPlanID" FromRole="Plans" ToRole="StatusHistory" />
           <NavigationProperty Name="Statuses" Relationship="Self.PlanStatusID" FromRole="Plans" ToRole="Statuses" />
@@ -413,6 +435,18 @@
             </Principal>
             <Dependent Role="Places">
               <PropertyRef Name="MunicipalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PlanMunicipalityID">
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Plans">
+              <PropertyRef Name="PlanMunicipalityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -563,6 +597,10 @@
             <End Role="Municipality" EntitySet="Municipality" />
             <End Role="Places" EntitySet="Places" />
           </AssociationSet>
+          <AssociationSet Name="PlanMunicipalityID" Association="Self.PlanMunicipalityID">
+            <End Role="Municipality" EntitySet="Municipality" />
+            <End Role="Plans" EntitySet="Plans" />
+          </AssociationSet>
           <AssociationSet Name="UserMunicipality" Association="Self.UserMunicipality">
             <End Role="Municipality" EntitySet="Municipality" />
             <End Role="Users" EntitySet="Users" />
@@ -645,6 +683,8 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="OrganisationID" ColumnName="OrganisationID" />
                 <ScalarProperty Name="PlanStatusID" ColumnName="PlanStatusID" />
+                <ScalarProperty Name="PlanMunicipalityID" ColumnName="PlanMunicipalityID" />
+                <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
                 <ScalarProperty Name="PlanName" ColumnName="PlanName" />
                 <ScalarProperty Name="StatusChangeDate" ColumnName="StatusChangeDate" />
               </MappingFragment>

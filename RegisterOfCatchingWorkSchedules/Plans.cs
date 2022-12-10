@@ -24,9 +24,12 @@ namespace RegisterOfCatchingWorkSchedules
         public int ID { get; set; }
         public Nullable<int> OrganisationID { get; set; }
         public Nullable<int> PlanStatusID { get; set; }
+        public Nullable<int> PlanMunicipalityID { get; set; }
+        public Nullable<System.DateTime> PlanDate { get; set; }
         public string PlanName { get; set; }
         public Nullable<System.DateTime> StatusChangeDate { get; set; }
     
+        public virtual Municipality Municipality { get; set; }
         public virtual Organisation Organisation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StatusHistory> StatusHistory { get; set; }

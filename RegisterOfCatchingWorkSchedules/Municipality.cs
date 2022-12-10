@@ -18,6 +18,7 @@ namespace RegisterOfCatchingWorkSchedules
         public Municipality()
         {
             this.Places = new HashSet<Places>();
+            this.Plans = new HashSet<Plans>();
             this.Users = new HashSet<Users>();
         }
     
@@ -26,6 +27,8 @@ namespace RegisterOfCatchingWorkSchedules
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Places> Places { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Plans> Plans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
     }
