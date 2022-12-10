@@ -12,7 +12,7 @@ namespace RegisterOfCatchingWorkSchedules
 	{
 		public bool TryLogin(string login, string password) 
 		{
-			AutorisationService.Autorise(login, password);
+			return(AuthorizationService.TryAuthorization(login, password));			
 		}
 	}
 }
