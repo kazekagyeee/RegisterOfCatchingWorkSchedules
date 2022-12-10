@@ -32,5 +32,23 @@ namespace RegisterOfCatchingWorkSchedules
                                 .Where(x => availableStatuses.Any(s => s.ID == x.PlanStatusID))
                                 .ToList();
         }
+
+        public void DeletePlan(int planID)
+        {
+            var planToRemove = Program.DBContext.Plans.FirstOrDefault(x => x.ID == planID);
+            Program.DBContext.Plans.Remove(planToRemove);
+        }
+
+        public int CreatePlan(DateTime planDate, Places place)
+        {
+            var plan = new Plans();
+            plan.PlanStatusID = Program.DBContext.Statuses.FirstOrDefault(x => x.StatusName == "Draft").ID;
+            plan.PlanDate = planDate;
+            plan.StatusChangeDate = DateTime.Now;
+            plan.OrganisationID = Program.Session.User.Organisation.ID;
+            plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
+            Program.DBContext.Plans.Add(plan);
+            return plan.ID;
+        }
     }
 }

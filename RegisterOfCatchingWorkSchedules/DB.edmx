@@ -36,7 +36,6 @@
           <Property Name="PlanStatusID" Type="int" />
           <Property Name="PlanMunicipalityID" Type="int" />
           <Property Name="PlanDate" Type="date" />
-          <Property Name="PlanName" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusChangeDate" Type="date" />
         </EntityType>
         <EntityType Name="Records">
@@ -353,7 +352,6 @@
           <Property Name="PlanStatusID" Type="Int32" />
           <Property Name="PlanMunicipalityID" Type="Int32" />
           <Property Name="PlanDate" Type="DateTime" Precision="0" />
-          <Property Name="PlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StatusChangeDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Municipality" Relationship="Self.PlanMunicipalityID" FromRole="Plans" ToRole="Municipality" />
           <NavigationProperty Name="Organisation" Relationship="Self.OrganisationID" FromRole="Plans" ToRole="Organisation" />
@@ -685,7 +683,6 @@
                 <ScalarProperty Name="PlanStatusID" ColumnName="PlanStatusID" />
                 <ScalarProperty Name="PlanMunicipalityID" ColumnName="PlanMunicipalityID" />
                 <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
-                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
                 <ScalarProperty Name="StatusChangeDate" ColumnName="StatusChangeDate" />
               </MappingFragment>
             </EntityTypeMapping>

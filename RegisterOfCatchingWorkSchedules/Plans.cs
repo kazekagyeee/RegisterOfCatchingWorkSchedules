@@ -26,7 +26,6 @@ namespace RegisterOfCatchingWorkSchedules
         public Nullable<int> PlanStatusID { get; set; }
         public Nullable<int> PlanMunicipalityID { get; set; }
         public Nullable<System.DateTime> PlanDate { get; set; }
-        public string PlanName { get; set; }
         public Nullable<System.DateTime> StatusChangeDate { get; set; }
     
         public virtual Municipality Municipality { get; set; }

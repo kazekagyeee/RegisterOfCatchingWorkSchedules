@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="70d8cac8f4bb4849a44e12c964bd78c5" Name="Diagram1">
+      <Diagram DiagramId="c11985679cbc476fab9b747fc9f36830" Name="Diagram1">
         <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Municipality" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Organisation" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Organisation" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Places" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Plans" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Records" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.RolePowers" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Roles" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Statuses" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.StatusHistory" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Records" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.RolePowers" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Roles" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Statuses" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.StatusHistory" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RegisterOfCathingWorkSchedulesModel.Users" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.MunicipalityID" ManuallyRouted="false" />
         <AssociationConnector Association="RegisterOfCathingWorkSchedulesModel.PlanMunicipalityID" ManuallyRouted="false" />
