@@ -22,7 +22,13 @@ namespace RegisterOfCatchingWorkSchedules
             UserController userController = new UserController();
             if (userController.TryLogin(textBox_login.Text, textBox_password.Text))
             {
-                MessageBox.Show("Logged in");
+                MessageBox.Show("Авторизация успешна");
+            }
+            else
+            {
+                MessageBox.Show("Невенрый логин или пароль");
+                textBox_login.Text = "";
+                textBox_password.Text = "";
             }
         }
     }

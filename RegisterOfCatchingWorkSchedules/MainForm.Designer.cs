@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dgvPlans = new System.Windows.Forms.DataGridView();
+			this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Locality = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,23 +40,33 @@
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.comboBox2 = new System.Windows.Forms.ComboBox();
 			this.comboBox3 = new System.Windows.Forms.ComboBox();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvPlans)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// dataGridView1
+			// dgvPlans
 			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.dgvPlans.AllowUserToAddRows = false;
+			this.dgvPlans.AllowUserToDeleteRows = false;
+			this.dgvPlans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvPlans.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.Date,
             this.Locality,
             this.Status});
-			this.dataGridView1.Location = new System.Drawing.Point(9, 44);
-			this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.RowHeadersWidth = 51;
-			this.dataGridView1.RowTemplate.Height = 24;
-			this.dataGridView1.Size = new System.Drawing.Size(1016, 356);
-			this.dataGridView1.TabIndex = 0;
+			this.dgvPlans.Location = new System.Drawing.Point(9, 44);
+			this.dgvPlans.Margin = new System.Windows.Forms.Padding(2);
+			this.dgvPlans.Name = "dgvPlans";
+			this.dgvPlans.RowHeadersWidth = 51;
+			this.dgvPlans.RowTemplate.Height = 24;
+			this.dgvPlans.Size = new System.Drawing.Size(1016, 356);
+			this.dgvPlans.TabIndex = 0;
+			this.dgvPlans.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OpenPlan);
+			// 
+			// ID
+			// 
+			this.ID.HeaderText = "ID";
+			this.ID.Name = "ID";
+			this.ID.Visible = false;
 			// 
 			// Date
 			// 
@@ -109,7 +120,6 @@
 			this.btRemoveRecord.TabIndex = 3;
 			this.btRemoveRecord.Text = "Удалить";
 			this.btRemoveRecord.UseVisualStyleBackColor = true;
-			this.btRemoveRecord.Click += new System.EventHandler(this.RemoveRecord);
 			// 
 			// label1
 			// 
@@ -161,11 +171,11 @@
 			this.Controls.Add(this.btRemoveRecord);
 			this.Controls.Add(this.btAddRecord);
 			this.Controls.Add(this.btn_autorisation);
-			this.Controls.Add(this.dataGridView1);
+			this.Controls.Add(this.dgvPlans);
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "MainForm";
 			this.Text = "Главная";
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvPlans)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -173,7 +183,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvPlans;
         private System.Windows.Forms.Button btn_autorisation;
         private System.Windows.Forms.Button btAddRecord;
         private System.Windows.Forms.Button btRemoveRecord;
@@ -181,6 +191,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ID;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Locality;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Status;

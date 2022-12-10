@@ -10,20 +10,29 @@ namespace RegisterOfCatchingWorkSchedules
 			InitializeComponent();
 		}
 
-		private void AddRecord(object sender, EventArgs e) => new RegisterRecordForm().ShowDialog();
+		private void AddRecord(object sender, EventArgs e) => new RegisterRecordForm(-1).ShowDialog();
 
 		private void OpenAuthForm(object sender, EventArgs e) => new AuthorizationForm().ShowDialog();
 
 		private void RemoveRecord(object sender, EventArgs e)
 		{
-			if (PlanController.TryRemovePlan())
+			foreach (DataGridViewRow row in dgvPlans.SelectedRows)
 			{
+				if (PlanController.TryRemovePlan((int)row.Cells["ID"].Value))
+				{
 
+				}
+				else
+				{
+					MessageBox.Show("Ошибка");
+				}
 			}
-			else
-			{
-				MessageBox.Show("Ошибка")
-			}
+		}
+
+		private void OpenPlan(object sender, DataGridViewCellEventArgs e)
+		{
+			var id = (int)dgvPlans.Rows[e.RowIndex].Cells["ID"].Value;
+			new RegisterRecordForm(id).ShowDialog();
 		}
 	}
 }
