@@ -28,12 +28,12 @@ namespace RegisterOfCatchingWorkSchedules
 
 		public static bool TryRemovePlan(int id) { throw new NotImplementedException(); }
 
-		internal static void RemoveLocation(int currentPlanId, int v)
+		public static void RemoveLocation(int currentPlanId, int locationId)
 		{
 			throw new NotImplementedException();
 		}
 
-		internal static void EditLocation(int currentPlanId, int selectedRowPlaceIndex, int v)
+		public static void EditLocation(int currentPlanId, int oldLocationId, int newLocationId)
 		{
 			throw new NotImplementedException();
 		}
