@@ -97,11 +97,12 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="PlansManagementService.cs" />
+    <Compile Include="RecordManagementService.cs" />
     <Compile Include="Records.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="RegisterDBContext.cs" />
-    <Compile Include="AutorisationService.cs" />
+    <Compile Include="AutorizationService.cs" />
     <Compile Include="RolePowers.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
