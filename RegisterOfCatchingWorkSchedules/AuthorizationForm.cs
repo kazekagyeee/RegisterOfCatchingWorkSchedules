@@ -1,35 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public partial class AuthorizationForm : Form
-    {
-        public AuthorizationForm()
-        {
-            InitializeComponent();
-        }
+	public partial class AuthorizationForm : Form
+	{
+		public AuthorizationForm() => InitializeComponent();
 
-        private void btn_login_Click(object sender, EventArgs e)
-        {
-            UserController userController = new UserController();
-            if (userController.TryLogin(textBox_login.Text, textBox_password.Text))
-            {
-                MessageBox.Show("Авторизация успешна");
-            }
-            else
-            {
-                MessageBox.Show("Невенрый логин или пароль");
-                textBox_login.Text = "";
-                textBox_password.Text = "";
-            }
-        }
-    }
+		private void OnLogin(object sender, EventArgs e)
+		{
+			if (UserController.TryLogin(textBox_login.Text, textBox_password.Text))
+			{
+				MessageBox.Show("Авторизация успешна");
+				Close();
+			}
+			else
+			{
+				MessageBox.Show("Неверный логин или пароль");
+			}
+		}
+	}
 }

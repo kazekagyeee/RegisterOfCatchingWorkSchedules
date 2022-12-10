@@ -1,7 +1,7 @@
 ﻿namespace RegisterOfCatchingWorkSchedules
 {
-	public class UserController
+	public static class UserController
 	{
-		public bool TryLogin(string login, string password) => AutorizationService.TryAutorizate(login, password);
+		public static bool TryLogin(string login, string password) => AutorizationService.TryAutorizate(login, password);
 	}
 }
