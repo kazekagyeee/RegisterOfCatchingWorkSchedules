@@ -22,7 +22,7 @@ namespace RegisterOfCatchingWorkSchedules
 			}
 			else
 			{
-				Message
+				MessageBox.Show("Ошибка")
 			}
 		}
 	}
