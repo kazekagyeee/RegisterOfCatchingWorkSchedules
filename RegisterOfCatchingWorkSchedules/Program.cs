@@ -8,6 +8,8 @@ namespace RegisterOfCatchingWorkSchedules
 {
     internal static class Program
     {
+        public static RegisterDBContext DBContext;
+        public static SessionService Session;
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -17,6 +19,9 @@ namespace RegisterOfCatchingWorkSchedules
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+
+            DBContext = new RegisterDBContext();
+            Session = new SessionService();
         }
     }
 }

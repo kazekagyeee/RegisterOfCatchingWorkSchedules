@@ -100,12 +100,14 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="RegisterDBContext.cs" />
+    <Compile Include="AutorisationService.cs" />
     <Compile Include="RolePowers.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SessionService.cs" />
     <Compile Include="Sort.cs" />
     <Compile Include="Statuses.cs">
       <DependentUpon>DB.tt</DependentUpon>
