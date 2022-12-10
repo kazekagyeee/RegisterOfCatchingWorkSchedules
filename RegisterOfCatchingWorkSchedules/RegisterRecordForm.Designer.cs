@@ -140,7 +140,8 @@
 			this.dgvPlan.Size = new System.Drawing.Size(1099, 338);
 			this.dgvPlan.TabIndex = 14;
 			this.dgvPlan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnDataGridCellClick);
-			this.dgvPlan.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.OnDataGridRowAdded);
+			this.dgvPlan.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
+			this.dgvPlan.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnRowSelected);
 			this.dgvPlan.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnDataGridRowRemoving);
 			// 
 			// Район
@@ -196,7 +197,7 @@
 		private System.Windows.Forms.ComboBox cbMunicipalty;
 		private System.Windows.Forms.Button btStatusHistory;
 		private System.Windows.Forms.DataGridView dgvPlan;
-		private System.Windows.Forms.DataGridViewComboBoxColumn Район;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.DataGridViewComboBoxColumn Район;
 	}
 }

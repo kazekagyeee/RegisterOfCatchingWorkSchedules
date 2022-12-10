@@ -7,6 +7,7 @@ namespace RegisterOfCatchingWorkSchedules
 	{
 		private int _currentPlanId;
 		private bool _hasUnsavedChanges = false;
+		private int _selectedRowPlaceIndex = -1;
 
 		public RegisterRecordForm(int planId)
 		{
@@ -16,7 +17,7 @@ namespace RegisterOfCatchingWorkSchedules
 			if (planId != -1)
 				LoadPlanInfo(planId);
 			//if () //TODO: session
-			DisableEditing();
+			//DisableEditing();
 		}
 
 		private void DisableEditing()
@@ -30,6 +31,7 @@ namespace RegisterOfCatchingWorkSchedules
 		private void LoadStatusesValues()
 		{
 			//cbStatus.Items = //TODO
+			cbStatus.Items.AddRange(new object[] { 1, 2 });
 		}
 
 		private void LoadPlanInfo(int id)
@@ -73,22 +75,21 @@ namespace RegisterOfCatchingWorkSchedules
 			_hasUnsavedChanges = true;
 		}
 
-
 		private void OnDataGridCellClick(object sender, DataGridViewCellEventArgs e)
 		{
-
+			//TODO
 			_hasUnsavedChanges = true;
 		}
 
-		private void OnDataGridRowAdded(object sender, DataGridViewRowsAddedEventArgs e)
-		{
-			//PlanController.AddLocation(_currentPlanId, GetDataGridRowPlaceIndex(e.RowIndex));
-			_hasUnsavedChanges = true;
-		}
+		//private void OnDataGridRowAdded(object sender, DataGridViewRowsAddedEventArgs e)
+		//{
+		//	//PlanController.AddLocation(_currentPlanId, GetDataGridRowPlaceIndex(e.RowIndex));
+		//	_hasUnsavedChanges = true;
+		//}
 
 		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e)
 		{
-			//PlanController.RemoveLocation(_currentPlanId, GetDataGridRowPlaceIndex(e.Row.Index));
+			PlanController.RemoveLocation(_currentPlanId, GetDataGridRowPlaceIndex(e.Row.Index));
 			_hasUnsavedChanges = true;
 		}
 
@@ -104,6 +105,19 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnSave(object sender, EventArgs e) => Save();
 
+
+		private void OnCellEdited(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.ColumnIndex != 0)
+				return;
+			PlanController.EditPlanPlace(_currentPlanId, _selectedRowPlaceIndex, GetDataGridRowPlaceIndex(e.RowIndex));
+			_hasUnsavedChanges = false;
+		}
+
+		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlaceIndex = GetDataGridRowPlaceIndex(e.RowIndex);
+		
+		private int GetDataGridRowPlaceIndex(int rowIndex) => ((ComboBox)dgvPlan.Rows[rowIndex].Cells[0].Value).SelectedIndex;
+		
 		private void Save()
 		{
 			PlanController.Save(_currentPlanId);
@@ -113,9 +127,8 @@ namespace RegisterOfCatchingWorkSchedules
 		private void CreatePlan()
 		{
 			_currentPlanId = PlanController.CreatePlan(dtpDate.Value, cbMunicipalty.SelectedIndex);//TODO
+			dgvPlan.Enabled = true;
 			cbStatus.Enabled = true;
 		}
-
-		private int GetDataGridRowPlaceIndex(int rowIndex) => ((ComboBox)dgvPlan.Rows[rowIndex].Cells[0].Value).SelectedIndex;
 	}
 }
