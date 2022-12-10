@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public static class AutorisationService
+    public static class AutorizationService
     {
-        public static bool Autorise(string login, string password)
+        public static bool Autorizate(string login, string password)
         {
             var user = Program.DBContext.Users
                 .FirstOrDefault(x => x.UserLogin == login && x.UserPassword == password);
