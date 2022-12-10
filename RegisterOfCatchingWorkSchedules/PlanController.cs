@@ -32,5 +32,10 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			throw new NotImplementedException();
 		}
+
+		internal static void EditPlanPlace(int currentPlanId, int selectedRowPlaceIndex, int v)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
