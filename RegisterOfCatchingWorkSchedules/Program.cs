@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,8 +22,16 @@ namespace RegisterOfCatchingWorkSchedules
 
             DBContext = new RegisterDBContext();
             Session = new SessionService();
-            
-            Application.Run(new MainForm());
+
+			//var tmn = DBContext.Municipality.Add(new Municipality() { MunicipalityName = "Тюмень" });
+			//DBContext.Municipality.Add(new Municipality() { MunicipalityName = "Тобольск" });
+			//DBContext.Municipality.Add(new Municipality() { MunicipalityName = "Ишим" });
+
+   //         for (int i = 1; i <= 6; i++)
+   //             tmn.Places.Add(new Places() { PlacesName = $"{i} мкр" });
+			//DBContext.SaveChanges();
+
+			Application.Run(new MainForm());
         }
     }
 }

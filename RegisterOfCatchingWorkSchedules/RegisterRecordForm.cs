@@ -12,6 +12,8 @@ namespace RegisterOfCatchingWorkSchedules
 		private bool _hasUnsavedChanges = false;
 		private int _selectedRowPlaceIndex = -1;
 
+		private bool _isInitialized = false;
+
 		private const int PlaceColumnWidth = 200;
 		private const int DayColumnWidth = 27;
 
@@ -27,14 +29,18 @@ namespace RegisterOfCatchingWorkSchedules
 			dgvPlan.Enabled = true;
 			InitComboboxes();
 			InitDataGrid();
+
+			_isInitialized = true;
 		}
 
 		private void InitComboboxes()
 		{
+			Program.DBContext.Municipality.Load();
 			cbMunicipalty.DataSource = Program.DBContext.Municipality.Local.ToBindingList(); //TODO
 			cbMunicipalty.ValueMember = "ID";
 			cbMunicipalty.DisplayMember = "MunicipalityName";
 
+			Program.DBContext.Statuses.Load();
 			cbStatus.DataSource = Program.DBContext.Statuses.Local.ToBindingList(); //TODO
 			cbStatus.ValueMember = "ID";
 			cbStatus.DisplayMember = "StatusName";
@@ -51,7 +57,7 @@ namespace RegisterOfCatchingWorkSchedules
 				ValueMember = "ID",
 				DisplayMember = "PlacesName",
 			};
-			((dgvPlan.Columns[0] as DataGridViewComboBoxColumn).DataSource as BindingListView<Places>).ApplyFilter(x => x.MunicipalityID == (int)cbMunicipalty.SelectedValue);
+			
 			dgvPlan.Columns.Add(places);
 			for (int i = 1; i <= 31; i++)
 			{
@@ -98,6 +104,9 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnDateChanged(object sender, EventArgs e)
 		{
+			//TODO: clear table, show message
+			if (!_isInitialized)
+				return;
 			if (cbMunicipalty.SelectedIndex != 0 && _currentPlanId == -1)
 				CreatePlan();
 			else if (_currentPlanId != -1)
@@ -107,15 +116,21 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnMunicipalityChanged(object sender, EventArgs e)
 		{
+			//TODO: clear table, show message
+			if (!_isInitialized)
+				return;
 			if (dtpDate.Value != DateTime.MinValue && _currentPlanId == -1)
 				CreatePlan();
 			else if (_currentPlanId != -1)
 				PlanController.SetPlanMunicipalty(_currentPlanId, cbMunicipalty.SelectedIndex);
+			((dgvPlan.Columns[0] as DataGridViewComboBoxColumn).DataSource as BindingListView<Places>).ApplyFilter(x => x.MunicipalityID == (cbMunicipalty.SelectedItem as Municipality).ID);
 			_hasUnsavedChanges = true;
 		}
 
 		private void OnStatusChanged(object sender, EventArgs e)
 		{
+			if (!_isInitialized)
+				return;
 			PlanController.SetPlanStatus(_currentPlanId, cbStatus.SelectedIndex);
 			_hasUnsavedChanges = true;
 		}

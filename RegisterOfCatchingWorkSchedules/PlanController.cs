@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Linq;
 
 namespace RegisterOfCatchingWorkSchedules
 {
 	public static class PlanController
 	{
-		public static Plans[] GetAllPlans() { return null; }
+		public static Plans[] GetAllPlans() => Program.DBContext.Plans.ToArray();
 
 		public static Plans GetPlan(int id) { return null; }
 
