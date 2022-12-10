@@ -96,6 +96,7 @@
     <Compile Include="Plans.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="PlansManagementService.cs" />
     <Compile Include="Records.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
