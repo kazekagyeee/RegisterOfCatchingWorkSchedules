@@ -12,7 +12,7 @@ namespace RegisterOfCatchingWorkSchedules
 	{
 		public bool TryLogin(string login, string password) 
 		{
-			throw new NotImplementedException(); 
+			AutorisationService.Autorise(login, password);
 		}
 	}
 }
