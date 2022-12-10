@@ -142,6 +142,7 @@
 			this.dgvPlan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnDataGridCellClick);
 			this.dgvPlan.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
 			this.dgvPlan.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnRowSelected);
+			this.dgvPlan.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnDataGridRowAdded);
 			this.dgvPlan.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnDataGridRowRemoving);
 			// 
 			// Район

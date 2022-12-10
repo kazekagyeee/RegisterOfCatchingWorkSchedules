@@ -18,6 +18,7 @@ namespace RegisterOfCatchingWorkSchedules
 				LoadPlanInfo(planId);
 			//if () //TODO: session
 			//DisableEditing();
+			dgvPlan.Enabled = true;
 		}
 
 		private void DisableEditing()
@@ -31,7 +32,6 @@ namespace RegisterOfCatchingWorkSchedules
 		private void LoadStatusesValues()
 		{
 			//cbStatus.Items = //TODO
-			cbStatus.Items.AddRange(new object[] { 1, 2 });
 		}
 
 		private void LoadPlanInfo(int id)
@@ -84,7 +84,8 @@ namespace RegisterOfCatchingWorkSchedules
 		//private void OnDataGridRowAdded(object sender, DataGridViewRowsAddedEventArgs e)
 		//{
 		//	//PlanController.AddLocation(_currentPlanId, GetDataGridRowPlaceIndex(e.RowIndex));
-		//	_hasUnsavedChanges = true;
+		//	//_hasUnsavedChanges = true;
+			
 		//}
 
 		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e)
@@ -116,7 +117,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlaceIndex = GetDataGridRowPlaceIndex(e.RowIndex);
 		
-		private int GetDataGridRowPlaceIndex(int rowIndex) => ((ComboBox)dgvPlan.Rows[rowIndex].Cells[0].Value).SelectedIndex;
+		private int GetDataGridRowPlaceIndex(int rowIndex) => ((ComboBox)dgvPlan.Rows[rowIndex].Cells[0].Value)?.SelectedIndex ?? -1;
 		
 		private void Save()
 		{
@@ -129,6 +130,13 @@ namespace RegisterOfCatchingWorkSchedules
 			_currentPlanId = PlanController.CreatePlan(dtpDate.Value, cbMunicipalty.SelectedIndex);//TODO
 			dgvPlan.Enabled = true;
 			cbStatus.Enabled = true;
+		}
+
+		private void OnDataGridRowAdded(object sender, DataGridViewRowEventArgs e)
+		{
+			var cb = new ComboBox();
+			cb.Items.AddRange(new object[] { 1, 2 });
+			e.Row.Cells[0].Value = cb;
 		}
 	}
 }
