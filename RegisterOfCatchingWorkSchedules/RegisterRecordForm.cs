@@ -57,7 +57,7 @@ namespace RegisterOfCatchingWorkSchedules
 				ValueMember = "ID",
 				DisplayMember = "PlacesName",
 			};
-
+			
 			dgvPlan.Columns.Add(places);
 			for (int i = 1; i <= 31; i++)
 			{
