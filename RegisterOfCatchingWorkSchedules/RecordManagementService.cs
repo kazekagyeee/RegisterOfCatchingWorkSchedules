@@ -8,9 +8,9 @@ namespace RegisterOfCatchingWorkSchedules
 {
     public class RecordManagementService
     {
-        public Records GetRecords(int planID)
+        public List<Records> GetRecords(int planID)
         {
-            return Program.DBContext.Records.FirstOrDefault(x => x.RecordPlanID == planID);
+            return Program.DBContext.Records.Where(x => x.RecordPlanID == planID).ToList();
         }
 
         public void CreateRecord(int placeID, int planID, DateTime date)
