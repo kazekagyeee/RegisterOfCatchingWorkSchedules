@@ -23,5 +23,24 @@ namespace RegisterOfCatchingWorkSchedules
 		public DbSet<RolePowers> RolePowers { get; set; }
 
 		public DbSet<Records> Records { get; set; }
+
+		public void RevertUnsavedChanges()
+		{
+			foreach (var entry in ChangeTracker.Entries())
+			{
+				switch (entry.State)
+				{
+					case EntityState.Modified:
+						entry.State = EntityState.Unchanged;
+						break;
+					case EntityState.Deleted:
+						entry.Reload();
+						break;
+					case EntityState.Added:
+						entry.State = EntityState.Detached;
+						break;
+				}
+			}
+		}
 	}
 }
