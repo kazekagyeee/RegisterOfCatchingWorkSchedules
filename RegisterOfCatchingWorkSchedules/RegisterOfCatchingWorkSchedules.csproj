@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatusHistoryService.cs" />
     <Compile Include="UserController.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>DB.tt</DependentUpon>
