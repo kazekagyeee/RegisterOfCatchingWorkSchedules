@@ -80,8 +80,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Filter.cs" />
-    <Compile Include="Location.cs" />
     <Compile Include="Municipality.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -91,7 +89,6 @@
     <Compile Include="Places.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Plan.cs" />
     <Compile Include="PlanController.cs" />
     <Compile Include="Plans.cs">
       <DependentUpon>DB.tt</DependentUpon>

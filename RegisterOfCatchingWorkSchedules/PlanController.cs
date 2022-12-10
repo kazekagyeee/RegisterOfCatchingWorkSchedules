@@ -4,9 +4,9 @@ namespace RegisterOfCatchingWorkSchedules
 {
 	public static class PlanController
 	{
-		public static Plan[] GetAllPlans() { throw new NotImplementedException(); }
+		public static Plans[] GetAllPlans() { throw new NotImplementedException(); }
 
-		public static Plan GetPlan(int id) { throw new NotImplementedException(); }
+		public static Plans GetPlan(int id) { throw new NotImplementedException(); }
 
 		public static int CreatePlan(DateTime date, int municipalityId) { throw new NotImplementedException(); }
 
