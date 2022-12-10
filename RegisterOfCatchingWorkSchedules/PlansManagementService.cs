@@ -10,15 +10,27 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public List<Plans> GetAllowedPlans()
         {
-            var currentUser = Program.Session.User;
-            var userRoles = currentUser.Roles;
-            /*if (currentUser != null)
+            var userRole = Program.Session.User.Roles;
+            if (userRole != null)
             {
-                var powers = Program.DBContext.RolePowers
-                    .Select(x => x.RoleID == currentUser.ID).ToList();
-            }*/
+                var rolePowers = Program.DBContext.RolePowers
+                    .Where(x => x.RoleID == userRole.ID)
+                    .ToList();
+                var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
+                return GetPlansWithStatuses(availableStatuses);
+            }
+            else
+            {
+                var availableStatuses = Program.DBContext.Statuses.Where(x => x.StatusName == "Done").ToList();
+                return GetPlansWithStatuses(availableStatuses);
+            }
+        }
 
-            throw new NotImplementedException();
+        private static List<Plans> GetPlansWithStatuses(List<Statuses> availableStatuses)
+        {
+            return Program.DBContext.Plans
+                                .Where(x => availableStatuses.Any(s => s.ID == x.PlanStatusID))
+                                .ToList();
         }
     }
 }
