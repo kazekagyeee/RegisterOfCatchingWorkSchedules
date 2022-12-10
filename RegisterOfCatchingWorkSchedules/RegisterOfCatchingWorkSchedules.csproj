@@ -92,6 +92,7 @@
     <Compile Include="Records.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="RegisterDBContext.cs" />
     <Compile Include="RolePowers.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
