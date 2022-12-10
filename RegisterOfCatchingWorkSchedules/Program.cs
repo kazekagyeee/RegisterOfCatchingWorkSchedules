@@ -18,10 +18,11 @@ namespace RegisterOfCatchingWorkSchedules
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
 
             DBContext = new RegisterDBContext();
             Session = new SessionService();
+            
+            Application.Run(new MainForm());
         }
     }
 }
