@@ -17,17 +17,21 @@ namespace RegisterOfCatchingWorkSchedules
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Plans()
         {
+            this.StatusHistory = new HashSet<StatusHistory>();
             this.Records = new HashSet<Records>();
         }
     
         public int ID { get; set; }
         public Nullable<int> OrganisationID { get; set; }
-        public Nullable<int> Status { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> PlanStatusID { get; set; }
+        public string PlanName { get; set; }
+        public Nullable<System.DateTime> StatusChangeDate { get; set; }
     
         public virtual Organisation Organisation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Records> Records { get; set; }
+        public virtual ICollection<StatusHistory> StatusHistory { get; set; }
         public virtual Statuses Statuses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Records> Records { get; set; }
     }
 }
