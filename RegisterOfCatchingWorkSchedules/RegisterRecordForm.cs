@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
@@ -8,6 +9,9 @@ namespace RegisterOfCatchingWorkSchedules
 		private int _currentPlanId;
 		private bool _hasUnsavedChanges = false;
 		private int _selectedRowPlaceIndex = -1;
+
+		private const int PlaceColumnWidth = 200;
+		private const int DayColumnWidth = 27;
 
 		public RegisterRecordForm(int planId)
 		{
@@ -19,6 +23,31 @@ namespace RegisterOfCatchingWorkSchedules
 			//if () //TODO: session
 			//DisableEditing();
 			dgvPlan.Enabled = true;
+			InitDataGrid();
+		}
+
+		private void InitDataGrid()
+		{
+			var list11 = new List<string>() { "10", "30", "80", "100" }; //TODO
+			var places = new DataGridViewComboBoxColumn
+			{
+				HeaderText = "Район",
+				DataPropertyName = "Place",
+				Width = PlaceColumnWidth,
+				DataSource = list11,
+			};
+			dgvPlan.Columns.Add(places);
+			for (int i = 1; i <= 31; i++)
+			{
+				var day = new DataGridViewCheckBoxColumn
+				{
+					HeaderText = i.ToString(),
+					DataPropertyName = i.ToString(),
+					Width = DayColumnWidth,
+				};
+				dgvPlan.Columns.Add(day);
+			}
+			dgvPlan.RowHeadersWidth = 20;
 		}
 
 		private void DisableEditing()
@@ -26,7 +55,6 @@ namespace RegisterOfCatchingWorkSchedules
 			cbStatus.Enabled = false;
 			dtpDate.Enabled = false;
 			cbMunicipalty.Enabled = false;
-			tbCommentary.Enabled = false;
 		}
 
 		private void LoadStatusesValues()
@@ -106,6 +134,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnSave(object sender, EventArgs e) => Save();
 
+		//TODO: on comment changed
 
 		private void OnCellEdited(object sender, DataGridViewCellEventArgs e)
 		{
@@ -116,8 +145,13 @@ namespace RegisterOfCatchingWorkSchedules
 		}
 
 		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlaceIndex = GetDataGridRowPlaceIndex(e.RowIndex);
-		
-		private int GetDataGridRowPlaceIndex(int rowIndex) => ((ComboBox)dgvPlan.Rows[rowIndex].Cells[0].Value)?.SelectedIndex ?? -1;
+
+		private int GetDataGridRowPlaceIndex(int rowIndex)
+		{
+			var value = dgvPlan.Rows[rowIndex].Cells[0].Value;
+			//TODO
+			return -1;
+		}
 		
 		private void Save()
 		{

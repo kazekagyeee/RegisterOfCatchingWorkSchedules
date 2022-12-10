@@ -32,13 +32,10 @@
 			this.cbStatus = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
-			this.tbCommentary = new System.Windows.Forms.TextBox();
-			this.label5 = new System.Windows.Forms.Label();
 			this.dtpDate = new System.Windows.Forms.DateTimePicker();
 			this.cbMunicipalty = new System.Windows.Forms.ComboBox();
 			this.btStatusHistory = new System.Windows.Forms.Button();
 			this.dgvPlan = new System.Windows.Forms.DataGridView();
-			this.Район = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.button1 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).BeginInit();
 			this.SuspendLayout();
@@ -80,25 +77,6 @@
 			this.label4.TabIndex = 5;
 			this.label4.Text = "Населённый пункт";
 			// 
-			// tbCommentary
-			// 
-			this.tbCommentary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbCommentary.Location = new System.Drawing.Point(30, 470);
-			this.tbCommentary.Multiline = true;
-			this.tbCommentary.Name = "tbCommentary";
-			this.tbCommentary.Size = new System.Drawing.Size(1099, 91);
-			this.tbCommentary.TabIndex = 9;
-			// 
-			// label5
-			// 
-			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(27, 454);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(77, 13);
-			this.label5.TabIndex = 10;
-			this.label5.Text = "Комментарий";
-			// 
 			// dtpDate
 			// 
 			this.dtpDate.CustomFormat = "MMMMyyyy";
@@ -121,7 +99,7 @@
 			// btStatusHistory
 			// 
 			this.btStatusHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btStatusHistory.Location = new System.Drawing.Point(967, 38);
+			this.btStatusHistory.Location = new System.Drawing.Point(967, -48);
 			this.btStatusHistory.Name = "btStatusHistory";
 			this.btStatusHistory.Size = new System.Drawing.Size(162, 23);
 			this.btStatusHistory.TabIndex = 13;
@@ -132,12 +110,10 @@
 			// dgvPlan
 			// 
 			this.dgvPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvPlan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Район});
 			this.dgvPlan.Enabled = false;
 			this.dgvPlan.Location = new System.Drawing.Point(30, 89);
 			this.dgvPlan.Name = "dgvPlan";
-			this.dgvPlan.Size = new System.Drawing.Size(1099, 338);
+			this.dgvPlan.Size = new System.Drawing.Size(1099, 377);
 			this.dgvPlan.TabIndex = 14;
 			this.dgvPlan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnDataGridCellClick);
 			this.dgvPlan.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
@@ -145,16 +121,10 @@
 			this.dgvPlan.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnDataGridRowAdded);
 			this.dgvPlan.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnDataGridRowRemoving);
 			// 
-			// Район
-			// 
-			this.Район.HeaderText = "Район";
-			this.Район.Name = "Район";
-			this.Район.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.Район.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(1039, 567);
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button1.Location = new System.Drawing.Point(1039, 481);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(90, 23);
 			this.button1.TabIndex = 15;
@@ -166,14 +136,12 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1162, 596);
+			this.ClientSize = new System.Drawing.Size(1162, 510);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.dgvPlan);
 			this.Controls.Add(this.btStatusHistory);
 			this.Controls.Add(this.cbMunicipalty);
 			this.Controls.Add(this.dtpDate);
-			this.Controls.Add(this.label5);
-			this.Controls.Add(this.tbCommentary);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.cbStatus);
@@ -192,13 +160,10 @@
 		private System.Windows.Forms.ComboBox cbStatus;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.TextBox tbCommentary;
-		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.DateTimePicker dtpDate;
 		private System.Windows.Forms.ComboBox cbMunicipalty;
 		private System.Windows.Forms.Button btStatusHistory;
 		private System.Windows.Forms.DataGridView dgvPlan;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.DataGridViewComboBoxColumn Район;
 	}
 }
