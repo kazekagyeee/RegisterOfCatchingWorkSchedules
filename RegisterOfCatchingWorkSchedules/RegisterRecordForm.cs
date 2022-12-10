@@ -1,5 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Equin.ApplicationFramework;
+using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
@@ -23,19 +25,33 @@ namespace RegisterOfCatchingWorkSchedules
 			//if () //TODO: session
 			//DisableEditing();
 			dgvPlan.Enabled = true;
+			InitComboboxes();
 			InitDataGrid();
+		}
+
+		private void InitComboboxes()
+		{
+			cbMunicipalty.DataSource = Program.DBContext.Municipality.Local.ToBindingList(); //TODO
+			cbMunicipalty.ValueMember = "ID";
+			cbMunicipalty.DisplayMember = "MunicipalityName";
+
+			cbStatus.DataSource = Program.DBContext.Statuses.Local.ToBindingList(); //TODO
+			cbStatus.ValueMember = "ID";
+			cbStatus.DisplayMember = "StatusName";
 		}
 
 		private void InitDataGrid()
 		{
-			var list11 = new List<string>() { "10", "30", "80", "100" }; //TODO
 			var places = new DataGridViewComboBoxColumn
 			{
 				HeaderText = "Район",
 				DataPropertyName = "Place",
 				Width = PlaceColumnWidth,
-				DataSource = list11,
+				DataSource = new BindingListView<Places>(Program.DBContext.Places.ToList()), //TODO
+				ValueMember = "ID",
+				DisplayMember = "PlacesName",
 			};
+			((dgvPlan.Columns[0] as DataGridViewComboBoxColumn).DataSource as BindingListView<Places>).ApplyFilter(x => x.MunicipalityID == (int)cbMunicipalty.SelectedValue);
 			dgvPlan.Columns.Add(places);
 			for (int i = 1; i <= 31; i++)
 			{
@@ -48,6 +64,7 @@ namespace RegisterOfCatchingWorkSchedules
 				dgvPlan.Columns.Add(day);
 			}
 			dgvPlan.RowHeadersWidth = 20;
+			dgvPlan.DataError += (s, e) => e.ThrowException = false;
 		}
 
 		private void DisableEditing()
@@ -113,7 +130,7 @@ namespace RegisterOfCatchingWorkSchedules
 		//{
 		//	//PlanController.AddLocation(_currentPlanId, GetDataGridRowPlaceIndex(e.RowIndex));
 		//	//_hasUnsavedChanges = true;
-			
+
 		//}
 
 		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e)
@@ -152,7 +169,7 @@ namespace RegisterOfCatchingWorkSchedules
 			//TODO
 			return -1;
 		}
-		
+
 		private void Save()
 		{
 			PlanController.Save(_currentPlanId);

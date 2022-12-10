@@ -42,6 +42,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Equin.ApplicationFramework.BindingListView">
+      <HintPath>..\Libraries\Equin.ApplicationFramework.BindingListView\Equin.ApplicationFramework.BindingListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -83,6 +86,7 @@
     <Compile Include="Municipality.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="MunicipaltyController.cs" />
     <Compile Include="Organisation.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
