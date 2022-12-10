@@ -28,24 +28,26 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dgvHistory = new System.Windows.Forms.DataGridView();
 			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Changes = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// dataGridView1
+			// dgvHistory
 			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.dgvHistory.AllowUserToAddRows = false;
+			this.dgvHistory.AllowUserToDeleteRows = false;
+			this.dgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Date,
             this.Changes,
             this.Author});
-			this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(348, 426);
-			this.dataGridView1.TabIndex = 0;
+			this.dgvHistory.Location = new System.Drawing.Point(12, 12);
+			this.dgvHistory.Name = "dgvHistory";
+			this.dgvHistory.Size = new System.Drawing.Size(348, 426);
+			this.dgvHistory.TabIndex = 0;
 			// 
 			// Date
 			// 
@@ -55,7 +57,7 @@
 			// 
 			// Changes
 			// 
-			this.Changes.HeaderText = "Изменения";
+			this.Changes.HeaderText = "Статус";
 			this.Changes.Name = "Changes";
 			this.Changes.ReadOnly = true;
 			// 
@@ -70,17 +72,17 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(371, 450);
-			this.Controls.Add(this.dataGridView1);
+			this.Controls.Add(this.dgvHistory);
 			this.Name = "StatusHistoryForm";
 			this.Text = "История статусов записи";
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView dgvHistory;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Changes;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Author;
