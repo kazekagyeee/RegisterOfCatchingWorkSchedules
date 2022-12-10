@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 namespace RegisterOfCatchingWorkSchedules
 {
@@ -16,7 +10,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		public DbSet<Places> Places { get; set; }
 
-		public DbSet<Municipality> Municipality { get; set;}
+		public DbSet<Municipality> Municipality { get; set; }
 
 		public DbSet<Organisation> Organisation { get; set; }
 

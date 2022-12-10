@@ -140,7 +140,7 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			if (e.ColumnIndex != 0)
 				return;
-			PlanController.EditPlanPlace(_currentPlanId, _selectedRowPlaceIndex, GetDataGridRowPlaceIndex(e.RowIndex));
+			PlanController.EditLocation(_currentPlanId, _selectedRowPlaceIndex, GetDataGridRowPlaceIndex(e.RowIndex));
 			_hasUnsavedChanges = false;
 		}
 
