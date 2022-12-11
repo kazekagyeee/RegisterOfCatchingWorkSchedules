@@ -116,7 +116,8 @@
 			this.dgvPlan.Size = new System.Drawing.Size(1099, 377);
 			this.dgvPlan.TabIndex = 14;
 			this.dgvPlan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnDataGridCellClick);
-			this.dgvPlan.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
+			this.dgvPlan.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellValueChanged);
+			this.dgvPlan.CurrentCellDirtyStateChanged += new System.EventHandler(this.CurrentCellDirtyStateChanged);
 			this.dgvPlan.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnRowSelected);
 			this.dgvPlan.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.OnRowsRemoved);
 			this.dgvPlan.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnDataGridRowRemoving);

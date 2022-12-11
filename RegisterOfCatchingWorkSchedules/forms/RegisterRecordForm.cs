@@ -8,7 +8,7 @@ namespace RegisterOfCatchingWorkSchedules
 	{
 		private int _currentPlanId;
 		private bool _hasUnsavedChanges = false;
-		private Places _selectedRowPlace;
+		private int _selectedRowPlaceID;
 
 		private bool _isInitialized = false;
 
@@ -18,7 +18,7 @@ namespace RegisterOfCatchingWorkSchedules
 		public RegisterRecordForm(int planId)
 		{
 			InitializeComponent();
-			
+
 			InitComboboxes();
 			InitDataGrid();
 			_currentPlanId = planId;
@@ -151,35 +151,58 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnDataGridCellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			//TODO
+			if (e.ColumnIndex < 1)
+				return;
+			PlanController.ToggleTask(_currentPlanId, _selectedRowPlaceID, dgvPlan.Columns[e.ColumnIndex].DataPropertyName);
 			_hasUnsavedChanges = true;
 		}
 
-		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e) => RemovePlace(GetDataGridRowPlace(e.Row.Index));
+		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e) => RemovePlace(GetDataGridRowPlaceID(e.Row.Index));
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (_currentPlanId == -1)
 				return;
 			if (_hasUnsavedChanges && MessageBox.Show("Есть несохраненные изменения. Сохранить?", "Предупреждение", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
-				OnSave(null, null);
+				Save();
 			else
 				PlanController.RevertChanges(_currentPlanId);
 		}
 
 		private void OnSave(object sender, EventArgs e) => Save();
 
-		private void OnCellEdited(object sender, DataGridViewCellEventArgs e)
+		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlaceID = GetDataGridRowPlaceID(e.RowIndex);
+
+		private void OnRowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+		{
+			foreach (DataGridViewRow row in dgvPlan.Rows)
+				RemovePlace(GetDataGridRowPlaceID(row.Index));
+		}
+
+		private void OnCellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.ColumnIndex != 0)
 				return;
-			PlanController.EditPlace(_currentPlanId, _selectedRowPlace, GetDataGridRowPlace(e.RowIndex));
+			PlanController.EditPlace(_currentPlanId, _selectedRowPlaceID, GetDataGridRowPlaceID(e.RowIndex));
 			_hasUnsavedChanges = false;
 		}
 
-		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlace = GetDataGridRowPlace(e.RowIndex);
+		private void RemovePlace(Places place)
+		{
+			PlanController.RemovePlace(_currentPlanId, place);
+			_hasUnsavedChanges = true;
+		}
 
-		private Places GetDataGridRowPlace(int rowIndex) => (Places)dgvPlan.Rows[rowIndex].Cells[0].Value;
+		private void CurrentCellDirtyStateChanged(object sender, EventArgs e)
+		{
+			if (dgvPlan.IsCurrentCellDirty)
+			{
+				// This fires the cell value changed event
+				dgvPlan.CommitEdit(DataGridViewDataErrorContexts.Commit);
+			}
+		}
+
+		private int GetDataGridRowPlaceID(int rowIndex) => (int)dgvPlan.Rows[rowIndex].Cells[0].Value;
 
 		private void Save()
 		{
@@ -196,18 +219,6 @@ namespace RegisterOfCatchingWorkSchedules
 			dgvPlan.Enabled = true;
 			cbStatus.Enabled = true;
 			_hasUnsavedChanges = false;
-		}
-
-		private void OnRowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-		{
-			foreach (DataGridViewRow row in dgvPlan.Rows)
-				RemovePlace(GetDataGridRowPlace(row.Index));
-		}
-
-		private void RemovePlace(Places place)
-		{
-			PlanController.RemovePlace(_currentPlanId, place);
-			_hasUnsavedChanges = true;
 		}
 	}
 }
