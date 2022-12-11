@@ -11,36 +11,77 @@ namespace RegisterOfCatchingWorkSchedules
 			return PlansManagementService.GetAllowedPlans();
         }
 
-		public static Plans GetPlan(int planId)
-		{ 
+		public static Plans GetPlan(int planID) // Возвращает null если нет плана с planID
+		{
+			var allPlans = GetAllPlans();
+			foreach (var plan in allPlans)
+				if (plan.ID == planID) return plan;
 			return null;
 		}
 
-		public static int CreatePlan(DateTime date, Municipality municipality)
+		public static Plans CreatePlan(DateTime date, Municipality municipality)
 		{
-			return -1;
+			return PlansManagementService.CreatePlan(date);
 		}
 
-		public static void SetPlanDate(int planId, DateTime date) { }
+		public static void SetPlanDate(int planID, DateTime date)
+		{
+			GetPlan(planID).PlanDate = date;
+		}
 
-		public static void SetPlanMunicipalty(int planId, Municipality municipality) { }
+		public static void SetPlanMunicipalty(int planID, Municipality municipality)
+        {
+			GetPlan(planID).Municipality = municipality;
+        }
 
-		public static void SetPlanStatus(int planId, Statuses status) { }
+		public static void SetPlanStatus(int planID, Statuses status)
+		{
+			GetPlan(planID).Statuses = status;
+		}
 
-		public static void AddPlace(int planId, Places place) { }
+		public static void AddPlace(int planID, Places place)
+        {
+			GetPlan(planID).Municipality.Places.Add(place);
+		}
 
-		public static void RemovePlace(int planId, Places place) { }
+		public static void RemovePlace(int planID, Places place)
+        {
+			GetPlan(planID).Municipality.Places.Remove(place);
+		}
 
-		public static void EditPlace(int planId, Places oldPlace, Places newPlace) { }
+		public static void EditPlace(int planID, Places oldPlace, Places newPlace)
+		{
+			var plan = GetPlan(planID);
+			plan.Municipality.Places.Remove(oldPlace);
+			plan.Municipality.Places.Add(newPlace);
+		}
 
-		public static void ToggleTask(int planId, Places place, DateTime day) { }
+		public static void ToggleTask(int planID, Places place, DateTime date)
+		{
+			var plan = GetPlan(planID);
+			plan.Municipality.Places.Add(place);
+			plan.PlanDate = date;
+		}
 
-		public static StatusHistory[] GetStatusHistory(int planId) { return null; }
+		public static StatusHistory[] GetStatusHistory(int planID)
+		{
+			return GetPlan(planID).StatusHistory.ToArray();
+		}
 
-		public static void RevertChanges(int planId) { }
+		public static void RevertChanges(int planID)
+		{
 
-		public static void Save(int planId) { }
+		}
 
-		public static bool TryRemovePlan(int planId) { return false; }
+		public static void Save(int planID)
+		{
+			PlansManagementService.SaveChanges();
+		}
+
+		public static bool TryRemovePlan(int planID)
+		{
+			PlansManagementService.DeletePlan(planID);
+			return true;
+		}
 	}
 }
