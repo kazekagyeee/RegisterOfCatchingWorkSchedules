@@ -74,6 +74,7 @@
 			this.ClientSize = new System.Drawing.Size(371, 450);
 			this.Controls.Add(this.dgvHistory);
 			this.Name = "StatusHistoryForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "История статусов записи";
 			((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).EndInit();
 			this.ResumeLayout(false);

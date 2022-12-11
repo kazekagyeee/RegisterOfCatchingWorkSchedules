@@ -98,7 +98,6 @@
 			this.btn_autorisation.TabIndex = 1;
 			this.btn_autorisation.Text = "Авторизация";
 			this.btn_autorisation.UseVisualStyleBackColor = true;
-			this.btn_autorisation.Click += new System.EventHandler(this.OpenAuthForm);
 			// 
 			// btAddRecord
 			// 
@@ -174,6 +173,7 @@
 			this.Controls.Add(this.dgvPlans);
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Главная";
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlans)).EndInit();
 			this.ResumeLayout(false);

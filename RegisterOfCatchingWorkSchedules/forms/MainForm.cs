@@ -8,11 +8,11 @@ namespace RegisterOfCatchingWorkSchedules
 		public MainForm()
 		{
 			InitializeComponent();
+			OpenAuthForm();
 		}
+		private void OpenAuthForm() => new AuthorizationForm().ShowDialog();
 
 		private void AddRecord(object sender, EventArgs e) => new RegisterRecordForm(-1).ShowDialog();
-
-		private void OpenAuthForm(object sender, EventArgs e) => new AuthorizationForm().ShowDialog();
 
 		private void RemoveRecord(object sender, EventArgs e)
 		{

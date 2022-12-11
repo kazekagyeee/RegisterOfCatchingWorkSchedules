@@ -148,6 +148,7 @@
 			this.Controls.Add(this.cbStatus);
 			this.Controls.Add(this.label1);
 			this.Name = "RegisterRecordForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "План-график работ по отлову";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).EndInit();
