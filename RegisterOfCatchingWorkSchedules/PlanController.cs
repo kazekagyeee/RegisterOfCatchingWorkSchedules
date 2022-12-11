@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace RegisterOfCatchingWorkSchedules
 {
 	public static class PlanController
 	{
-		public static Plans[] GetAllPlans() => Program.DBContext.Plans.ToArray();
+		public static List<Plans> GetAllPlans()
+        {
 
-		public static Plans GetPlan(int planId) { return null; }
+			return new List<Plans>();
+        }
 
-		public static int CreatePlan(DateTime date, Municipality municipality) { return -1; }
+		public static Plans GetPlan(int planId)
+		{ 
+			return null;
+		}
+
+		public static int CreatePlan(DateTime date, Municipality municipality)
+		{
+			return -1;
+		}
 
 		public static void SetPlanDate(int planId, DateTime date) { }
 
