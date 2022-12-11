@@ -30,9 +30,9 @@ namespace RegisterOfCatchingWorkSchedules
 		}
 
 		public static void SetPlanMunicipalty(int planID, Municipality municipality)
-        {
+		{
 			GetPlan(planID).Municipality = municipality;
-        }
+		}
 
 		public static void SetPlanStatus(int planID, Statuses status)
 		{
@@ -47,19 +47,27 @@ namespace RegisterOfCatchingWorkSchedules
 
 		public static void EditPlace(int planID, Places oldPlace, Places newPlace)
 		{
-			var plan = GetPlan(planID);
-			foreach (var record in plan.Records)
+			foreach (var record in GetPlan(planID).Records)
 				if (record.Places == oldPlace)
 					record.Places = newPlace;
 		}
 
-		public static void AddToggleTask(int planID, Places place, int day)
+		public static void AddRecord(int planID, Places place, int day)
 		{
-			
+			var plan = GetPlan(planID);
+			RecordManagementService.CreateRecord(
+				place.ID,
+				planID,
+				new DateTime(plan.PlanDate.Value.Year,
+								plan.PlanDate.Value.Month,
+									day));
 		}
-		public static void DeleteToggleTask(int planID, Places place, int day)
-		{
 
+		public static void DeleteRecord(int planID, Places place, int day)
+		{
+			foreach (var record in GetPlan(planID).Records)
+				if (record.Places == place && record.RecordDate.Value.Day == day)
+					RecordManagementService.DeleteRecord(record.ID);
 		}
 
 		public static StatusHistory[] GetStatusHistory(int planID)
