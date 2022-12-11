@@ -50,5 +50,7 @@ namespace RegisterOfCatchingWorkSchedules
             Program.DBContext.Plans.Add(plan);
             return plan.ID;
         }
+
+        public void SaveChanges() => Program.DBContext.SaveChanges();
     }
 }
