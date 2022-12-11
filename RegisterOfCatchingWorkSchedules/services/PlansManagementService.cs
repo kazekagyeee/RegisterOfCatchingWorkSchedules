@@ -69,9 +69,9 @@ namespace RegisterOfCatchingWorkSchedules
             {
                 var changedPlan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
                 var properties = typeof(Plans).GetProperties();
-                foreach (var property in properties)
+                foreach (var value in changedValues)
                 {
-                    foreach (var value in changedValues)
+                    foreach (var property in properties)
                     {
                         if (property.Name == value.Key)
                         {
