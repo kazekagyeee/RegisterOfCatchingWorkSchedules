@@ -83,20 +83,20 @@ namespace RegisterOfCatchingWorkSchedules
             }
         }
 
-        /*public static void RevertUnsavedChanges()
+        public static void RevertUnsavedChanges()
         {
             using (var dbContext = new RegisterDBContext())
             {
                 dbContext.RevertUnsavedChanges();
             }
-        }*/
+        }
 
-        /*public static void SaveChanges() 
-        { 
+        public static void SaveChanges()
+        {
             using (var dbContext = new RegisterDBContext())
             {
                 dbContext.SaveChanges();
             }
-        }*/
+        }
     }
 }
