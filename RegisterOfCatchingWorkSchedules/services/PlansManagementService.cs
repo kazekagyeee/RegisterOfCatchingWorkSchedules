@@ -10,9 +10,10 @@ namespace RegisterOfCatchingWorkSchedules
         {
             using (var dbContext = new RegisterDBContext())
             {
-                var userRole = Program.Session.User.Roles;
-                if (userRole != null)
+                var user = Program.Session.User;
+                if (user != null)
                 {
+                    var userRole = user.Roles;
                     var rolePowers = dbContext.RolePowers
                         .Where(x => x.RoleID == userRole.ID)
                         .ToList();
