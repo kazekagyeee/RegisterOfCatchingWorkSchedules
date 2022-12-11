@@ -21,9 +21,12 @@ namespace RegisterOfCatchingWorkSchedules
                 }
                 else
                 {
-                    var availableStatuses = dbContext.Statuses.Where(x => x.StatusName == "Done").ToList();
-                    return GetPlansWithStatuses(availableStatuses);
-                }
+                    //var availableStatuses = dbContext.Statuses.Where(x => x.StatusName == "Done").ToList();
+                    //return GetPlansWithStatuses(availableStatuses);
+                    var result =  dbContext.Plans.ToList();
+                    result.Select(x => x.Municipality.MunicipalityName + x.Statuses.StatusName).ToArray(); //just to load the data
+                    return result;
+				}
             }
         }
 
@@ -52,11 +55,11 @@ namespace RegisterOfCatchingWorkSchedules
             using (var dbContext = new RegisterDBContext())
             {
                 var plan = new Plans();
-                plan.PlanStatusID = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик").ID;
+                plan.Statuses = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик");
                 plan.PlanDate = planDate;
                 plan.StatusChangeDate = DateTime.Now;
-                plan.OrganisationID = Program.Session.User.Organisation.ID;
-                plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
+                plan.Organisation = Program.Session.User.Organisation;
+                plan.Municipality = Program.Session.User.Municipality;
                 dbContext.Plans.Add(plan);
                 dbContext.SaveChanges();
                 return plan;

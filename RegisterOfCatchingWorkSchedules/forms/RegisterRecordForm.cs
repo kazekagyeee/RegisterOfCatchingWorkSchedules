@@ -81,8 +81,8 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			var plan = PlanController.GetPlan(id);
 			dtpDate.Value = plan.PlanDate.Value;
-			cbMunicipalty.SelectedValue = plan.PlanMunicipalityID;
-			cbStatus.SelectedValue = plan.Statuses;
+			cbMunicipalty.SelectedItem = plan.Municipality;
+			cbStatus.SelectedItem = plan.Statuses;
 
 			dtpDate.Enabled = false;
 			cbMunicipalty.Enabled = false;
@@ -143,9 +143,12 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnStatusChanged(object sender, EventArgs e)
 		{
-			if (!_isInitialized)
+			if (!_isInitialized || _currentPlanId < 0)
 				return;
-			PlanController.SetPlanStatus(_currentPlanId, (Statuses)cbStatus.SelectedItem);
+			var status = (Statuses)cbStatus.SelectedItem;
+			if (status == null)
+				return;
+			PlanController.SetPlanStatus(_currentPlanId, status);
 			_hasUnsavedChanges = true;
 		}
 
@@ -166,7 +169,7 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			if (_currentPlanId == -1)
 				return;
-			if (_hasUnsavedChanges && MessageBox.Show("Есть несохраненные изменения. Сохранить?", "Предупреждение", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+			if (_hasUnsavedChanges && MessageBox.Show("Есть несохраненные изменения. Сохранить?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
 				Save();
 			else
 				PlanController.RevertChanges(_currentPlanId);
