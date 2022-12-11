@@ -11,7 +11,7 @@ namespace RegisterOfCatchingWorkSchedules
 			return PlansManagementService.GetAllowedPlans();
         }
 
-		public static Plans GetPlan(int planID) // Возвращает null если нет плана с planID
+		public static Plans GetPlan(int planID)
 		{
 			var allPlans = GetAllPlans();
 			foreach (var plan in allPlans)
@@ -39,28 +39,27 @@ namespace RegisterOfCatchingWorkSchedules
 			GetPlan(planID).Statuses = status;
 		}
 
-		public static void AddPlace(int planID, Places place)
-        {
-			GetPlan(planID).Municipality.Places.Add(place);
-		}
-
 		public static void RemovePlace(int planID, Places place)
         {
-			GetPlan(planID).Municipality.Places.Remove(place);
+			foreach(var record in GetPlan(planID).Records)
+				if (record.Places == place) record.Places = null;
 		}
 
 		public static void EditPlace(int planID, Places oldPlace, Places newPlace)
 		{
 			var plan = GetPlan(planID);
-			plan.Municipality.Places.Remove(oldPlace);
-			plan.Municipality.Places.Add(newPlace);
+			foreach (var record in plan.Records)
+				if (record.Places == oldPlace)
+					record.Places = newPlace;
 		}
 
-		public static void ToggleTask(int planID, Places place, DateTime date)
+		public static void AddToggleTask(int planID, Places place, int day)
 		{
-			var plan = GetPlan(planID);
-			plan.Municipality.Places.Add(place);
-			plan.PlanDate = date;
+			
+		}
+		public static void DeleteToggleTask(int planID, Places place, int day)
+		{
+
 		}
 
 		public static StatusHistory[] GetStatusHistory(int planID)
@@ -70,7 +69,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		public static void RevertChanges(int planID)
 		{
-
+			var plan = GetPlan(planID);
 		}
 
 		public static void Save(int planID)
