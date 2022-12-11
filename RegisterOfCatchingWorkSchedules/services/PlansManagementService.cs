@@ -46,7 +46,7 @@ namespace RegisterOfCatchingWorkSchedules
             }
         }
 
-        public static int CreatePlan(DateTime planDate)
+        public static Plans CreatePlan(DateTime planDate)
         {
             using (var dbContext = new RegisterDBContext())
             {
@@ -57,7 +57,7 @@ namespace RegisterOfCatchingWorkSchedules
                 plan.OrganisationID = Program.Session.User.Organisation.ID;
                 plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
                 dbContext.Plans.Add(plan);
-                return plan.ID;
+                return plan;
             }
         }
 
