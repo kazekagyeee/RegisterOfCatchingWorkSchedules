@@ -15,7 +15,13 @@ namespace RegisterOfCatchingWorkSchedules
                 var user = dbContext.Users
                 .FirstOrDefault(x => x.UserLogin == login && x.UserPassword == password);
                 if (user == null) return false;
-                Program.Session.User = user;
+                var currendUser = new Users();
+                var properties = typeof(Users).GetProperties();
+                foreach (var property in properties)
+                {
+                    property.SetValue(currendUser, property.GetValue(user));
+                }
+                Program.Session.User = currendUser;
                 return true;
             }
         }
