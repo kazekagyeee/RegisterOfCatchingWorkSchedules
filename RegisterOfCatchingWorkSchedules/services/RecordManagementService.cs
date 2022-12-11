@@ -25,7 +25,7 @@ namespace RegisterOfCatchingWorkSchedules
                 record.RecordPlanID = planID;
                 record.RecordDate = date;
                 dbContext.Records.Add(record);
-
+                dbContext.SaveChanges();
             }
         }
 
@@ -35,6 +35,7 @@ namespace RegisterOfCatchingWorkSchedules
             {
                 var recordToDelete = dbContext.Records.FirstOrDefault(x => x.ID == recordID);
                 dbContext.Records.Remove(recordToDelete);
+                dbContext.SaveChanges();
             }
         }
     }

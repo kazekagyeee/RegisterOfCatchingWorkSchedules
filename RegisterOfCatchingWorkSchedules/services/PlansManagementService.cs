@@ -43,6 +43,7 @@ namespace RegisterOfCatchingWorkSchedules
             {
                 var planToRemove = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
                 dbContext.Plans.Remove(planToRemove);
+                dbContext.SaveChanges();
             }
         }
 
@@ -57,6 +58,7 @@ namespace RegisterOfCatchingWorkSchedules
                 plan.OrganisationID = Program.Session.User.Organisation.ID;
                 plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
                 dbContext.Plans.Add(plan);
+                dbContext.SaveChanges();
                 return plan;
             }
         }
@@ -77,23 +79,24 @@ namespace RegisterOfCatchingWorkSchedules
                         }
                     }
                 }
+                dbContext.SaveChanges();
             }
         }
 
-        public static void RevertUnsavedChanges()
+        /*public static void RevertUnsavedChanges()
         {
             using (var dbContext = new RegisterDBContext())
             {
                 dbContext.RevertUnsavedChanges();
             }
-        }
+        }*/
 
-        public static void SaveChanges() 
+        /*public static void SaveChanges() 
         { 
             using (var dbContext = new RegisterDBContext())
             {
                 dbContext.SaveChanges();
             }
-        }
+        }*/
     }
 }

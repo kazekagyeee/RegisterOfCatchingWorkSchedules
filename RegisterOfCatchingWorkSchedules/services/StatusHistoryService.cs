@@ -26,6 +26,7 @@ namespace RegisterOfCatchingWorkSchedules
                 logToAdd.HistoryPlanID = planID;
                 logToAdd.HistoryDate = DateTime.Now;
                 dbContext.StatusHistory.Add(logToAdd);
+                dbContext.SaveChanges();
             } 
         }
     }
