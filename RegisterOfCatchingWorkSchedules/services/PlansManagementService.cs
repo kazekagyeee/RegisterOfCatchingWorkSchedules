@@ -61,7 +61,7 @@ namespace RegisterOfCatchingWorkSchedules
             }
         }
 
-        public static void ChangePlanProperties(Dictionary<string, int> changedValues, int planID)
+        public static void ChangePlanProperties(Dictionary<string, object> changedValues, int planID)
         {
             using (var dbContext = new RegisterDBContext())
             {

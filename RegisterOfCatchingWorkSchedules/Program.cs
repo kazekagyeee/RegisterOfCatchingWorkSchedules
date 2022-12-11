@@ -38,8 +38,6 @@ namespace RegisterOfCatchingWorkSchedules
 
             //DBContext.SaveChanges();
 
-            PlansManagementService.SavePlanChanges(new Dictionary<string, int> { }, 0);
-
             Application.Run(new MainForm());
         }
     }
