@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public class PlansManagementService
+    public static class PlansManagementService
     {
-        public List<Plans> GetAllowedPlans()
+        public static List<Plans> GetAllowedPlans()
         {
             var userRole = Program.Session.User.Roles;
             if (userRole != null)
@@ -33,13 +33,13 @@ namespace RegisterOfCatchingWorkSchedules
                                 .ToList();
         }
 
-        public void DeletePlan(int planID)
+        public static void DeletePlan(int planID)
         {
             var planToRemove = Program.DBContext.Plans.FirstOrDefault(x => x.ID == planID);
             Program.DBContext.Plans.Remove(planToRemove);
         }
 
-        public int CreatePlan(DateTime planDate, Places place)
+        public static int CreatePlan(DateTime planDate, Places place)
         {
             var plan = new Plans();
             plan.PlanStatusID = Program.DBContext.Statuses.FirstOrDefault(x => x.StatusName == "Draft").ID;
@@ -51,6 +51,6 @@ namespace RegisterOfCatchingWorkSchedules
             return plan.ID;
         }
 
-        public void SaveChanges() => Program.DBContext.SaveChanges();
+        public static void SaveChanges() => Program.DBContext.SaveChanges();
     }
 }
