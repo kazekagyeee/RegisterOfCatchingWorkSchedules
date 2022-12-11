@@ -52,11 +52,11 @@ namespace RegisterOfCatchingWorkSchedules
             using (var dbContext = new RegisterDBContext())
             {
                 var plan = new Plans();
-                plan.PlanStatusID = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик").ID;
+                plan.Statuses = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик");
                 plan.PlanDate = planDate;
                 plan.StatusChangeDate = DateTime.Now;
-                plan.OrganisationID = Program.Session.User.Organisation.ID;
-                plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
+                plan.Organisation = Program.Session.User.Organisation;
+                plan.Municipality = Program.Session.User.Municipality;
                 dbContext.Plans.Add(plan);
                 dbContext.SaveChanges();
                 return plan;
