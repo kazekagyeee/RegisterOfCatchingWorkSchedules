@@ -205,7 +205,7 @@ namespace RegisterOfCatchingWorkSchedules
 			}
 		}
 
-		private int GetDataGridRowPlaceID(int rowIndex) => (int)dgvPlan.Rows[rowIndex].Cells[0].Value;
+		private int GetDataGridRowPlaceID(int rowIndex) => (int)(dgvPlan.Rows[rowIndex].Cells[0].Value ?? -1);
 
 		private void Save()
 		{
@@ -215,9 +215,9 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void CreatePlan()
 		{
-			//var plan = PlanController.CreatePlan(dtpDate.Value, (Municipality)cbMunicipalty.SelectedItem);
-			//_currentPlanId = plan.ID;
-			//cbStatus.SelectedItem = plan.Statuses;
+			var plan = PlanController.CreatePlan(dtpDate.Value, (Municipality)cbMunicipalty.SelectedItem);
+			_currentPlanId = plan.ID;
+			cbStatus.SelectedItem = plan.Statuses;
 
 			dgvPlan.Enabled = true;
 			cbStatus.Enabled = true;
