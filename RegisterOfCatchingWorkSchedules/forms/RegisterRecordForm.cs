@@ -18,14 +18,15 @@ namespace RegisterOfCatchingWorkSchedules
 		public RegisterRecordForm(int planId)
 		{
 			InitializeComponent();
+			
+			InitComboboxes();
+			InitDataGrid();
 			_currentPlanId = planId;
-			LoadStatusesValues();
+
 			if (planId != -1)
 				LoadPlanInfo(planId);
 			//if () //TODO: session
 			//DisableEditing();
-			InitComboboxes();
-			InitDataGrid();
 
 			_isInitialized = true;
 		}
@@ -35,6 +36,7 @@ namespace RegisterOfCatchingWorkSchedules
 			cbMunicipalty.DataSource = MunicipaltyController.GetMunicipalitiesBindingList();
 			cbMunicipalty.ValueMember = "ID";
 			cbMunicipalty.DisplayMember = "MunicipalityName";
+			cbMunicipalty.SelectedIndex = -1;
 
 			cbStatus.DataSource = StatusesController.GetStatusesBindingList();
 			cbStatus.ValueMember = "ID";
@@ -75,11 +77,6 @@ namespace RegisterOfCatchingWorkSchedules
 			cbMunicipalty.Enabled = false;
 		}
 
-		private void LoadStatusesValues()
-		{
-			//cbStatus.Items = //TODO
-		}
-
 		private void LoadPlanInfo(int id)
 		{
 			var plan = PlanController.GetPlan(id);
@@ -102,10 +99,15 @@ namespace RegisterOfCatchingWorkSchedules
 			//TODO: clear table, show message
 			if (!_isInitialized)
 				return;
-			if (cbMunicipalty.SelectedIndex != 0 && _currentPlanId == -1)
+			if (cbMunicipalty.SelectedIndex > 0 && _currentPlanId == -1)
+			{
 				CreatePlan();
-			else if (_currentPlanId != -1)
+			}
+			else if (_currentPlanId != -1 && IsUserAgreedToClearTableData())
+			{
+				ClearTableData();
 				PlanController.SetPlanDate(_currentPlanId, dtpDate.Value);
+			}
 			_hasUnsavedChanges = true;
 		}
 
@@ -114,12 +116,29 @@ namespace RegisterOfCatchingWorkSchedules
 			//TODO: clear table, show message
 			if (!_isInitialized)
 				return;
+
+			var municipalty = (Municipality)cbMunicipalty.SelectedItem;
 			if (dtpDate.Value != DateTime.MinValue && _currentPlanId == -1)
+			{
 				CreatePlan();
-			else if (_currentPlanId != -1)
-				PlanController.SetPlanMunicipalty(_currentPlanId, (Municipality)cbMunicipalty.SelectedItem);
-			((dgvPlan.Columns[0] as DataGridViewComboBoxColumn).DataSource as BindingListView<Places>).ApplyFilter(x => x.MunicipalityID == (cbMunicipalty.SelectedItem as Municipality).ID);
+			}
+			else if (_currentPlanId != -1 && IsUserAgreedToClearTableData())
+			{
+				ClearTableData();
+				PlanController.SetPlanMunicipalty(_currentPlanId, municipalty);
+			}
+			((dgvPlan.Columns[0] as DataGridViewComboBoxColumn).DataSource as BindingListView<Places>).ApplyFilter(x => x.MunicipalityID == municipalty.ID);
 			_hasUnsavedChanges = true;
+		}
+
+		private void ClearTableData()
+		{
+			dgvPlan.Rows.Clear();
+		}
+
+		private bool IsUserAgreedToClearTableData()
+		{
+			return MessageBox.Show("Данное изменение приведет к очистке табличной части!\nПродолжить?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes;
 		}
 
 		private void OnStatusChanged(object sender, EventArgs e)
@@ -136,18 +155,7 @@ namespace RegisterOfCatchingWorkSchedules
 			_hasUnsavedChanges = true;
 		}
 
-		//private void OnDataGridRowAdded(object sender, DataGridViewRowsAddedEventArgs e)
-		//{
-		//	//PlanController.AddLocation(_currentPlanId, GetDataGridRowPlaceIndex(e.RowIndex));
-		//	//_hasUnsavedChanges = true;
-
-		//}
-
-		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e)
-		{
-			PlanController.RemovePlace(_currentPlanId, GetDataGridRowPlace(e.Row.Index));
-			_hasUnsavedChanges = true;
-		}
+		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e) => RemovePlace(GetDataGridRowPlace(e.Row.Index));
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -160,8 +168,6 @@ namespace RegisterOfCatchingWorkSchedules
 		}
 
 		private void OnSave(object sender, EventArgs e) => Save();
-
-		//TODO: on comment changed
 
 		private void OnCellEdited(object sender, DataGridViewCellEventArgs e)
 		{
@@ -183,17 +189,25 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void CreatePlan()
 		{
-			_currentPlanId = PlanController.CreatePlan(dtpDate.Value, (Municipality)cbMunicipalty.SelectedItem);//TODO
-																												//TODO: update status
+			//var plan = PlanController.CreatePlan(dtpDate.Value, (Municipality)cbMunicipalty.SelectedItem);
+			//_currentPlanId = plan.ID;
+			//cbStatus.SelectedItem = plan.Statuses;
+
 			dgvPlan.Enabled = true;
 			cbStatus.Enabled = true;
+			_hasUnsavedChanges = false;
 		}
 
-		private void OnDataGridRowAdded(object sender, DataGridViewRowEventArgs e)
+		private void OnRowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
 		{
-			var cb = new ComboBox();
-			cb.Items.AddRange(new object[] { 1, 2 });
-			e.Row.Cells[0].Value = cb;
+			foreach (DataGridViewRow row in dgvPlan.Rows)
+				RemovePlace(GetDataGridRowPlace(row.Index));
+		}
+
+		private void RemovePlace(Places place)
+		{
+			PlanController.RemovePlace(_currentPlanId, place);
+			_hasUnsavedChanges = true;
 		}
 	}
 }
