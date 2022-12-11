@@ -1,7 +1,5 @@
 ﻿using Equin.ApplicationFramework;
 using System;
-using System.Data.Entity;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
@@ -26,7 +24,6 @@ namespace RegisterOfCatchingWorkSchedules
 				LoadPlanInfo(planId);
 			//if () //TODO: session
 			//DisableEditing();
-			dgvPlan.Enabled = true;
 			InitComboboxes();
 			InitDataGrid();
 
@@ -35,13 +32,11 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void InitComboboxes()
 		{
-			Program.DBContext.Municipality.Load();
-			cbMunicipalty.DataSource = Program.DBContext.Municipality.Local.ToBindingList(); //TODO
+			cbMunicipalty.DataSource = MunicipaltyController.GetMunicipalitiesBindingList();
 			cbMunicipalty.ValueMember = "ID";
 			cbMunicipalty.DisplayMember = "MunicipalityName";
 
-			Program.DBContext.Statuses.Load();
-			cbStatus.DataSource = Program.DBContext.Statuses.Local.ToBindingList(); //TODO
+			cbStatus.DataSource = StatusesController.GetStatusesBindingList();
 			cbStatus.ValueMember = "ID";
 			cbStatus.DisplayMember = "StatusName";
 		}
@@ -53,11 +48,11 @@ namespace RegisterOfCatchingWorkSchedules
 				HeaderText = "Район",
 				DataPropertyName = "Place",
 				Width = PlaceColumnWidth,
-				DataSource = new BindingListView<Places>(Program.DBContext.Places.ToList()), //TODO
+				DataSource = new BindingListView<Places>(MunicipaltyController.GetAllPlaces()),
 				ValueMember = "ID",
 				DisplayMember = "PlacesName",
 			};
-			
+
 			dgvPlan.Columns.Add(places);
 			for (int i = 1; i <= 31; i++)
 			{
@@ -88,9 +83,9 @@ namespace RegisterOfCatchingWorkSchedules
 		private void LoadPlanInfo(int id)
 		{
 			var plan = PlanController.GetPlan(id);
-			//dtpDate.Value = plan. //TODO
-			//cbPlace.SelectedValue = plan.Equals //TODO
-			//cbStatus.SelectedIndex = //TODO
+			dtpDate.Value = plan.PlanDate.Value;
+			cbMunicipalty.SelectedValue = plan.PlanMunicipalityID;
+			cbStatus.SelectedValue = plan.Statuses;
 
 			dtpDate.Enabled = false;
 			cbMunicipalty.Enabled = false;
@@ -178,7 +173,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlace = GetDataGridRowPlace(e.RowIndex);
 
-		private Places GetDataGridRowPlace(int rowIndex) =>  (Places)dgvPlan.Rows[rowIndex].Cells[0].Value;
+		private Places GetDataGridRowPlace(int rowIndex) => (Places)dgvPlan.Rows[rowIndex].Cells[0].Value;
 
 		private void Save()
 		{
@@ -189,7 +184,7 @@ namespace RegisterOfCatchingWorkSchedules
 		private void CreatePlan()
 		{
 			_currentPlanId = PlanController.CreatePlan(dtpDate.Value, (Municipality)cbMunicipalty.SelectedItem);//TODO
-			//TODO: update status
+																												//TODO: update status
 			dgvPlan.Enabled = true;
 			cbStatus.Enabled = true;
 		}

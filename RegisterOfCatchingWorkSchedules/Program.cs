@@ -9,7 +9,6 @@ namespace RegisterOfCatchingWorkSchedules
 {
     internal static class Program
     {
-        public static RegisterDBContext DBContext;
         public static Session Session;
         /// <summary>
         /// Главная точка входа для приложения.
@@ -20,7 +19,6 @@ namespace RegisterOfCatchingWorkSchedules
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DBContext = new RegisterDBContext();
             Session = new Session();
 
             //var tmn = DBContext.Municipality.Add(new Municipality() { MunicipalityName = "Тюмень" });
@@ -38,8 +36,7 @@ namespace RegisterOfCatchingWorkSchedules
             //	tmn.Places.Add(new Places() { PlacesName = place.Replace('_', ' ') });
             //}
 
-            DBContext.SaveChanges();
-
+            //DBContext.SaveChanges();
 
             Application.Run(new MainForm());
         }

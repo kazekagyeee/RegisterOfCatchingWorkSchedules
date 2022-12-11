@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
@@ -10,47 +8,65 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public static List<Plans> GetAllowedPlans()
         {
-            var userRole = Program.Session.User.Roles;
-            if (userRole != null)
+            using (var dbContext = new RegisterDBContext())
             {
-                var rolePowers = Program.DBContext.RolePowers
-                    .Where(x => x.RoleID == userRole.ID)
-                    .ToList();
-                var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
-                return GetPlansWithStatuses(availableStatuses);
-            }
-            else
-            {
-                var availableStatuses = Program.DBContext.Statuses.Where(x => x.StatusName == "Done").ToList();
-                return GetPlansWithStatuses(availableStatuses);
+                var userRole = Program.Session.User.Roles;
+                if (userRole != null)
+                {
+                    var rolePowers = dbContext.RolePowers
+                        .Where(x => x.RoleID == userRole.ID)
+                        .ToList();
+                    var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
+                    return GetPlansWithStatuses(availableStatuses);
+                }
+                else
+                {
+                    var availableStatuses = dbContext.Statuses.Where(x => x.StatusName == "Done").ToList();
+                    return GetPlansWithStatuses(availableStatuses);
+                }
             }
         }
 
         private static List<Plans> GetPlansWithStatuses(List<Statuses> availableStatuses)
         {
-            return Program.DBContext.Plans
-                                .Where(x => availableStatuses.Any(s => s.ID == x.PlanStatusID))
-                                .ToList();
+            using (var dbContext = new RegisterDBContext())
+            {
+                return dbContext.Plans
+                    .Where(x => availableStatuses.Any(s => s.ID == x.PlanStatusID))
+                    .ToList();
+            }
         }
 
         public static void DeletePlan(int planID)
         {
-            var planToRemove = Program.DBContext.Plans.FirstOrDefault(x => x.ID == planID);
-            Program.DBContext.Plans.Remove(planToRemove);
+            using (var dbContext = new RegisterDBContext())
+            {
+                var planToRemove = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+                dbContext.Plans.Remove(planToRemove);
+            }
         }
 
-        public static int CreatePlan(DateTime planDate, Places place)
+        public static int CreatePlan(DateTime planDate)
         {
-            var plan = new Plans();
-            plan.PlanStatusID = Program.DBContext.Statuses.FirstOrDefault(x => x.StatusName == "Draft").ID;
-            plan.PlanDate = planDate;
-            plan.StatusChangeDate = DateTime.Now;
-            plan.OrganisationID = Program.Session.User.Organisation.ID;
-            plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
-            Program.DBContext.Plans.Add(plan);
-            return plan.ID;
+            using (var dbContext = new RegisterDBContext())
+            {
+                var plan = new Plans();
+                plan.PlanStatusID = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Draft").ID;
+                plan.PlanDate = planDate;
+                plan.StatusChangeDate = DateTime.Now;
+                plan.OrganisationID = Program.Session.User.Organisation.ID;
+                plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
+                dbContext.Plans.Add(plan);
+                return plan.ID;
+            }
         }
 
-        public static void SaveChanges() => Program.DBContext.SaveChanges();
+        public static void SaveChanges() 
+        { 
+            using (var dbContext = new RegisterDBContext())
+            {
+                dbContext.SaveChanges();
+            }
+        }
     }
 }
