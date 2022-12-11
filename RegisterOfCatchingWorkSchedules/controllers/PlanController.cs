@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using RegisterOfCatchingWorkSchedules.services;
 
 namespace RegisterOfCatchingWorkSchedules
 {
@@ -39,34 +40,34 @@ namespace RegisterOfCatchingWorkSchedules
 			GetPlan(planID).Statuses = status;
 		}
 
-		public static void RemovePlace(int planID, Places place)
+		public static void RemovePlace(int planID, int placeID)
 		{
 			foreach (var record in GetPlan(planID).Records)
-				if (record.Places == place) record.Places = null;
+				if (record.Places.ID == placeID) record.Places = null;
 		}
 
-		public static void EditPlace(int planID, Places oldPlace, Places newPlace)
+		public static void EditPlace(int planID, int oldPlaceID, int newPlaceID)
 		{
 			foreach (var record in GetPlan(planID).Records)
-				if (record.Places == oldPlace)
-					record.Places = newPlace;
+				if (record.Places == MunicipalityService.GetPlaceByID(oldPlaceID))
+					record.Places = MunicipalityService.GetPlaceByID(newPlaceID);
 		}
 
-		public static void AddRecord(int planID, Places place, int day)
+		public static void AddRecord(int planID, int placeID, int day)
 		{
 			var plan = GetPlan(planID);
 			RecordManagementService.CreateRecord(
-				place.ID,
+				placeID,
 				planID,
 				new DateTime(plan.PlanDate.Value.Year,
 								plan.PlanDate.Value.Month,
 									day));
 		}
 
-		public static void DeleteRecord(int planID, Places place, int day)
+		public static void DeleteRecord(int planID, int placeID, int day)
 		{
 			foreach (var record in GetPlan(planID).Records)
-				if (record.Places == place && record.RecordDate.Value.Day == day)
+				if (record.Places == MunicipalityService.GetPlaceByID(placeID) && record.RecordDate.Value.Day == day)
 					RecordManagementService.DeleteRecord(record.ID);
 		}
 
