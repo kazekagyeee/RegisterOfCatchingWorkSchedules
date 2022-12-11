@@ -61,6 +61,23 @@ namespace RegisterOfCatchingWorkSchedules
             }
         }
 
+        public static void SavePlanChanges(Dictionary<string, int> changedValues, int planID)
+        {
+            using (var dbContext = new RegisterDBContext())
+            {
+                var changedPlan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+                var atributes = typeof(Plans).GetCustomAttributes(false);
+            }
+        }
+
+        public static void RevertUnsavedChanges()
+        {
+            using (var dbContext = new RegisterDBContext())
+            {
+                dbContext.RevertUnsavedChanges();
+            }
+        }
+
         public static void SaveChanges() 
         { 
             using (var dbContext = new RegisterDBContext())
