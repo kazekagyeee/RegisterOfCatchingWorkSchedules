@@ -190,9 +190,9 @@ namespace RegisterOfCatchingWorkSchedules
 			_hasUnsavedChanges = false;
 		}
 
-		private void RemovePlace(Places place)
+		private void RemovePlace(int placeID)
 		{
-			PlanController.RemovePlace(_currentPlanId, place);
+			PlanController.RemovePlace(_currentPlanId, placeID);
 			_hasUnsavedChanges = true;
 		}
 
