@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
 			this.dgvPlans = new System.Windows.Forms.DataGridView();
+			this.btAddRecord = new System.Windows.Forms.Button();
+			this.btRemoveRecord = new System.Windows.Forms.Button();
 			this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Locality = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btAddRecord = new System.Windows.Forms.Button();
-			this.btRemoveRecord = new System.Windows.Forms.Button();
+			this.StatusChangeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlans)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -47,42 +48,17 @@
             this.ID,
             this.Date,
             this.Locality,
-            this.Status});
+            this.Status,
+            this.StatusChangeDate});
 			this.dgvPlans.Location = new System.Drawing.Point(9, 44);
 			this.dgvPlans.Margin = new System.Windows.Forms.Padding(2);
 			this.dgvPlans.Name = "dgvPlans";
+			this.dgvPlans.ReadOnly = true;
 			this.dgvPlans.RowHeadersWidth = 51;
 			this.dgvPlans.RowTemplate.Height = 24;
 			this.dgvPlans.Size = new System.Drawing.Size(1016, 356);
 			this.dgvPlans.TabIndex = 0;
 			this.dgvPlans.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OpenPlan);
-			// 
-			// ID
-			// 
-			this.ID.HeaderText = "ID";
-			this.ID.Name = "ID";
-			this.ID.Visible = false;
-			// 
-			// Date
-			// 
-			this.Date.HeaderText = "Дата";
-			this.Date.MinimumWidth = 6;
-			this.Date.Name = "Date";
-			this.Date.Width = 125;
-			// 
-			// Locality
-			// 
-			this.Locality.HeaderText = "Населённый пункт";
-			this.Locality.MinimumWidth = 6;
-			this.Locality.Name = "Locality";
-			this.Locality.Width = 200;
-			// 
-			// Status
-			// 
-			this.Status.HeaderText = "Статус";
-			this.Status.MinimumWidth = 6;
-			this.Status.Name = "Status";
-			this.Status.Width = 125;
 			// 
 			// btAddRecord
 			// 
@@ -104,6 +80,44 @@
 			this.btRemoveRecord.TabIndex = 3;
 			this.btRemoveRecord.Text = "Удалить";
 			this.btRemoveRecord.UseVisualStyleBackColor = true;
+			// 
+			// ID
+			// 
+			this.ID.HeaderText = "ID";
+			this.ID.Name = "ID";
+			this.ID.ReadOnly = true;
+			this.ID.Visible = false;
+			// 
+			// Date
+			// 
+			this.Date.HeaderText = "Дата";
+			this.Date.MinimumWidth = 6;
+			this.Date.Name = "Date";
+			this.Date.ReadOnly = true;
+			this.Date.Width = 125;
+			// 
+			// Locality
+			// 
+			this.Locality.HeaderText = "Населённый пункт";
+			this.Locality.MinimumWidth = 6;
+			this.Locality.Name = "Locality";
+			this.Locality.ReadOnly = true;
+			this.Locality.Width = 300;
+			// 
+			// Status
+			// 
+			this.Status.HeaderText = "Статус";
+			this.Status.MinimumWidth = 6;
+			this.Status.Name = "Status";
+			this.Status.ReadOnly = true;
+			this.Status.Width = 125;
+			// 
+			// StatusChangeDate
+			// 
+			this.StatusChangeDate.HeaderText = "Дата изменения статуса";
+			this.StatusChangeDate.Name = "StatusChangeDate";
+			this.StatusChangeDate.ReadOnly = true;
+			this.StatusChangeDate.Width = 130;
 			// 
 			// MainForm
 			// 
@@ -131,6 +145,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Locality;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+		private System.Windows.Forms.DataGridViewTextBoxColumn StatusChangeDate;
 	}
 }
 

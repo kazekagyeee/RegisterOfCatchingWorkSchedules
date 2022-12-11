@@ -21,9 +21,12 @@ namespace RegisterOfCatchingWorkSchedules
                 }
                 else
                 {
-                    var availableStatuses = dbContext.Statuses.Where(x => x.StatusName == "Done").ToList();
-                    return GetPlansWithStatuses(availableStatuses);
-                }
+                    //var availableStatuses = dbContext.Statuses.Where(x => x.StatusName == "Done").ToList();
+                    //return GetPlansWithStatuses(availableStatuses);
+                    var result =  dbContext.Plans.ToList();
+                    result.Select(x => x.Municipality.MunicipalityName + x.Statuses.StatusName).ToArray(); //just to load the data
+                    return result;
+				}
             }
         }
 

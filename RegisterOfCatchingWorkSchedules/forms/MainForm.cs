@@ -9,7 +9,17 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			InitializeComponent();
 			OpenAuthForm();
+			LoadPlansList();
 		}
+
+		private void LoadPlansList()
+		{
+			foreach (var plan in PlanController.GetAllPlans())
+			{
+				dgvPlans.Rows.Add(plan.ID, plan.PlanDate, plan.Municipality.MunicipalityName, plan.Statuses.StatusName, plan.StatusChangeDate);
+			}
+		}
+
 		private void OpenAuthForm() => new AuthorizationForm().ShowDialog();
 
 		private void AddRecord(object sender, EventArgs e) => new RegisterRecordForm(-1).ShowDialog();

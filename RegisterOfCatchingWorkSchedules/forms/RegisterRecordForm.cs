@@ -81,8 +81,8 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			var plan = PlanController.GetPlan(id);
 			dtpDate.Value = plan.PlanDate.Value;
-			cbMunicipalty.SelectedValue = plan.PlanMunicipalityID;
-			cbStatus.SelectedValue = plan.Statuses;
+			cbMunicipalty.SelectedItem = plan.Municipality;
+			cbStatus.SelectedItem = plan.Statuses;
 
 			dtpDate.Enabled = false;
 			cbMunicipalty.Enabled = false;
