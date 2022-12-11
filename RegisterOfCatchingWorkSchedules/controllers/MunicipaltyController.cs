@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
 	public static class MunicipaltyController
 	{
-		public static Municipality[] GetAll() => Program.DBContext.Municipality.ToArray();
+		public static Municipality[] GetAllMunicipalties() => Program.DBContext.Municipality.ToArray();
 
-		public static Municipality GetByIndex(int index) => Program.DBContext.Municipality.ToArray()[index];
+		public static Places[] GetAllPlaces() => Program.DBContext.Places.ToArray();
 
-		public static string[] GetAllNames() => GetAll().Select(x => x.MunicipalityName).ToArray();
+		public static BindingList<Municipality> GetMunicipalitiesBindingList()
+		{
+			Program.DBContext.Municipality.Load();
+			return Program.DBContext.Municipality.Local.ToBindingList();
+		}
 
-		//public static 
+		public static BindingList<Places> GetPlacesBindingList()
+		{
+			Program.DBContext.Places.Load();
+			return Program.DBContext.Places.Local.ToBindingList();
+		}
 	}
 }
