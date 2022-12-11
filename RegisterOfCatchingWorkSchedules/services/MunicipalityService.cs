@@ -14,7 +14,7 @@ namespace RegisterOfCatchingWorkSchedules.services
             }
         }
 
-        public static Places GetPlanByID(int id)
+        public static Places GetPlaceByID(int id)
         {
 			using (var dbContext = new RegisterDBContext())
 			{
