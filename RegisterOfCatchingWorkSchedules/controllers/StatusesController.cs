@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using RegisterOfCatchingWorkSchedules.services;
+using System.ComponentModel;
 using System.Data.Entity;
 
 namespace RegisterOfCatchingWorkSchedules
@@ -7,8 +8,7 @@ namespace RegisterOfCatchingWorkSchedules
 	{
 		public static BindingList<Statuses> GetStatusesBindingList()
 		{
-			Program.DBContext.Statuses.Load();
-			return Program.DBContext.Statuses.Local.ToBindingList();
+			return StatusesService.GetBindingList();
 		}
 	}
 }

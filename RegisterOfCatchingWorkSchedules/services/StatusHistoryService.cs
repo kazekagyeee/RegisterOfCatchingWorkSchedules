@@ -10,17 +10,23 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public static List<StatusHistory> GetHistory(int planID)
         {
-            return Program.DBContext.StatusHistory
-                .Where(x => x.HistoryPlanID == planID)
-                .ToList();
+            using (var dbContext = new RegisterDBContext())
+            {
+                return dbContext.StatusHistory
+                    .Where(x => x.HistoryPlanID == planID)
+                    .ToList();
+            }
         }
         public static void AddHistoryLog(int statusID, int planID)
         {
-            var logToAdd = new StatusHistory();
-            logToAdd.HistoryStatusID = statusID;
-            logToAdd.HistoryPlanID = planID;
-            logToAdd.HistoryDate = DateTime.Now;
-            Program.DBContext.StatusHistory.Add(logToAdd);
+            using (var dbContext = new RegisterDBContext())
+            {
+                var logToAdd = new StatusHistory();
+                logToAdd.HistoryStatusID = statusID;
+                logToAdd.HistoryPlanID = planID;
+                logToAdd.HistoryDate = DateTime.Now;
+                dbContext.StatusHistory.Add(logToAdd);
+            } 
         }
     }
 }

@@ -111,6 +111,7 @@
     <Compile Include="Roles.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="services\StatusesService.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Sort.cs" />
     <Compile Include="Statuses.cs">
