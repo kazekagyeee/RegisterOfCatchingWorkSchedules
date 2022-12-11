@@ -153,7 +153,10 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			if (e.ColumnIndex < 1)
 				return;
-			PlanController.ToggleTask(_currentPlanId, _selectedRowPlaceID, dgvPlan.Columns[e.ColumnIndex].DataPropertyName);
+			if ((bool)dgvPlan.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
+				PlanController.AddRecord(_currentPlanId, _selectedRowPlaceID, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
+			else
+				PlanController.DeleteRecord(_currentPlanId, _selectedRowPlaceID, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
 			_hasUnsavedChanges = true;
 		}
 

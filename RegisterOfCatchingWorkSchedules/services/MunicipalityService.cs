@@ -14,6 +14,14 @@ namespace RegisterOfCatchingWorkSchedules.services
             }
         }
 
+        public static Places GetPlanByID(int id)
+        {
+			using (var dbContext = new RegisterDBContext())
+			{
+                return dbContext.Places.FirstOrDefault(x => x.ID == id);
+			}
+		}
+
         public static Places[] GetAllPlaces() 
         { 
             using (var dbContext = new RegisterDBContext())
