@@ -14,5 +14,13 @@ namespace RegisterOfCatchingWorkSchedules
                 .Where(x => x.HistoryPlanID == planID)
                 .ToList();
         }
+        public void AddHistoryLog(int statusID, int planID)
+        {
+            var logToAdd = new StatusHistory();
+            logToAdd.HistoryStatusID = statusID;
+            logToAdd.HistoryPlanID = planID;
+            logToAdd.HistoryDate = DateTime.Now;
+            Program.DBContext.StatusHistory.Add(logToAdd);
+        }
     }
 }
