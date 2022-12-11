@@ -51,7 +51,7 @@ namespace RegisterOfCatchingWorkSchedules
             using (var dbContext = new RegisterDBContext())
             {
                 var plan = new Plans();
-                plan.PlanStatusID = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Draft").ID;
+                plan.PlanStatusID = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик").ID;
                 plan.PlanDate = planDate;
                 plan.StatusChangeDate = DateTime.Now;
                 plan.OrganisationID = Program.Session.User.Organisation.ID;
@@ -61,12 +61,22 @@ namespace RegisterOfCatchingWorkSchedules
             }
         }
 
-        public static void SavePlanChanges(Dictionary<string, int> changedValues, int planID)
+        public static void ChangePlanProperties(Dictionary<string, int> changedValues, int planID)
         {
             using (var dbContext = new RegisterDBContext())
             {
                 var changedPlan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
-                var atributes = typeof(Plans).GetCustomAttributes(false);
+                var properties = typeof(Plans).GetProperties();
+                foreach (var property in properties)
+                {
+                    foreach (var value in changedValues)
+                    {
+                        if (property.Name == value.Key)
+                        {
+                            property.SetValue(changedPlan, value.Value);
+                        }
+                    }
+                }
             }
         }
 
