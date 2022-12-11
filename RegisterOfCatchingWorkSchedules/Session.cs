@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RegisterOfCatchingWorkSchedules
 {
-    public class SessionService
+    public class Session
     {
         public Users User { get; set; }
     }

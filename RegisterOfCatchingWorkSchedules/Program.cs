@@ -10,7 +10,7 @@ namespace RegisterOfCatchingWorkSchedules
     internal static class Program
     {
         public static RegisterDBContext DBContext;
-        public static SessionService Session;
+        public static Session Session;
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -21,7 +21,7 @@ namespace RegisterOfCatchingWorkSchedules
             Application.SetCompatibleTextRenderingDefault(false);
 
             DBContext = new RegisterDBContext();
-            Session = new SessionService();
+            Session = new Session();
 
             //var tmn = DBContext.Municipality.Add(new Municipality() { MunicipalityName = "Тюмень" });
             //DBContext.Municipality.Add(new Municipality() { MunicipalityName = "Тобольск" });
