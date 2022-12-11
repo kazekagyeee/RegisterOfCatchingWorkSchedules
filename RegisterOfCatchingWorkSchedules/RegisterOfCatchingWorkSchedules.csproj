@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controllers\StatusesController.cs" />
     <Compile Include="forms\AuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
