@@ -8,8 +8,7 @@ namespace RegisterOfCatchingWorkSchedules
 	{
 		public static List<Plans> GetAllPlans()
         {
-
-			return new List<Plans>();
+			return PlansManagementService.GetAllowedPlans();
         }
 
 		public static Plans GetPlan(int planId)
