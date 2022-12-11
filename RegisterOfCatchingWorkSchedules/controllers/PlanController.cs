@@ -7,9 +7,9 @@ namespace RegisterOfCatchingWorkSchedules
 	public static class PlanController
 	{
 		public static List<Plans> GetAllPlans()
-        {
+		{
 			return PlansManagementService.GetAllowedPlans();
-        }
+		}
 
 		public static Plans GetPlan(int planID)
 		{
@@ -40,8 +40,8 @@ namespace RegisterOfCatchingWorkSchedules
 		}
 
 		public static void RemovePlace(int planID, Places place)
-        {
-			foreach(var record in GetPlan(planID).Records)
+		{
+			foreach (var record in GetPlan(planID).Records)
 				if (record.Places == place) record.Places = null;
 		}
 
