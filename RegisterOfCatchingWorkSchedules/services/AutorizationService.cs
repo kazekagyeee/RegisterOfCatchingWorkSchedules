@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,10 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public static bool TryAutorizate(string login, string password)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var user = dbContext.Users
-                .FirstOrDefault(x => x.UserLogin == login && x.UserPassword == password);
+                    .FirstOrDefault(x => x.UserLogin == login && x.UserPassword == password);
                 if (user == null) return false;
                 var currendUser = new Users();
                 var properties = typeof(Users).GetProperties();

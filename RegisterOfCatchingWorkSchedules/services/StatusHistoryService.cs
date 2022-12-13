@@ -10,7 +10,7 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public static List<StatusHistory> GetHistory(int planID)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 return dbContext.StatusHistory
                     .Where(x => x.HistoryPlanID == planID)
@@ -19,7 +19,7 @@ namespace RegisterOfCatchingWorkSchedules
         }
         public static void AddHistoryLog(int statusID, int planID)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var logToAdd = new StatusHistory();
                 logToAdd.HistoryStatusID = statusID;

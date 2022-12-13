@@ -8,7 +8,7 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public static List<Plans> GetAllowedPlans()
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var user = Program.Session.User;
                 if (user != null)
@@ -33,17 +33,22 @@ namespace RegisterOfCatchingWorkSchedules
 
         private static List<Plans> GetPlansWithStatuses(List<Statuses> availableStatuses)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
-                return dbContext.Plans
-                    .Where(x => availableStatuses.Any(s => s.ID == x.PlanStatusID))
-                    .ToList();
+                var plansToReturn = new List<Plans>();
+                var plans = dbContext.Plans;
+                foreach (var status in availableStatuses)
+                {
+                    var plansWithStatus = dbContext.Plans.Where(x => x.PlanStatusID == status.ID).ToList();
+                    plansToReturn.AddRange(plansWithStatus);
+                }
+                return plans.ToList();
             }
         }
 
         public static void DeletePlan(int planID)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var planToRemove = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
                 dbContext.Plans.Remove(planToRemove);
@@ -53,7 +58,7 @@ namespace RegisterOfCatchingWorkSchedules
 
         public static Plans CreatePlan(DateTime planDate)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var plan = new Plans();
                 plan.Statuses = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик");
@@ -69,7 +74,7 @@ namespace RegisterOfCatchingWorkSchedules
 
         public static void ChangePlanProperties(Dictionary<string, object> changedValues, int planID)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var changedPlan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
                 var properties = typeof(Plans).GetProperties();
@@ -89,15 +94,15 @@ namespace RegisterOfCatchingWorkSchedules
 
         public static void RevertUnsavedChanges()
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
-                dbContext.RevertUnsavedChanges();
+                //dbContext.RevertUnsavedChanges();
             }
         }
 
         public static void SaveChanges()
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 dbContext.SaveChanges();
             }

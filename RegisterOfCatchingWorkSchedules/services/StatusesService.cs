@@ -12,7 +12,7 @@ namespace RegisterOfCatchingWorkSchedules.services
     {
         public static BindingList<Statuses> GetBindingList()
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 dbContext.Statuses.Load();
                 return dbContext.Statuses.Local.ToBindingList();

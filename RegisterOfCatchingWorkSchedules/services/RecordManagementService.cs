@@ -10,7 +10,7 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public static List<Records> GetRecords(int planID)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 return dbContext.Records.Where(x => x.RecordPlanID == planID).ToList();
             }
@@ -18,7 +18,7 @@ namespace RegisterOfCatchingWorkSchedules
 
         public static void CreateRecord(int placeID, int planID, DateTime date)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var record = new Records();
                 record.PlaceID = placeID;
@@ -31,7 +31,7 @@ namespace RegisterOfCatchingWorkSchedules
 
         public static void DeleteRecord(int recordID)
         {
-            using (var dbContext = new RegisterDBContext())
+            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var recordToDelete = dbContext.Records.FirstOrDefault(x => x.ID == recordID);
                 dbContext.Records.Remove(recordToDelete);
