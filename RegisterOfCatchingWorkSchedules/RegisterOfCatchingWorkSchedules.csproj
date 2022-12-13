@@ -18,4 +18,10 @@
         <HintPath>..\Libraries\Equin.ApplicationFramework.BindingListView\Equin.ApplicationFramework.BindingListView.dll</HintPath>
       </Reference>
     </ItemGroup>
+	
+    <ItemGroup>
+      <None Update="database.db">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 </Project>
