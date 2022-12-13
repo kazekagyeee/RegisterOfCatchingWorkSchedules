@@ -1,5 +1,6 @@
 ﻿using Equin.ApplicationFramework;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules
@@ -23,10 +24,9 @@ namespace RegisterOfCatchingWorkSchedules
 			InitDataGrid();
 			_currentPlanId = planId;
 
-			if (planId != -1)
-				LoadPlanInfo(planId);
-			//if () //TODO: session
-			//DisableEditing();
+			var plan = PlanController.GetPlan(planId);
+			if (plan != null)
+				LoadPlanInfo(plan, true);
 
 			_isInitialized = true;
 		}
@@ -77,16 +77,39 @@ namespace RegisterOfCatchingWorkSchedules
 			cbMunicipalty.Enabled = false;
 		}
 
-		private void LoadPlanInfo(int id)
+		private void LoadPlanInfo(Plans plan, bool diableHeaderEditing)
 		{
-			var plan = PlanController.GetPlan(id);
 			dtpDate.Value = plan.PlanDate.Value;
 			cbMunicipalty.SelectedItem = plan.Municipality;
 			cbStatus.SelectedItem = plan.Statuses;
 
-			dtpDate.Enabled = false;
-			cbMunicipalty.Enabled = false;
+			ConfigureDayColumns();
+			LoadPlanTableData(plan);
+
+			if (diableHeaderEditing)
+			{
+				dtpDate.Enabled = false;
+				cbMunicipalty.Enabled = false;
+			}
 			cbStatus.Enabled = true;
+			EnableTableEditing();
+		}
+
+		private void EnableTableEditing()
+		{
+			dgvPlan.Enabled = true;
+			dgvPlan.AllowUserToAddRows = true;
+		}
+
+		private void LoadPlanTableData(Plans plan)
+		{
+			var addedAreas = new Dictionary<int, int>();
+			foreach (var task in plan.Records)
+			{
+				if (!addedAreas.ContainsKey(task.Places.ID))
+					addedAreas[task.Places.ID] = dgvPlan.Rows.Add(task.Places);
+				dgvPlan.Rows[addedAreas[task.Places.ID]].Cells[task.RecordDate.Value.Day].Value = true;
+			}
 		}
 
 		private void OpenPlanHistory(object sender, EventArgs e)
@@ -99,6 +122,8 @@ namespace RegisterOfCatchingWorkSchedules
 			//TODO: clear table, show message
 			if (!_isInitialized)
 				return;
+			ConfigureDayColumns();
+
 			if (cbMunicipalty.SelectedIndex > 0 && _currentPlanId == -1)
 			{
 				CreatePlan();
@@ -109,6 +134,13 @@ namespace RegisterOfCatchingWorkSchedules
 				PlanController.SetPlanDate(_currentPlanId, dtpDate.Value);
 			}
 			_hasUnsavedChanges = true;
+		}
+
+		private void ConfigureDayColumns()
+		{
+			var daysInMonth = DateTime.DaysInMonth(dtpDate.Value.Year, dtpDate.Value.Month);
+			for (int i = 0; i < dgvPlan.ColumnCount; i++)
+				dgvPlan.Columns[i].Visible = i <= daysInMonth;
 		}
 
 		private void OnMunicipalityChanged(object sender, EventArgs e)
@@ -156,11 +188,20 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			if (e.ColumnIndex < 1)
 				return;
-			if ((bool)dgvPlan.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
-				PlanController.AddRecord(_currentPlanId, _selectedRowPlaceID, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
-			else
-				PlanController.DeleteRecord(_currentPlanId, _selectedRowPlaceID, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
+
+			var areaId = GetDataGridRowPlaceID(e.RowIndex);
+			var cell = dgvPlan.Rows[e.RowIndex].Cells[e.ColumnIndex];
+			if (areaId < 0)
+			{
+				cell.Value = false;
+				MessageBox.Show("Сначала вам необходимо выбрать место!");
+				return;
+			}
 			_hasUnsavedChanges = true;
+			if ((bool)cell.Value)
+				PlanController.AddRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
+			else
+				PlanController.AddRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
 		}
 
 		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e) => RemovePlace(GetDataGridRowPlaceID(e.Row.Index));
