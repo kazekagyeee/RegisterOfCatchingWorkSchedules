@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegisterOfCatchingWorkSchedules", "RegisterOfCatchingWorkSchedules\RegisterOfCatchingWorkSchedules.csproj", "{B21CD21F-BA5B-4C60-BC8D-4A7A30F6D92C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B21CD21F-BA5B-4C60-BC8D-4A7A30F6D92C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B21CD21F-BA5B-4C60-BC8D-4A7A30F6D92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B21CD21F-BA5B-4C60-BC8D-4A7A30F6D92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B21CD21F-BA5B-4C60-BC8D-4A7A30F6D92C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22A7BAF2-4C89-4CF8-9063-7A0B9764E977}
+	EndGlobalSection
+EndGlobal
