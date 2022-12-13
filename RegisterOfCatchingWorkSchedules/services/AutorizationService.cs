@@ -14,15 +14,12 @@ namespace RegisterOfCatchingWorkSchedules
             using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var user = dbContext.Users
+                    .Include(x => x.Municipality)
+                    .Include(x => x.Organisation)
+                    .Include(x => x.Roles)
                     .FirstOrDefault(x => x.UserLogin == login && x.UserPassword == password);
                 if (user == null) return false;
-                var currendUser = new Users();
-                var properties = typeof(Users).GetProperties();
-                foreach (var property in properties)
-                {
-                    property.SetValue(currendUser, property.GetValue(user));
-                }
-                Program.Session.User = currendUser;
+                Program.Session.User = user;
                 return true;
             }
         }

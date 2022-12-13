@@ -16,7 +16,7 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			foreach (var plan in PlanController.GetAllPlans())
 			{
-				dgvPlans.Rows.Add(plan.ID, plan.PlanDate, plan.Municipality.MunicipalityName, plan.Statuses.StatusName, plan.StatusChangeDate);
+				dgvPlans.Rows.Add(plan.ID, plan.PlanDate, plan.Municipality.MunicipalityName, plan.StatusChangeDate);
 			}
 		}
 

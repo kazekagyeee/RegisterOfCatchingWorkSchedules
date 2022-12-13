@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace RegisterOfCatchingWorkSchedules
 {
@@ -8,42 +9,51 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public static List<Plans> GetAllowedPlans()
         {
+            var plans = new List<Plans>();
             using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var user = Program.Session.User;
                 if (user != null)
                 {
                     var userRole = user.Roles;
+
                     var rolePowers = dbContext.RolePowers
                         .Where(x => x.RoleID == userRole.ID)
                         .ToList();
                     var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
-                    return GetPlansWithStatuses(availableStatuses);
+                    plans = GetPlansWithStatuses(availableStatuses);
                 }
                 else
                 {
                     //var availableStatuses = dbContext.Statuses.Where(x => x.StatusName == "Done").ToList();
                     //return GetPlansWithStatuses(availableStatuses);
-                    var result =  dbContext.Plans.ToList();
-                    result.Select(x => x.Municipality.MunicipalityName + x.Statuses.StatusName).ToArray(); //just to load the data
-                    return result;
-				}
+                    var result = dbContext.Plans.ToList();
+                    result.Select(x => x.Municipality.MunicipalityName + x.Statuses.StatusName).ToList(); //just to load the data
+                    plans = result;
+                }
             }
+            return plans;
         }
 
         private static List<Plans> GetPlansWithStatuses(List<Statuses> availableStatuses)
         {
+            var plansToReturn = new List<Plans>();
             using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
-                var plansToReturn = new List<Plans>();
-                var plans = dbContext.Plans;
+                var plans = dbContext.Plans
+                    .Include(x => x.Municipality)
+                    .Include(x => x.Statuses)
+                    .Include(x => x.Organisation)
+                    .Include(x => x.Records.Select(p => p.Places))
+                    .ToList();
+
                 foreach (var status in availableStatuses)
                 {
-                    var plansWithStatus = dbContext.Plans.Where(x => x.PlanStatusID == status.ID).ToList();
+                    var plansWithStatus = plans.Where(x => x.PlanStatusID == status.ID).ToList();
                     plansToReturn.AddRange(plansWithStatus);
                 }
-                return plans.ToList();
             }
+            return plansToReturn;
         }
 
         public static void DeletePlan(int planID)

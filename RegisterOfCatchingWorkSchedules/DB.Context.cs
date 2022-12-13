@@ -18,6 +18,7 @@ namespace RegisterOfCatchingWorkSchedules
         public RegisterOfCathingWorkSchedulesEntities()
             : base("name=RegisterOfCathingWorkSchedulesEntities")
         {
+            /*this.Configuration.LazyLoadingEnabled = false;*/
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
