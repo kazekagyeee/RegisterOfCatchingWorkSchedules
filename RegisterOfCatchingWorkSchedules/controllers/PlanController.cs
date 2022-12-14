@@ -83,7 +83,7 @@ namespace RegisterOfCatchingWorkSchedules
 			PlansManagementService.SaveChanges();
 		}
 
-		public static bool TryRemovePlan(int planID)
+		public static bool RemovePlan(int planID)
 		{
 			PlansManagementService.DeletePlan(planID);
 			return true;
