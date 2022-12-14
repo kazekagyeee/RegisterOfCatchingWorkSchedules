@@ -122,18 +122,41 @@ namespace RegisterOfCatchingWorkSchedules
 			}
 		}
 
-		public static void RevertUnsavedChanges()
+		public static void ChangePlanPropertiy(int planID, string propName, object propValueD)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				//dbContext.RevertUnsavedChanges();
+				var changedPlan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				var properties = typeof(Plans).GetProperties();
+				foreach (var property in properties)
+				{
+					if (property.Name == propName)
+					{
+						property.SetValue(changedPlan, propValueD);
+					}
+				}
+				dbContext.SaveChanges();
 			}
 		}
 
-		public static void SaveChanges()
+		public static void ChangePlace(int planID, int oldPlaceID, int newPlaceID)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
+				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				foreach (var rec in plan.Records)
+					if (rec.PlaceID == oldPlaceID)
+						rec.PlaceID = newPlaceID;
+				dbContext.SaveChanges();
+			}
+		}
+
+		public static void RemovePlace(int planID, int placeID)
+		{
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+			{
+				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				plan.Records = plan.Records.Where(x => x.PlaceID != placeID).ToHashSet();
 				dbContext.SaveChanges();
 			}
 		}
