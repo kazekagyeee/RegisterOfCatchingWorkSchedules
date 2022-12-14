@@ -26,13 +26,19 @@ namespace RegisterOfCatchingWorkSchedules
 			var plans = new List<Plans>();
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				var user = Program.Session.User;
-				var userRole = user.Roles;
-				var rolePowers = dbContext.RolePowers
-					.Where(x => x.RoleID == userRole.ID)
+				//var user = Program.Session.User;
+				//var userRole = user.Roles;
+				//var rolePowers = dbContext.RolePowers
+				//	.Where(x => x.RoleID == userRole.ID)
+				//	.ToList();
+				//var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
+				//plans = GetPlansWithStatuses(availableStatuses);
+				return dbContext.Plans
+					.Include(x => x.Municipality)
+					.Include(x => x.Statuses)
+					.Include(x => x.Organisation)
+					.Include(x => x.Records.Select(p => p.Places))
 					.ToList();
-				var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
-				plans = GetPlansWithStatuses(availableStatuses);
 			}
 			return plans;
 		}
