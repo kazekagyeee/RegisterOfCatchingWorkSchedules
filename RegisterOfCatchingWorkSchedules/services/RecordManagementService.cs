@@ -34,7 +34,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				var plan = PlansManagementService.GetById(planID);
+				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
 				var planDate = plan.PlanDate.Value;
 				var recordDate = new DateTime(planDate.Year, planDate.Month, day);
 				var record = plan.Records.FirstOrDefault(x => x.RecordDate == recordDate);

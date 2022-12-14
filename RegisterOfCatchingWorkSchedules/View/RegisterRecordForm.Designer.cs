@@ -89,7 +89,7 @@
 			// btStatusHistory
 			// 
 			this.btStatusHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btStatusHistory.Location = new System.Drawing.Point(967, -48);
+			this.btStatusHistory.Location = new System.Drawing.Point(967, 38);
 			this.btStatusHistory.Name = "btStatusHistory";
 			this.btStatusHistory.Size = new System.Drawing.Size(162, 23);
 			this.btStatusHistory.TabIndex = 13;

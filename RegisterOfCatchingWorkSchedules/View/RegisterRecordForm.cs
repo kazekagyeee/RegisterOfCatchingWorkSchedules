@@ -3,6 +3,8 @@ using RegisterOfCatchingWorkSchedules.Coltrollers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
+using System.ComponentModel;
 
 namespace RegisterOfCatchingWorkSchedules.View
 {
@@ -16,6 +18,8 @@ namespace RegisterOfCatchingWorkSchedules.View
 		private const int PlaceColumnWidth = 200;
 		private const int DayColumnWidth = 27;
 
+		private BindingList<Statuses> _statuses;
+
 		public RegisterRecordForm(int planId)
 		{
 			InitializeComponent();
@@ -23,18 +27,20 @@ namespace RegisterOfCatchingWorkSchedules.View
 			InitComboboxes();
 			InitDataGrid(user.UserMunicipality.Value);
 			tbMunicipality.Text = user.Municipality.MunicipalityName;
-			_currentPlanId = planId;
 
 			var plan = PlanController.GetPlan(planId);
 			if (plan != null)
 				LoadPlanInfo(plan, true);
+			else
+				CreatePlan();
 
 			_isInitialized = true;
 		}
 
 		private void InitComboboxes()
 		{
-			cbStatus.DataSource = StatusesController.GetStatusesBindingList();
+			_statuses = StatusesController.GetStatusesBindingList();
+			cbStatus.DataSource = _statuses;
 			cbStatus.ValueMember = "ID";
 			cbStatus.DisplayMember = "StatusName";
 		}
@@ -66,20 +72,16 @@ namespace RegisterOfCatchingWorkSchedules.View
 			dgvPlan.DataError += (s, e) => e.ThrowException = false;
 		}
 
-		private void DisableEditing()
+		private void LoadPlanInfo(Plans plan, bool diableDateEditing)
 		{
-			dtpDate.Enabled = false;
-		}
-
-		private void LoadPlanInfo(Plans plan, bool diableHeaderEditing)
-		{
+			_currentPlanId = plan.ID;
 			dtpDate.Value = plan.PlanDate.Value;
-			cbStatus.SelectedItem = plan.Statuses;
+			cbStatus.SelectedItem = _statuses.First(x => x.ID == plan.PlanStatusID);
 
 			ConfigureDayColumns();
 			LoadPlanTableData(plan);
 
-			if (diableHeaderEditing)
+			if (diableDateEditing)
 			{
 				dtpDate.Enabled = false;
 			}
@@ -116,7 +118,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 			{
 				CreatePlan();
 			}
-			else if (_currentPlanId != -1 && IsUserAgreedToClearTableData())
+			else if (_currentPlanId != -1 && _isInitialized && IsUserAgreedToClearTableData())
 			{
 				ClearTableData();
 				PlanController.SetPlanDate(_currentPlanId, dtpDate.Value);
@@ -218,8 +220,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 		private void CreatePlan()
 		{
 			var plan = PlanController.CreatePlan(dtpDate.Value);
-			_currentPlanId = plan.ID;
-			cbStatus.SelectedItem = plan.Statuses;
+			LoadPlanInfo(plan, false);
 		}
 	}
 }

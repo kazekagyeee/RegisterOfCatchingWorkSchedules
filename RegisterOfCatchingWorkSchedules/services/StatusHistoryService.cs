@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Data.Entity;
 
 namespace RegisterOfCatchingWorkSchedules.Services
 {
@@ -8,7 +9,10 @@ namespace RegisterOfCatchingWorkSchedules.Services
 		public static StatusHistory[] GetHistory(int planID)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
-				return dbContext.StatusHistory.Where(x => x.HistoryPlanID == planID).ToArray();
+				return dbContext.StatusHistory
+					.Include(x => x.Statuses)
+					.Where(x => x.HistoryPlanID == planID)
+					.ToArray();
 		}
 
 		public static void AddHistoryLog(int statusID, int planID)
