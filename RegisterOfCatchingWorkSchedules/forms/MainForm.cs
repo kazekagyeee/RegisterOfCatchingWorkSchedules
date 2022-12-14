@@ -34,17 +34,17 @@ namespace RegisterOfCatchingWorkSchedules
 			LoadPlansList();
 		}
 
-		private void RemovePlan(object sender, EventArgs e)
-		{
-			foreach (DataGridViewRow row in dgvPlans.SelectedRows)
-				PlanController.RemovePlan((int)row.Cells["ID"].Value);
-			LoadPlansList();
-		}
-
 		private void OpenPlan(object sender, DataGridViewCellEventArgs e)
 		{
 			var id = (int)dgvPlans.Rows[e.RowIndex].Cells["ID"].Value;
 			new RegisterRecordForm(id).ShowDialog();
+			LoadPlansList();
+		}
+
+		private void RemoveRecord(object sender, EventArgs e)
+		{
+			foreach (DataGridViewRow row in dgvPlans.SelectedRows)
+				PlanController.RemovePlan((int)row.Cells["ID"].Value);
 			LoadPlansList();
 		}
 	}

@@ -33,10 +33,10 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.dtpDate = new System.Windows.Forms.DateTimePicker();
-			this.cbMunicipalty = new System.Windows.Forms.ComboBox();
 			this.btStatusHistory = new System.Windows.Forms.Button();
 			this.dgvPlan = new System.Windows.Forms.DataGridView();
 			this.button1 = new System.Windows.Forms.Button();
+			this.tbMunicipality = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -51,7 +51,6 @@
 			// 
 			// cbStatus
 			// 
-			this.cbStatus.Enabled = false;
 			this.cbStatus.FormattingEnabled = true;
 			this.cbStatus.Location = new System.Drawing.Point(570, 40);
 			this.cbStatus.Name = "cbStatus";
@@ -86,15 +85,6 @@
 			this.dtpDate.Size = new System.Drawing.Size(200, 20);
 			this.dtpDate.TabIndex = 11;
 			this.dtpDate.ValueChanged += new System.EventHandler(this.OnDateChanged);
-			// 
-			// cbMunicipalty
-			// 
-			this.cbMunicipalty.FormattingEnabled = true;
-			this.cbMunicipalty.Location = new System.Drawing.Point(260, 40);
-			this.cbMunicipalty.Name = "cbMunicipalty";
-			this.cbMunicipalty.Size = new System.Drawing.Size(277, 21);
-			this.cbMunicipalty.TabIndex = 12;
-			this.cbMunicipalty.SelectedIndexChanged += new System.EventHandler(this.OnMunicipalityChanged);
 			// 
 			// btStatusHistory
 			// 
@@ -132,15 +122,23 @@
 			this.button1.Text = "Сохранить";
 			this.button1.UseVisualStyleBackColor = true;
 			// 
+			// tbMunicipality
+			// 
+			this.tbMunicipality.Enabled = false;
+			this.tbMunicipality.Location = new System.Drawing.Point(260, 40);
+			this.tbMunicipality.Name = "tbMunicipality";
+			this.tbMunicipality.Size = new System.Drawing.Size(274, 20);
+			this.tbMunicipality.TabIndex = 16;
+			// 
 			// RegisterRecordForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1162, 510);
+			this.Controls.Add(this.tbMunicipality);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.dgvPlan);
 			this.Controls.Add(this.btStatusHistory);
-			this.Controls.Add(this.cbMunicipalty);
 			this.Controls.Add(this.dtpDate);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label2);
@@ -161,9 +159,9 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.DateTimePicker dtpDate;
-		private System.Windows.Forms.ComboBox cbMunicipalty;
 		private System.Windows.Forms.Button btStatusHistory;
 		private System.Windows.Forms.DataGridView dgvPlan;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.TextBox tbMunicipality;
 	}
 }

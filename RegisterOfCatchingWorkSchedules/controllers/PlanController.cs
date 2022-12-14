@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using RegisterOfCatchingWorkSchedules.services;
 
 namespace RegisterOfCatchingWorkSchedules
 {
@@ -14,8 +12,6 @@ namespace RegisterOfCatchingWorkSchedules
 		public static Plans CreatePlan(DateTime date) => PlansManagementService.CreatePlan(date);
 
 		public static void SetPlanDate(int planID, DateTime date) => PlansManagementService.ChangePlanPropertiy(planID, "PlanDate", date);
-
-		public static void SetPlanMunicipalty(int planID, Municipality municipality) => PlansManagementService.ChangePlanPropertiy(planID, "PlanMunicipalityID", municipality.ID);
 
 		public static void SetPlanStatus(int planID, Statuses status) => PlansManagementService.SetPlanStatus(planID, status.ID);
 
