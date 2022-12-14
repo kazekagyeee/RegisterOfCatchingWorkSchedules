@@ -6,14 +6,6 @@ namespace RegisterOfCatchingWorkSchedules
 {
 	public static class RecordManagementService
 	{
-		public static List<Records> GetRecords(int planID)
-		{
-			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
-			{
-				return dbContext.Records.Where(x => x.RecordPlanID == planID).ToList();
-			}
-		}
-
 		public static void CreateRecord(int planID, int placeID, int day)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())

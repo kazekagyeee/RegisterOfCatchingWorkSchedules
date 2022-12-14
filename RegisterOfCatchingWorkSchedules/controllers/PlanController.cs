@@ -27,7 +27,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		public static void RemoveRecord(int planID, int placeID, int day) => RecordManagementService.RemoveRecord(planID, placeID, day);
 
-		public static StatusHistory[] GetStatusHistory(int planID) => GetPlan(planID).StatusHistory.ToArray();
+		public static StatusHistory[] GetStatusHistory(int planID) => StatusHistoryService.GetHistory(planID);
 
 		public static void RemovePlan(int planID) => PlansManagementService.DeletePlan(planID);
 	}
