@@ -7,33 +7,15 @@ namespace RegisterOfCatchingWorkSchedules
 {
 	public static class PlanController
 	{
-		public static List<Plans> GetAllPlans()
-		{
-			return PlansManagementService.GetAllowedPlans();
-		}
+		public static List<Plans> GetAllPlans() => PlansManagementService.GetAllowedPlans();
 
-		public static Plans GetPlan(int planID)
-		{
-			var allPlans = GetAllPlans();
-			foreach (var plan in allPlans)
-				if (plan.ID == planID) return plan;
-			return null;
-		}
+		public static Plans GetPlan(int planID) => PlansManagementService.GetById(planID);
 
-		public static Plans CreatePlan(DateTime date, Municipality municipality)
-		{
-			return PlansManagementService.CreatePlan(date);
-		}
+		public static Plans CreatePlan(DateTime date) => PlansManagementService.CreatePlan(date);
 
-		public static void SetPlanDate(int planID, DateTime date)
-		{
-			GetPlan(planID).PlanDate = date;
-		}
+		public static void SetPlanDate(int planID, DateTime date) => GetPlan(planID).PlanDate = date;
 
-		public static void SetPlanMunicipalty(int planID, Municipality municipality)
-		{
-			GetPlan(planID).Municipality = municipality;
-		}
+		public static void SetPlanMunicipalty(int planID, Municipality municipality) => GetPlan(planID).Municipality = municipality;
 
 		public static void SetPlanStatus(int planID, Statuses status) => PlansManagementService.SetPlanStatus(planID, status.ID);
 
@@ -52,41 +34,22 @@ namespace RegisterOfCatchingWorkSchedules
 
 		public static void AddRecord(int planID, int placeID, int day)
 		{
-			var plan = GetPlan(planID);
+			var planDate = GetPlan(planID).PlanDate.Value;
 			RecordManagementService.CreateRecord(
 				placeID,
 				planID,
-				new DateTime(plan.PlanDate.Value.Year,
-								plan.PlanDate.Value.Month,
-									day));
+				new DateTime(planDate.Year, planDate.Month, day));
 		}
 
-		public static void DeleteRecord(int planID, int placeID, int day)
+		public static void RemoveRecord(int planID, int placeID, int day)
 		{
 			foreach (var record in GetPlan(planID).Records)
 				if (record.Places == MunicipalityService.GetPlaceByID(placeID) && record.RecordDate.Value.Day == day)
 					RecordManagementService.DeleteRecord(record.ID);
 		}
 
-		public static StatusHistory[] GetStatusHistory(int planID)
-		{
-			return GetPlan(planID).StatusHistory.ToArray();
-		}
+		public static StatusHistory[] GetStatusHistory(int planID) => GetPlan(planID).StatusHistory.ToArray();
 
-		public static void RevertChanges(int planID)
-		{
-			var plan = GetPlan(planID);
-		}
-
-		public static void Save(int planID)
-		{
-			PlansManagementService.SaveChanges();
-		}
-
-		public static bool RemovePlan(int planID)
-		{
-			PlansManagementService.DeletePlan(planID);
-			return true;
-		}
+		public static void RemovePlan(int planID) => PlansManagementService.DeletePlan(planID);
 	}
 }

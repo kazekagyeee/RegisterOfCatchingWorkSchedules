@@ -201,22 +201,10 @@ namespace RegisterOfCatchingWorkSchedules
 			if ((bool)cell.Value)
 				PlanController.AddRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
 			else
-				PlanController.AddRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
+				PlanController.RemoveRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
 		}
 
 		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e) => RemovePlace(GetDataGridRowPlaceID(e.Row.Index));
-
-		private void OnFormClosing(object sender, FormClosingEventArgs e)
-		{
-			if (_currentPlanId == -1)
-				return;
-			if (_hasUnsavedChanges && MessageBox.Show("Есть несохраненные изменения. Сохранить?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
-				Save();
-			else
-				PlanController.RevertChanges(_currentPlanId);
-		}
-
-		private void OnSave(object sender, EventArgs e) => Save();
 
 		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlaceID = GetDataGridRowPlaceID(e.RowIndex);
 

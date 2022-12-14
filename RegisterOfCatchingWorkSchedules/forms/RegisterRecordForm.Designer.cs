@@ -131,7 +131,6 @@
 			this.button1.TabIndex = 15;
 			this.button1.Text = "Сохранить";
 			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.OnSave);
 			// 
 			// RegisterRecordForm
 			// 
@@ -150,7 +149,6 @@
 			this.Name = "RegisterRecordForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "План-график работ по отлову";
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
