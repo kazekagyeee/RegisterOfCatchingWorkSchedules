@@ -14,15 +14,18 @@ namespace RegisterOfCatchingWorkSchedules.Model
 
 		public virtual PlanStatus Status { get; set; }
 
+		public virtual User User { get; set; }
+
 		public DateTime Date { get; set; }
 
 		public PlanStatusChangeRecord() { }
 
-		public PlanStatusChangeRecord(Plan plan, PlanStatus status, DateTime date)
+		public PlanStatusChangeRecord(Plan plan, PlanStatus status, User user, DateTime date)
 		{
 			Plan = plan;
 			Status = status;
 			Date = date;
+			User = user;
 		}
 	}
 }

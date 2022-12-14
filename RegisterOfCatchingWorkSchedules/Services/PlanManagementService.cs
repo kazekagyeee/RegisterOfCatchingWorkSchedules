@@ -38,7 +38,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 		public static void SetStatus(Plan plan, PlanStatus status)
 		{
 			var date = DateTime.Now;
-			var statusRecord = new PlanStatusChangeRecord(plan, status, date);
+			var statusRecord = new PlanStatusChangeRecord(plan, status, SessionService.CurrentUser, date);
 			plan.Status = status;
 			plan.StatusHistory.Add(statusRecord);
 			plan.StatusChangeDate = date;
