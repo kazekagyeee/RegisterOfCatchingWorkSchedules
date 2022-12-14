@@ -107,7 +107,7 @@ namespace RegisterOfCatchingWorkSchedules
 			foreach (var task in plan.Records)
 			{
 				if (!addedAreas.ContainsKey(task.Places.ID))
-					addedAreas[task.Places.ID] = dgvPlan.Rows.Add(task.Places.ID);
+					addedAreas[task.Places.ID] = dgvPlan.Rows.Add(task.Places.ID, false);
 				dgvPlan.Rows[addedAreas[task.Places.ID]].Cells[task.RecordDate.Value.Day].Value = true;
 			}
 		}
