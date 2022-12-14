@@ -12,7 +12,12 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				return dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				return dbContext.Plans
+					.Include(x => x.Municipality)
+					.Include(x => x.Statuses)
+					.Include(x => x.Organisation)
+					.Include(x => x.Records.Select(p => p.Places))
+					.FirstOrDefault(x => x.ID == planID);
 			}
 		}
 

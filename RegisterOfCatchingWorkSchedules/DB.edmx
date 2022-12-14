@@ -73,7 +73,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HistoryStatusID" Type="int" />
           <Property Name="HistoryPlanID" Type="int" />
           <Property Name="HistoryDate" Type="date" />
@@ -403,7 +403,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HistoryStatusID" Type="Int32" />
           <Property Name="HistoryPlanID" Type="Int32" />
           <Property Name="HistoryDate" Type="DateTime" Precision="0" />
