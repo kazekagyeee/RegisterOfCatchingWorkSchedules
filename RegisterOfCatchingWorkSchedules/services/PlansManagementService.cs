@@ -74,8 +74,8 @@ namespace RegisterOfCatchingWorkSchedules
                 plan.Statuses = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик");
                 plan.PlanDate = planDate;
                 plan.StatusChangeDate = DateTime.Now;
-                plan.Organisation = Program.Session.User.Organisation;
-                plan.Municipality = Program.Session.User.Municipality;
+                plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
+                plan.OrganisationID = Program.Session.User.Organisation.ID;
                 dbContext.Plans.Add(plan);
                 dbContext.SaveChanges();
                 return plan;
