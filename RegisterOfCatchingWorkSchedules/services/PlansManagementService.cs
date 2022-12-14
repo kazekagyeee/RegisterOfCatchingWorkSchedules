@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegisterOfCatchingWorkSchedules.services;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,6 +8,14 @@ namespace RegisterOfCatchingWorkSchedules
 {
 	public static class PlansManagementService
 	{
+		public static Plans GetById(int planID)
+		{
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+			{
+				return dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+			}
+		}
+
 		public static List<Plans> GetAllowedPlans()
 		{
 			var plans = new List<Plans>();
@@ -59,14 +68,26 @@ namespace RegisterOfCatchingWorkSchedules
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
 				var plan = new Plans();
-				plan.Statuses = dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Черновик");
 				plan.PlanDate = planDate;
-				plan.StatusChangeDate = DateTime.Now;
 				plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
 				plan.OrganisationID = Program.Session.User.Organisation.ID;
 				dbContext.Plans.Add(plan);
 				dbContext.SaveChanges();
-				return plan;
+
+				SetPlanStatus(plan.ID, StatusesService.GetDefault().ID);
+				return GetById(plan.ID);
+			}
+		}
+
+		public static void SetPlanStatus(int planID, int statusID)
+		{
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+			{
+				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				plan.PlanStatusID = statusID;
+				plan.StatusChangeDate = DateTime.Now;
+				StatusHistoryService.AddHistoryLog(statusID, planID);
+				dbContext.SaveChanges();
 			}
 		}
 

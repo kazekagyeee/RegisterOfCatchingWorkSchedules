@@ -35,10 +35,7 @@ namespace RegisterOfCatchingWorkSchedules
 			GetPlan(planID).Municipality = municipality;
 		}
 
-		public static void SetPlanStatus(int planID, Statuses status)
-		{
-			GetPlan(planID).Statuses = status;
-		}
+		public static void SetPlanStatus(int planID, Statuses status) => PlansManagementService.SetPlanStatus(planID, status.ID);
 
 		public static void RemovePlace(int planID, int placeID)
 		{
