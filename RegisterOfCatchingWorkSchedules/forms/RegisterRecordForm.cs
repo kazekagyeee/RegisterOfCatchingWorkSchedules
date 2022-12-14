@@ -238,24 +238,10 @@ namespace RegisterOfCatchingWorkSchedules
 		}
 
 		private int GetDataGridRowPlaceID(int rowIndex) => (int)(dgvPlan.Rows[rowIndex].Cells[0].Value ?? -1);
-		/*private int GetDataGridRowPlaceID(int rowIndex)
-        {
-			var place = (Plans)dgvPlan.Rows[rowIndex].Cells[0].Value;
-			if (place == null) return -1;
-			return place.ID;    
-			//Попытка исправить, мб это правильно, просто пусть полежит тут
-        }*/
-        
-
-		private void Save()
-		{
-			PlanController.Save(_currentPlanId);
-			_hasUnsavedChanges = false;
-		}
 
 		private void CreatePlan()
 		{
-			var plan = PlanController.CreatePlan(dtpDate.Value, (Municipality)cbMunicipalty.SelectedItem);
+			var plan = PlanController.CreatePlan(dtpDate.Value);
 			_currentPlanId = plan.ID;
 			cbStatus.SelectedItem = plan.Statuses;
 
