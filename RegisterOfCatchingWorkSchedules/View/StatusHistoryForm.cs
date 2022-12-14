@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using RegisterOfCatchingWorkSchedules.Coltrollers;
+using System.Windows.Forms;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.View
 {
 	public partial class StatusHistoryForm : Form
 	{

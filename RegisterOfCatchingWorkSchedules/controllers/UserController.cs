@@ -1,4 +1,6 @@
-﻿namespace RegisterOfCatchingWorkSchedules
+﻿using RegisterOfCatchingWorkSchedules.Services;
+
+namespace RegisterOfCatchingWorkSchedules
 {
 	public static class UserController
 	{

@@ -1,10 +1,9 @@
-﻿using RegisterOfCatchingWorkSchedules.services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Services
 {
 	public static class PlansManagementService
 	{

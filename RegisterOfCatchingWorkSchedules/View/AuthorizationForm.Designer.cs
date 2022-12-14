@@ -1,4 +1,4 @@
-﻿namespace RegisterOfCatchingWorkSchedules
+﻿namespace RegisterOfCatchingWorkSchedules.View
 {
     partial class AuthorizationForm
     {

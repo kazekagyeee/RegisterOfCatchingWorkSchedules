@@ -1,9 +1,10 @@
 ﻿using Equin.ApplicationFramework;
+using RegisterOfCatchingWorkSchedules.Coltrollers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.View
 {
 	public partial class RegisterRecordForm : Form
 	{

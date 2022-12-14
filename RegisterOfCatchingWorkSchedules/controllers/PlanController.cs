@@ -1,7 +1,8 @@
-﻿using System;
+﻿using RegisterOfCatchingWorkSchedules.Services;
+using System;
 using System.Collections.Generic;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Coltrollers
 {
 	public static class PlanController
 	{

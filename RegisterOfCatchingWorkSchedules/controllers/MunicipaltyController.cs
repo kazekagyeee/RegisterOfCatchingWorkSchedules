@@ -1,7 +1,7 @@
-﻿using RegisterOfCatchingWorkSchedules.services;
+﻿using RegisterOfCatchingWorkSchedules.Services;
 using System.ComponentModel;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Coltrollers
 {
 	public static class MunicipaltyController
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Services
 {
 	public static class StatusHistoryService
 	{

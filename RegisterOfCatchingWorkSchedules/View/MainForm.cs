@@ -1,7 +1,8 @@
-﻿using System;
+﻿using RegisterOfCatchingWorkSchedules.Coltrollers;
+using System;
 using System.Windows.Forms;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.View
 {
 	public partial class MainForm : Form
 	{
