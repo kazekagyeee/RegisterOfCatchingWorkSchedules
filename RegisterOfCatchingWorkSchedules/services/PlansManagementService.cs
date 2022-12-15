@@ -37,7 +37,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 					availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
 				} else
                 {
-					availableStatuses = new List<Statuses>() { StatusesService.GetDefault() };
+					availableStatuses = new List<Statuses>() { StatusesService.GetFinished() };
                 }
                 
                 plans = GetPlansWithStatuses(availableStatuses);

@@ -14,6 +14,14 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			}
 		}
 
+		public static Statuses GetFinished()
+        {
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+            {
+				return dbContext.Statuses.FirstOrDefault(x => x.StatusName == "Согласован в ОМСУ");
+            }
+        }
+
 		public static BindingList<Statuses> GetBindingList()
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())

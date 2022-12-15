@@ -37,6 +37,7 @@
           <Property Name="PlanMunicipalityID" Type="int" Nullable="false" />
           <Property Name="PlanDate" Type="date" />
           <Property Name="StatusChangeDate" Type="date" />
+          <Property Name="StatusComment" Type="text" />
         </EntityType>
         <EntityType Name="Records">
           <Key>
@@ -375,6 +376,7 @@
           <Property Name="PlanMunicipalityID" Type="Int32" Nullable="false" />
           <Property Name="PlanDate" Type="DateTime" Precision="0" />
           <Property Name="StatusChangeDate" Type="DateTime" Precision="0" />
+          <Property Name="StatusComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Municipality" Relationship="Self.PlanMunicipalityID" FromRole="Plans" ToRole="Municipality" />
           <NavigationProperty Name="Organisation" Relationship="Self.OrganisationID" FromRole="Plans" ToRole="Organisation" />
           <NavigationProperty Name="StatusHistory" Relationship="Self.HistoryPlanID" FromRole="Plans" ToRole="StatusHistory" />
@@ -728,6 +730,7 @@
                 <ScalarProperty Name="PlanMunicipalityID" ColumnName="PlanMunicipalityID" />
                 <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
                 <ScalarProperty Name="StatusChangeDate" ColumnName="StatusChangeDate" />
+                <ScalarProperty Name="StatusComment" ColumnName="StatusComment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
