@@ -14,14 +14,14 @@ namespace RegisterOfCatchingWorkSchedules.Services
 		{
 			//TODO: check if ara task created
 			var task = plan.Tasks.Single(x => x.Area.Id == areaID);
-			task.DailyTasks += (int)Math.Pow(2, day);
+			task.DailyTasks += 1 << day;
 		}
 
 		public static void RemoveDailyTask(Plan plan, int areaID, int day)
 		{
 			//TODO: check if ara task created
 			var task = plan.Tasks.Single(x => x.Area.Id == areaID);
-			task.DailyTasks -= (int)Math.Pow(2, day);
+			task.DailyTasks -= 1 << day;
 		}
 
 		public static void CreateTask(Plan plan, int areaID)
