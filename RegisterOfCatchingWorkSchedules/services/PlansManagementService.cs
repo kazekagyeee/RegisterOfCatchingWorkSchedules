@@ -16,6 +16,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 					.Include(x => x.Statuses)
 					.Include(x => x.Organisation)
 					.Include(x => x.Records.Select(p => p.Places))
+					.Include(x => x.StatusHistory)
 					.FirstOrDefault(x => x.ID == planID);
 			}
 		}
@@ -25,21 +26,23 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			var plans = new List<Plans>();
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				//var user = Program.Session.User;
-				//var userRole = user.Roles;
-				//var rolePowers = dbContext.RolePowers
-				//	.Where(x => x.RoleID == userRole.ID)
-				//	.ToList();
-				//var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
-				//plans = GetPlansWithStatuses(availableStatuses);
-				return dbContext.Plans
-					.Include(x => x.Municipality)
-					.Include(x => x.Statuses)
-					.Include(x => x.Organisation)
-					.Include(x => x.Records.Select(p => p.Places))
-					.ToList();
-			}
-			return plans;
+				var availableStatuses = new List<Statuses>();
+				var user = Program.Session.User;
+				if (user != null)
+                {
+					var userRole = user.Roles;
+					var rolePowers = dbContext.RolePowers
+						.Where(x => x.RoleID == userRole.ID)
+						.ToList();
+					availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
+				} else
+                {
+					availableStatuses = new List<Statuses>() { StatusesService.GetDefault() };
+                }
+                
+                plans = GetPlansWithStatuses(availableStatuses);
+            }
+            return plans;
 		}
 
 		private static List<Plans> GetPlansWithStatuses(List<Statuses> availableStatuses)
@@ -52,6 +55,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 					.Include(x => x.Statuses)
 					.Include(x => x.Organisation)
 					.Include(x => x.Records.Select(p => p.Places))
+					.Include(x => x.StatusHistory)
 					.ToList();
 
 				foreach (var status in availableStatuses)
@@ -68,12 +72,13 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
 				var planToRemove = dbContext.Plans
-					.Include(x => x.Municipality)
-					.Include(x => x.Statuses)
-					.Include(x => x.Organisation)
-					.Include(x => x.Records.Select(p => p.Places))
-					.FirstOrDefault(x => x.ID == planID);
-				dbContext.Plans.Remove(planToRemove);
+                    .Include(x => x.Municipality)
+                    .Include(x => x.Statuses)
+                    .Include(x => x.Organisation)
+                    .Include(x => x.Records.Select(p => p.Places))
+                    .Include(x => x.StatusHistory)
+                    .FirstOrDefault(x => x.ID == planID);
+                dbContext.Plans.Remove(planToRemove);
 				dbContext.SaveChanges();
 			}
 		}
@@ -86,6 +91,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 				plan.PlanDate = planDate;
 				plan.PlanMunicipalityID = Program.Session.User.Municipality.ID;
 				plan.OrganisationID = Program.Session.User.Organisation.ID;
+				plan.PlanStatusID = StatusesService.GetDefault().ID;
 				dbContext.Plans.Add(plan);
 				dbContext.SaveChanges();
 

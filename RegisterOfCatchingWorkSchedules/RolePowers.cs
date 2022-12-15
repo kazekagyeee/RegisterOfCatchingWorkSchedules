@@ -15,8 +15,8 @@ namespace RegisterOfCatchingWorkSchedules
     public partial class RolePowers
     {
         public int ID { get; set; }
-        public Nullable<int> RoleID { get; set; }
-        public Nullable<int> StatusID { get; set; }
+        public int RoleID { get; set; }
+        public int StatusID { get; set; }
     
         public virtual Roles Roles { get; set; }
         public virtual Statuses Statuses { get; set; }

@@ -25,7 +25,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 			InitializeComponent();
 			var user = UserController.GetCurrentUser();
 			InitComboboxes();
-			InitDataGrid(user.UserMunicipality.Value);
+			InitDataGrid(user.UserMunicipality);
 			tbMunicipality.Text = user.Municipality.MunicipalityName;
 
 			var plan = PlanController.GetPlan(planId);

@@ -16,7 +16,7 @@ namespace RegisterOfCatchingWorkSchedules
     {
         public int ID { get; set; }
         public Nullable<int> HistoryStatusID { get; set; }
-        public Nullable<int> HistoryPlanID { get; set; }
+        public int HistoryPlanID { get; set; }
         public Nullable<System.DateTime> HistoryDate { get; set; }
     
         public virtual Plans Plans { get; set; }

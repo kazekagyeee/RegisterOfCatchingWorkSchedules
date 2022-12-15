@@ -22,7 +22,7 @@ namespace RegisterOfCatchingWorkSchedules
     
         public int ID { get; set; }
         public string PlacesName { get; set; }
-        public Nullable<int> MunicipalityID { get; set; }
+        public int MunicipalityID { get; set; }
     
         public virtual Municipality Municipality { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

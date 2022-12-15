@@ -15,8 +15,8 @@ namespace RegisterOfCatchingWorkSchedules
     public partial class Records
     {
         public int ID { get; set; }
-        public Nullable<int> PlaceID { get; set; }
-        public Nullable<int> RecordPlanID { get; set; }
+        public int PlaceID { get; set; }
+        public int RecordPlanID { get; set; }
         public Nullable<System.DateTime> RecordDate { get; set; }
     
         public virtual Places Places { get; set; }

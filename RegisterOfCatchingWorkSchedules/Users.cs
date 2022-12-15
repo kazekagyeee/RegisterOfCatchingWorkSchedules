@@ -17,9 +17,9 @@ namespace RegisterOfCatchingWorkSchedules
         public int ID { get; set; }
         public string UserLogin { get; set; }
         public string UserPassword { get; set; }
-        public Nullable<int> UserRole { get; set; }
-        public Nullable<int> UserOrganisation { get; set; }
-        public Nullable<int> UserMunicipality { get; set; }
+        public int UserRole { get; set; }
+        public int UserOrganisation { get; set; }
+        public int UserMunicipality { get; set; }
     
         public virtual Municipality Municipality { get; set; }
         public virtual Organisation Organisation { get; set; }

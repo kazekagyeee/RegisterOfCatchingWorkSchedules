@@ -79,14 +79,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="View\AuthorizationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\AuthorizationForm.Designer.cs">
-      <DependentUpon>AuthorizationForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\MunicipaltyController.cs" />
-    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Municipality.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -108,6 +100,23 @@
     <Compile Include="Roles.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Statuses.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StatusHistory.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\AuthorizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AuthorizationForm.Designer.cs">
+      <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\MunicipaltyController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Services\MunicipalityService.cs" />
     <Compile Include="Services\PlansManagementService.cs" />
     <Compile Include="Services\RecordManagementService.cs" />
@@ -137,15 +146,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\StatusHistoryService.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Statuses.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StatusHistory.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Users.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="View\AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>

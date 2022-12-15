@@ -25,16 +25,16 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PlacesName" Type="nvarchar" MaxLength="50" />
-          <Property Name="MunicipalityID" Type="int" />
+          <Property Name="MunicipalityID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Plans">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrganisationID" Type="int" />
-          <Property Name="PlanStatusID" Type="int" />
-          <Property Name="PlanMunicipalityID" Type="int" />
+          <Property Name="OrganisationID" Type="int" Nullable="false" />
+          <Property Name="PlanStatusID" Type="int" Nullable="false" />
+          <Property Name="PlanMunicipalityID" Type="int" Nullable="false" />
           <Property Name="PlanDate" Type="date" />
           <Property Name="StatusChangeDate" Type="date" />
         </EntityType>
@@ -43,8 +43,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PlaceID" Type="int" />
-          <Property Name="RecordPlanID" Type="int" />
+          <Property Name="PlaceID" Type="int" Nullable="false" />
+          <Property Name="RecordPlanID" Type="int" Nullable="false" />
           <Property Name="RecordDate" Type="date" />
         </EntityType>
         <EntityType Name="RolePowers">
@@ -52,8 +52,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleID" Type="int" />
-          <Property Name="StatusID" Type="int" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -75,7 +75,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HistoryStatusID" Type="int" />
-          <Property Name="HistoryPlanID" Type="int" />
+          <Property Name="HistoryPlanID" Type="int" Nullable="false" />
           <Property Name="HistoryDate" Type="date" />
         </EntityType>
         <EntityType Name="Users">
@@ -83,14 +83,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserLogin" Type="nvarchar" MaxLength="50" />
-          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" />
-          <Property Name="UserRole" Type="int" />
-          <Property Name="UserOrganisation" Type="int" />
-          <Property Name="UserMunicipality" Type="int" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRole" Type="int" Nullable="false" />
+          <Property Name="UserOrganisation" Type="int" Nullable="false" />
+          <Property Name="UserMunicipality" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="HistoryPlanID">
-          <End Role="Plans" Type="Self.Plans" Multiplicity="0..1" />
+          <End Role="Plans" Type="Self.Plans" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StatusHistory" Type="Self.StatusHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plans">
@@ -114,7 +116,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="MunicipalityID">
-          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Places" Type="Self.Places" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipality">
@@ -126,7 +130,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="OrganisationID">
-          <End Role="Organisation" Type="Self.Organisation" Multiplicity="0..1" />
+          <End Role="Organisation" Type="Self.Organisation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organisation">
@@ -138,7 +144,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PlaceID">
-          <End Role="Places" Type="Self.Places" Multiplicity="0..1" />
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
           <End Role="Records" Type="Self.Records" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Places">
@@ -150,7 +156,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PlanMunicipalityID">
-          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipality">
@@ -162,7 +170,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PlanStatusID">
-          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
@@ -174,7 +184,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RecordPlanID">
-          <End Role="Plans" Type="Self.Plans" Multiplicity="0..1" />
+          <End Role="Plans" Type="Self.Plans" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Records" Type="Self.Records" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plans">
@@ -186,7 +198,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RoleID">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RolePowers" Type="Self.RolePowers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -198,7 +212,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="StatusID">
-          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RolePowers" Type="Self.RolePowers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
@@ -210,7 +226,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserMunicipality">
-          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipality">
@@ -222,7 +240,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserOrganisation">
-          <End Role="Organisation" Type="Self.Organisation" Multiplicity="0..1" />
+          <End Role="Organisation" Type="Self.Organisation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organisation">
@@ -234,7 +254,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserRole">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -339,7 +361,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PlacesName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MunicipalityID" Type="Int32" />
+          <Property Name="MunicipalityID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Municipality" Relationship="Self.MunicipalityID" FromRole="Places" ToRole="Municipality" />
           <NavigationProperty Name="Records" Relationship="Self.PlaceID" FromRole="Places" ToRole="Records" />
         </EntityType>
@@ -348,9 +370,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrganisationID" Type="Int32" />
-          <Property Name="PlanStatusID" Type="Int32" />
-          <Property Name="PlanMunicipalityID" Type="Int32" />
+          <Property Name="OrganisationID" Type="Int32" Nullable="false" />
+          <Property Name="PlanStatusID" Type="Int32" Nullable="false" />
+          <Property Name="PlanMunicipalityID" Type="Int32" Nullable="false" />
           <Property Name="PlanDate" Type="DateTime" Precision="0" />
           <Property Name="StatusChangeDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Municipality" Relationship="Self.PlanMunicipalityID" FromRole="Plans" ToRole="Municipality" />
@@ -364,8 +386,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PlaceID" Type="Int32" />
-          <Property Name="RecordPlanID" Type="Int32" />
+          <Property Name="PlaceID" Type="Int32" Nullable="false" />
+          <Property Name="RecordPlanID" Type="Int32" Nullable="false" />
           <Property Name="RecordDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Places" Relationship="Self.PlaceID" FromRole="Records" ToRole="Places" />
           <NavigationProperty Name="Plans" Relationship="Self.RecordPlanID" FromRole="Records" ToRole="Plans" />
@@ -375,8 +397,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleID" Type="Int32" />
-          <Property Name="StatusID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Roles" Relationship="Self.RoleID" FromRole="RolePowers" ToRole="Roles" />
           <NavigationProperty Name="Statuses" Relationship="Self.StatusID" FromRole="RolePowers" ToRole="Statuses" />
         </EntityType>
@@ -405,7 +427,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HistoryStatusID" Type="Int32" />
-          <Property Name="HistoryPlanID" Type="Int32" />
+          <Property Name="HistoryPlanID" Type="Int32" Nullable="false" />
           <Property Name="HistoryDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Plans" Relationship="Self.HistoryPlanID" FromRole="StatusHistory" ToRole="Plans" />
           <NavigationProperty Name="Statuses" Relationship="Self.HistoryStatusID" FromRole="StatusHistory" ToRole="Statuses" />
@@ -415,17 +437,19 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserRole" Type="Int32" />
-          <Property Name="UserOrganisation" Type="Int32" />
-          <Property Name="UserMunicipality" Type="Int32" />
+          <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserRole" Type="Int32" Nullable="false" />
+          <Property Name="UserOrganisation" Type="Int32" Nullable="false" />
+          <Property Name="UserMunicipality" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Municipality" Relationship="Self.UserMunicipality" FromRole="Users" ToRole="Municipality" />
           <NavigationProperty Name="Organisation" Relationship="Self.UserOrganisation" FromRole="Users" ToRole="Organisation" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRole" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="MunicipalityID">
-          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Places" Type="Self.Places" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipality">
@@ -437,7 +461,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PlanMunicipalityID">
-          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipality">
@@ -449,7 +475,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserMunicipality">
-          <End Role="Municipality" Type="Self.Municipality" Multiplicity="0..1" />
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipality">
@@ -461,7 +489,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="OrganisationID">
-          <End Role="Organisation" Type="Self.Organisation" Multiplicity="0..1" />
+          <End Role="Organisation" Type="Self.Organisation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organisation">
@@ -473,7 +503,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserOrganisation">
-          <End Role="Organisation" Type="Self.Organisation" Multiplicity="0..1" />
+          <End Role="Organisation" Type="Self.Organisation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organisation">
@@ -485,7 +517,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PlaceID">
-          <End Role="Places" Type="Self.Places" Multiplicity="0..1" />
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
           <End Role="Records" Type="Self.Records" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Places">
@@ -497,7 +529,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="HistoryPlanID">
-          <End Role="Plans" Type="Self.Plans" Multiplicity="0..1" />
+          <End Role="Plans" Type="Self.Plans" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StatusHistory" Type="Self.StatusHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plans">
@@ -509,7 +543,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PlanStatusID">
-          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Plans" Type="Self.Plans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
@@ -521,7 +557,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RecordPlanID">
-          <End Role="Plans" Type="Self.Plans" Multiplicity="0..1" />
+          <End Role="Plans" Type="Self.Plans" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Records" Type="Self.Records" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plans">
@@ -533,7 +571,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RoleID">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RolePowers" Type="Self.RolePowers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -545,7 +585,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="StatusID">
-          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RolePowers" Type="Self.RolePowers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
@@ -557,7 +599,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserRole">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
