@@ -1,4 +1,4 @@
-﻿namespace RegisterOfCatchingWorkSchedules
+﻿namespace RegisterOfCatchingWorkSchedules.View
 {
     partial class MainForm
     {
@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
 			this.dgvPlans = new System.Windows.Forms.DataGridView();
-			this.btAddRecord = new System.Windows.Forms.Button();
-			this.btRemoveRecord = new System.Windows.Forms.Button();
 			this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Locality = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.StatusChangeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btAddRecord = new System.Windows.Forms.Button();
+			this.btRemoveRecord = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlans)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -59,27 +59,6 @@
 			this.dgvPlans.Size = new System.Drawing.Size(1016, 356);
 			this.dgvPlans.TabIndex = 0;
 			this.dgvPlans.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OpenPlan);
-			// 
-			// btAddRecord
-			// 
-			this.btAddRecord.Location = new System.Drawing.Point(9, 10);
-			this.btAddRecord.Margin = new System.Windows.Forms.Padding(2);
-			this.btAddRecord.Name = "btAddRecord";
-			this.btAddRecord.Size = new System.Drawing.Size(100, 29);
-			this.btAddRecord.TabIndex = 2;
-			this.btAddRecord.Text = "Добавить";
-			this.btAddRecord.UseVisualStyleBackColor = true;
-			this.btAddRecord.Click += new System.EventHandler(this.AddRecord);
-			// 
-			// btRemoveRecord
-			// 
-			this.btRemoveRecord.Location = new System.Drawing.Point(114, 10);
-			this.btRemoveRecord.Margin = new System.Windows.Forms.Padding(2);
-			this.btRemoveRecord.Name = "btRemoveRecord";
-			this.btRemoveRecord.Size = new System.Drawing.Size(100, 29);
-			this.btRemoveRecord.TabIndex = 3;
-			this.btRemoveRecord.Text = "Удалить";
-			this.btRemoveRecord.UseVisualStyleBackColor = true;
 			// 
 			// ID
 			// 
@@ -118,6 +97,28 @@
 			this.StatusChangeDate.Name = "StatusChangeDate";
 			this.StatusChangeDate.ReadOnly = true;
 			this.StatusChangeDate.Width = 130;
+			// 
+			// btAddRecord
+			// 
+			this.btAddRecord.Location = new System.Drawing.Point(9, 10);
+			this.btAddRecord.Margin = new System.Windows.Forms.Padding(2);
+			this.btAddRecord.Name = "btAddRecord";
+			this.btAddRecord.Size = new System.Drawing.Size(100, 29);
+			this.btAddRecord.TabIndex = 2;
+			this.btAddRecord.Text = "Добавить";
+			this.btAddRecord.UseVisualStyleBackColor = true;
+			this.btAddRecord.Click += new System.EventHandler(this.AddRecord);
+			// 
+			// btRemoveRecord
+			// 
+			this.btRemoveRecord.Location = new System.Drawing.Point(114, 10);
+			this.btRemoveRecord.Margin = new System.Windows.Forms.Padding(2);
+			this.btRemoveRecord.Name = "btRemoveRecord";
+			this.btRemoveRecord.Size = new System.Drawing.Size(100, 29);
+			this.btRemoveRecord.TabIndex = 3;
+			this.btRemoveRecord.Text = "Удалить";
+			this.btRemoveRecord.UseVisualStyleBackColor = true;
+			this.btRemoveRecord.Click += new System.EventHandler(this.RemoveRecord);
 			// 
 			// MainForm
 			// 

@@ -1,10 +1,9 @@
-﻿using RegisterOfCatchingWorkSchedules.services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Services
 {
 	public static class PlansManagementService
 	{
@@ -26,13 +25,19 @@ namespace RegisterOfCatchingWorkSchedules
 			var plans = new List<Plans>();
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				var user = Program.Session.User;
-				var userRole = user.Roles;
-				var rolePowers = dbContext.RolePowers
-					.Where(x => x.RoleID == userRole.ID)
+				//var user = Program.Session.User;
+				//var userRole = user.Roles;
+				//var rolePowers = dbContext.RolePowers
+				//	.Where(x => x.RoleID == userRole.ID)
+				//	.ToList();
+				//var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
+				//plans = GetPlansWithStatuses(availableStatuses);
+				return dbContext.Plans
+					.Include(x => x.Municipality)
+					.Include(x => x.Statuses)
+					.Include(x => x.Organisation)
+					.Include(x => x.Records.Select(p => p.Places))
 					.ToList();
-				var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
-				plans = GetPlansWithStatuses(availableStatuses);
 			}
 			return plans;
 		}
@@ -121,18 +126,41 @@ namespace RegisterOfCatchingWorkSchedules
 			}
 		}
 
-		public static void RevertUnsavedChanges()
+		public static void ChangePlanPropertiy(int planID, string propName, object propValueD)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				//dbContext.RevertUnsavedChanges();
+				var changedPlan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				var properties = typeof(Plans).GetProperties();
+				foreach (var property in properties)
+				{
+					if (property.Name == propName)
+					{
+						property.SetValue(changedPlan, propValueD);
+					}
+				}
+				dbContext.SaveChanges();
 			}
 		}
 
-		public static void SaveChanges()
+		public static void ChangePlace(int planID, int oldPlaceID, int newPlaceID)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
+				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				foreach (var rec in plan.Records)
+					if (rec.PlaceID == oldPlaceID)
+						rec.PlaceID = newPlaceID;
+				dbContext.SaveChanges();
+			}
+		}
+
+		public static void RemovePlace(int planID, int placeID)
+		{
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+			{
+				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				plan.Records = plan.Records.Where(x => x.PlaceID != placeID).ToHashSet();
 				dbContext.SaveChanges();
 			}
 		}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.View
 {
 	public partial class AuthorizationForm : Form
 	{

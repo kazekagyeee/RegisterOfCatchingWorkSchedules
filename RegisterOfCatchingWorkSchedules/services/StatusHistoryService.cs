@@ -1,33 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Services
 {
-    public static class StatusHistoryService
-    {
-        public static List<StatusHistory> GetHistory(int planID)
-        {
-            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
-            {
-                return dbContext.StatusHistory
-                    .Where(x => x.HistoryPlanID == planID)
-                    .ToList();
-            }
-        }
-        public static void AddHistoryLog(int statusID, int planID)
-        {
-            using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
-            {
-                var logToAdd = new StatusHistory();
-                logToAdd.HistoryStatusID = statusID;
-                logToAdd.HistoryPlanID = planID;
-                logToAdd.HistoryDate = DateTime.Now;
-                dbContext.StatusHistory.Add(logToAdd);
-                dbContext.SaveChanges();
-            } 
-        }
-    }
+	public static class StatusHistoryService
+	{
+		public static StatusHistory[] GetHistory(int planID)
+		{
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+				return dbContext.StatusHistory
+					.Include(x => x.Statuses)
+					.Where(x => x.HistoryPlanID == planID)
+					.ToArray();
+		}
+
+		public static void AddHistoryLog(int statusID, int planID)
+		{
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+			{
+				var logToAdd = new StatusHistory
+				{
+					HistoryStatusID = statusID,
+					HistoryPlanID = planID,
+					HistoryDate = DateTime.Now
+				};
+				dbContext.StatusHistory.Add(logToAdd);
+				dbContext.SaveChanges();
+			}
+		}
+	}
 }

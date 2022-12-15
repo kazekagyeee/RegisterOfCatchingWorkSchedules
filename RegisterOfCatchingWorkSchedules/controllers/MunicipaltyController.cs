@@ -1,19 +1,13 @@
-﻿using RegisterOfCatchingWorkSchedules.services;
+﻿using RegisterOfCatchingWorkSchedules.Services;
 using System.ComponentModel;
-using System.Data.Entity;
-using System.Linq;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Coltrollers
 {
 	public static class MunicipaltyController
 	{
-		public static Municipality[] GetAllMunicipalties() => MunicipalityService.GetAllMunicipalties();
-
 		public static Places[] GetAllPlaces() => MunicipalityService.GetAllPlaces();
 
-		public static BindingList<Municipality> GetMunicipalitiesBindingList() 
+		public static BindingList<Municipality> GetMunicipalitiesBindingList()
 			=> MunicipalityService.GetMunicipalitiesBindingList();
-
-		public static BindingList<Places> GetPlacesBindingList() => MunicipalityService.GetPlacesBindingList();
 	}
 }

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using RegisterOfCatchingWorkSchedules.Coltrollers;
+using System;
 using System.Windows.Forms;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.View
 {
 	public partial class MainForm : Form
 	{
@@ -14,6 +15,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void LoadPlansList()
 		{
+			dgvPlans.Rows.Clear();
 			foreach (var plan in PlanController.GetAllPlans())
 			{
 				dgvPlans.Rows.Add(
@@ -27,27 +29,24 @@ namespace RegisterOfCatchingWorkSchedules
 
 		private void OpenAuthForm() => new AuthorizationForm().ShowDialog();
 
-		private void AddRecord(object sender, EventArgs e) => new RegisterRecordForm(-1).ShowDialog();
-
-		private void RemoveRecord(object sender, EventArgs e)
+		private void AddRecord(object sender, EventArgs e)
 		{
-			foreach (DataGridViewRow row in dgvPlans.SelectedRows)
-			{
-				if (PlanController.TryRemovePlan((int)row.Cells["ID"].Value))
-				{
-
-				}
-				else
-				{
-					MessageBox.Show("Ошибка");
-				}
-			}
+			new RegisterRecordForm(-1).ShowDialog();
+			LoadPlansList();
 		}
 
 		private void OpenPlan(object sender, DataGridViewCellEventArgs e)
 		{
 			var id = (int)dgvPlans.Rows[e.RowIndex].Cells["ID"].Value;
 			new RegisterRecordForm(id).ShowDialog();
+			LoadPlansList();
+		}
+
+		private void RemoveRecord(object sender, EventArgs e)
+		{
+			foreach (DataGridViewRow row in dgvPlans.SelectedRows)
+				PlanController.RemovePlan((int)row.Cells["ID"].Value);
+			LoadPlansList();
 		}
 	}
 }

@@ -1,14 +1,10 @@
-﻿using RegisterOfCatchingWorkSchedules.services;
+﻿using RegisterOfCatchingWorkSchedules.Services;
 using System.ComponentModel;
-using System.Data.Entity;
 
-namespace RegisterOfCatchingWorkSchedules
+namespace RegisterOfCatchingWorkSchedules.Coltrollers
 {
 	public static class StatusesController
 	{
-		public static BindingList<Statuses> GetStatusesBindingList()
-		{
-			return StatusesService.GetBindingList();
-		}
+		public static BindingList<Statuses> GetStatusesBindingList() => StatusesService.GetBindingList();
 	}
 }

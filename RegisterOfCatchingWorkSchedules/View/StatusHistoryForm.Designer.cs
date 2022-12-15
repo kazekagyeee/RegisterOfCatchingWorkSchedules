@@ -1,4 +1,4 @@
-﻿namespace RegisterOfCatchingWorkSchedules
+﻿namespace RegisterOfCatchingWorkSchedules.View
 {
 	partial class StatusHistoryForm
 	{
@@ -31,7 +31,6 @@
 			this.dgvHistory = new System.Windows.Forms.DataGridView();
 			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Changes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -42,8 +41,7 @@
 			this.dgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Date,
-            this.Changes,
-            this.Author});
+            this.Changes});
 			this.dgvHistory.Location = new System.Drawing.Point(12, 12);
 			this.dgvHistory.Name = "dgvHistory";
 			this.dgvHistory.Size = new System.Drawing.Size(348, 426);
@@ -60,12 +58,6 @@
 			this.Changes.HeaderText = "Статус";
 			this.Changes.Name = "Changes";
 			this.Changes.ReadOnly = true;
-			// 
-			// Author
-			// 
-			this.Author.HeaderText = "Пользователь";
-			this.Author.Name = "Author";
-			this.Author.ReadOnly = true;
 			// 
 			// StatusHistoryForm
 			// 
@@ -86,6 +78,5 @@
 		private System.Windows.Forms.DataGridView dgvHistory;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Changes;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Author;
 	}
 }

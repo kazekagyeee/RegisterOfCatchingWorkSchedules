@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="controllers\StatusesController.cs" />
+    <Compile Include="Controllers\StatusesController.cs" />
     <Compile Include="DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,14 +79,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="forms\AuthorizationForm.cs">
+    <Compile Include="View\AuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\AuthorizationForm.Designer.cs">
+    <Compile Include="View\AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="controllers\MunicipaltyController.cs" />
-    <Compile Include="controllers\PlanController.cs" />
+    <Compile Include="Controllers\MunicipaltyController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Municipality.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -108,35 +108,35 @@
     <Compile Include="Roles.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="services\MunicipalityService.cs" />
-    <Compile Include="services\PlansManagementService.cs" />
-    <Compile Include="services\RecordManagementService.cs" />
-    <Compile Include="services\AutorizationService.cs" />
-    <Compile Include="services\StatusesService.cs" />
+    <Compile Include="Services\MunicipalityService.cs" />
+    <Compile Include="Services\PlansManagementService.cs" />
+    <Compile Include="Services\RecordManagementService.cs" />
+    <Compile Include="Services\AutorizationService.cs" />
+    <Compile Include="Services\StatusesService.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Sort.cs" />
-    <Compile Include="forms\StatusHistoryForm.cs">
+    <Compile Include="View\StatusHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\StatusHistoryForm.Designer.cs">
+    <Compile Include="View\StatusHistoryForm.Designer.cs">
       <DependentUpon>StatusHistoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\MainForm.cs">
+    <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\MainForm.Designer.cs">
+    <Compile Include="View\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\RegisterRecordForm.cs">
+    <Compile Include="View\RegisterRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\RegisterRecordForm.Designer.cs">
+    <Compile Include="View\RegisterRecordForm.Designer.cs">
       <DependentUpon>RegisterRecordForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="services\StatusHistoryService.cs" />
-    <Compile Include="controllers\UserController.cs" />
+    <Compile Include="Services\StatusHistoryService.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Statuses.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -146,13 +146,13 @@
     <Compile Include="Users.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="forms\AuthorizationForm.resx">
+    <EmbeddedResource Include="View\AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\StatusHistoryForm.resx">
+    <EmbeddedResource Include="View\StatusHistoryForm.resx">
       <DependentUpon>StatusHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\MainForm.resx">
+    <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -165,7 +165,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="forms\RegisterRecordForm.resx">
+    <EmbeddedResource Include="View\RegisterRecordForm.resx">
       <DependentUpon>RegisterRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DB.edmx">
