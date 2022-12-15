@@ -27,7 +27,9 @@ namespace RegisterOfCatchingWorkSchedules.View
 			InitializeComponent();
 			var user = UserController.GetCurrentUser();
 			InitComboboxes();
-			InitDataGrid(user.UserMunicipality);
+			InitDataGrid();
+			AddPlacesToDataGrid(user.UserMunicipality);
+
 			tbMunicipality.Text = user.Municipality.MunicipalityName;
 			_userMunicipalty = user.UserMunicipality;
 			var plan = PlanController.GetPlan(planId);
@@ -47,10 +49,9 @@ namespace RegisterOfCatchingWorkSchedules.View
 			cbStatus.DisplayMember = "StatusName";
 		}
 
-		private void InitDataGrid(int municipalityID)
+		private void InitDataGrid()
 		{
 			dgvPlan.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Район", DataPropertyName = "Place", Width = PlaceColumnWidth, ReadOnly = true });
-			AddPlacesToDataGrid(municipalityID);
 			for (int i = 1; i <= 31; i++)
 			{
 				var day = new DataGridViewCheckBoxColumn
@@ -162,12 +163,6 @@ namespace RegisterOfCatchingWorkSchedules.View
 			_hasSomeRecords = true;
 			var areaId = GetDataGridRowPlaceID(e.RowIndex);
 			var cell = dgvPlan.Rows[e.RowIndex].Cells[e.ColumnIndex];
-			if (areaId < 0)
-			{
-				cell.Value = false;
-				MessageBox.Show("Сначала вам необходимо выбрать место!");
-				return;
-			}
 			if ((bool)cell.Value)
 				PlanController.AddRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
 			else
