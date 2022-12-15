@@ -22,14 +22,7 @@ namespace RegisterOfCatchingWorkSchedules
 
 		public static void RemoveAreaTask(Plan plan, int areaID) => TaskManagementService.RemoveTask(plan, areaID);
 
-		public static void ChangeArea(Plan plan, int oldAreaId, int newAreaId)
-		{
-			//TODO move to service
-			var newArea = LocalityController.GetAreaById(newAreaId);
-			foreach (var task in plan.Tasks)
-				if (task.Area.Id == oldAreaId)
-					task.Area = newArea;
-		}
+		public static void ChangeArea(Plan plan, int oldAreaId, int newAreaId) => PlanManagementService.ChangeArea(plan, oldAreaId, newAreaId);
 
 		public static void AddDailyTask(Plan plan, int areaID, int day) => TaskManagementService.AddDailyTask(plan, areaID, day);
 

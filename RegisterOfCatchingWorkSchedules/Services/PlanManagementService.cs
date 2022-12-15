@@ -43,5 +43,13 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			plan.StatusHistory.Add(statusRecord);
 			plan.StatusChangeDate = date;
 		}
+
+		public static void ChangeArea(Plan plan, int oldAreaId, int newAreaId)
+		{
+			var newArea = LocalityController.GetAreaById(newAreaId); //TODO move this to service
+			foreach (var task in plan.Tasks)
+				if (task.Area.Id == oldAreaId)
+					task.Area = newArea;
+		}
 	}
 }
