@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RegisterOfCatchingWorkSchedules.Services
@@ -20,24 +19,14 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			}
 		}
 
-		public static void DeleteRecord(int recordID)
-		{
-			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
-			{
-				var recordToDelete = dbContext.Records.FirstOrDefault(x => x.ID == recordID);
-				dbContext.Records.Remove(recordToDelete);
-				dbContext.SaveChanges();
-			}
-		}
-
-		internal static void RemoveRecord(int planID, int placeID, int day)
+		public static void RemoveRecord(int planID, int placeID, int day)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
 				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
 				var planDate = plan.PlanDate.Value;
 				var recordDate = new DateTime(planDate.Year, planDate.Month, day);
-				var record = plan.Records.FirstOrDefault(x => x.RecordDate == recordDate);
+				var record = plan.Records.FirstOrDefault(x => x.RecordDate == recordDate && x.PlaceID == placeID);
 				dbContext.Records.Remove(record);
 				dbContext.SaveChanges();
 			}

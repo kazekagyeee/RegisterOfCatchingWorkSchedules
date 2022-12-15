@@ -29,7 +29,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 				var availableStatuses = new List<Statuses>();
 				var user = Program.Session.User;
 				if (user != null)
-                {
+				{
 					var userRole = user.Roles;
 					var rolePowers = dbContext.RolePowers
 						.Where(x => x.RoleID == userRole.ID)
@@ -72,13 +72,13 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
 				var planToRemove = dbContext.Plans
-                    .Include(x => x.Municipality)
-                    .Include(x => x.Statuses)
-                    .Include(x => x.Organisation)
-                    .Include(x => x.Records.Select(p => p.Places))
-                    .Include(x => x.StatusHistory)
-                    .FirstOrDefault(x => x.ID == planID);
-                dbContext.Plans.Remove(planToRemove);
+					.Include(x => x.Municipality)
+					.Include(x => x.Statuses)
+					.Include(x => x.Organisation)
+					.Include(x => x.Records.Select(p => p.Places))
+					.Include(x => x.StatusHistory)
+					.FirstOrDefault(x => x.ID == planID);
+				dbContext.Plans.Remove(planToRemove);
 				dbContext.SaveChanges();
 			}
 		}
@@ -112,26 +112,6 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			}
 		}
 
-		public static void ChangePlanProperties(Dictionary<string, object> changedValues, int planID)
-		{
-			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
-			{
-				var changedPlan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
-				var properties = typeof(Plans).GetProperties();
-				foreach (var value in changedValues)
-				{
-					foreach (var property in properties)
-					{
-						if (property.Name == value.Key)
-						{
-							property.SetValue(changedPlan, value.Value);
-						}
-					}
-				}
-				dbContext.SaveChanges();
-			}
-		}
-
 		public static void ChangePlanPropertiy(int planID, string propName, object propValueD)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
@@ -149,24 +129,12 @@ namespace RegisterOfCatchingWorkSchedules.Services
 			}
 		}
 
-		public static void ChangePlace(int planID, int oldPlaceID, int newPlaceID)
+		public static void RemovePlanRecords(int planID)
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
 				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
-				foreach (var rec in plan.Records)
-					if (rec.PlaceID == oldPlaceID)
-						rec.PlaceID = newPlaceID;
-				dbContext.SaveChanges();
-			}
-		}
-
-		public static void RemovePlace(int planID, int placeID)
-		{
-			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
-			{
-				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
-				plan.Records = plan.Records.Where(x => x.PlaceID != placeID).ToHashSet();
+				plan.Records.Clear();
 				dbContext.SaveChanges();
 			}
 		}
