@@ -1,23 +1,25 @@
-﻿using Equin.ApplicationFramework;
-using RegisterOfCatchingWorkSchedules.Coltrollers;
+﻿using RegisterOfCatchingWorkSchedules.Coltrollers;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Linq;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace RegisterOfCatchingWorkSchedules.View
 {
 	public partial class RegisterRecordForm : Form
 	{
 		private int _currentPlanId;
-		private int _selectedRowPlaceID;
+		private bool _hasSomeRecords;
+		private int _userMunicipalty;
 
 		private bool _isInitialized = false;
 
 		private const int PlaceColumnWidth = 200;
 		private const int DayColumnWidth = 27;
 
+		private Dictionary<int, int> _placesIdIndexMap;
+		private Dictionary<int, int> _placesIndexIdMap;
 		private BindingList<Statuses> _statuses;
 
 		public RegisterRecordForm(int planId)
@@ -27,7 +29,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 			InitComboboxes();
 			InitDataGrid(user.UserMunicipality);
 			tbMunicipality.Text = user.Municipality.MunicipalityName;
-
+			_userMunicipalty = user.UserMunicipality;
 			var plan = PlanController.GetPlan(planId);
 			if (plan != null)
 				LoadPlanInfo(plan, true);
@@ -47,17 +49,8 @@ namespace RegisterOfCatchingWorkSchedules.View
 
 		private void InitDataGrid(int municipalityID)
 		{
-			var places = new DataGridViewComboBoxColumn
-			{
-				HeaderText = "Район",
-				DataPropertyName = "Place",
-				Width = PlaceColumnWidth,
-				DataSource = new BindingListView<Places>(MunicipaltyController.GetAllPlaces()),
-				ValueMember = "ID",
-				DisplayMember = "PlacesName",
-			};
-			dgvPlan.Columns.Add(places);
-			((dgvPlan.Columns[0] as DataGridViewComboBoxColumn).DataSource as BindingListView<Places>).ApplyFilter(x => x.MunicipalityID == municipalityID);
+			dgvPlan.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Район", DataPropertyName = "Place", Width = PlaceColumnWidth, ReadOnly = true });
+			AddPlacesToDataGrid(municipalityID);
 			for (int i = 1; i <= 31; i++)
 			{
 				var day = new DataGridViewCheckBoxColumn
@@ -70,6 +63,17 @@ namespace RegisterOfCatchingWorkSchedules.View
 			}
 			dgvPlan.RowHeadersWidth = 20;
 			dgvPlan.DataError += (s, e) => e.ThrowException = false;
+		}
+
+		private void AddPlacesToDataGrid(int municipalityID)
+		{
+			var placesList = MunicipaltyController.GetMunicipaltyPlaces(municipalityID);
+			_placesIdIndexMap = placesList.Select((x, i) => (x.ID, i)).ToDictionary(x => x.ID, x => x.i);
+			_placesIndexIdMap = placesList.Select((x, i) => (x.ID, i)).ToDictionary(x => x.i, x => x.ID);
+			foreach (var place in placesList)
+			{
+				dgvPlan.Rows.Add(place.PlacesName);
+			}
 		}
 
 		private void LoadPlanInfo(Plans plan, bool diableDateEditing)
@@ -91,17 +95,14 @@ namespace RegisterOfCatchingWorkSchedules.View
 		private void EnableTableEditing()
 		{
 			dgvPlan.Enabled = true;
-			dgvPlan.AllowUserToAddRows = true;
 		}
 
 		private void LoadPlanTableData(Plans plan)
 		{
-			var addedAreas = new Dictionary<int, int>();
 			foreach (var task in plan.Records)
 			{
-				if (!addedAreas.ContainsKey(task.Places.ID))
-					addedAreas[task.Places.ID] = dgvPlan.Rows.Add(task.Places.ID, false);
-				dgvPlan.Rows[addedAreas[task.Places.ID]].Cells[task.RecordDate.Value.Day].Value = true;
+				_hasSomeRecords = true;
+				dgvPlan.Rows[_placesIdIndexMap[task.PlaceID]].Cells[task.RecordDate.Value.Day].Value = true;
 			}
 		}
 
@@ -118,9 +119,10 @@ namespace RegisterOfCatchingWorkSchedules.View
 			{
 				CreatePlan();
 			}
-			else if (_currentPlanId != -1 && _isInitialized && IsUserAgreedToClearTableData())
+			else if (_currentPlanId != -1 && _isInitialized && (!_hasSomeRecords || IsUserAgreedToClearTableData()))
 			{
 				ClearTableData();
+				PlanController.RemoveAllRecords(_currentPlanId);
 				PlanController.SetPlanDate(_currentPlanId, dtpDate.Value);
 			}
 		}
@@ -132,25 +134,10 @@ namespace RegisterOfCatchingWorkSchedules.View
 				dgvPlan.Columns[i].Visible = i <= daysInMonth;
 		}
 
-		private void OnMunicipalityChanged(object sender, EventArgs e)
-		{
-			//TODO: clear table, show message
-			if (!_isInitialized)
-				return;
-
-			if (dtpDate.Value != DateTime.MinValue && _currentPlanId == -1)
-			{
-				CreatePlan();
-			}
-			else if (_currentPlanId != -1 && IsUserAgreedToClearTableData())
-			{
-				ClearTableData();
-			}
-		}
-
 		private void ClearTableData()
 		{
 			dgvPlan.Rows.Clear();
+			AddPlacesToDataGrid(_userMunicipalty);
 		}
 
 		private bool IsUserAgreedToClearTableData()
@@ -172,7 +159,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 		{
 			if (e.ColumnIndex < 1)
 				return;
-
+			_hasSomeRecords = true;
 			var areaId = GetDataGridRowPlaceID(e.RowIndex);
 			var cell = dgvPlan.Rows[e.RowIndex].Cells[e.ColumnIndex];
 			if (areaId < 0)
@@ -187,35 +174,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 				PlanController.RemoveRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
 		}
 
-		private void OnDataGridRowRemoving(object sender, DataGridViewRowCancelEventArgs e) => RemovePlace(GetDataGridRowPlaceID(e.Row.Index));
-
-		private void OnRowSelected(object sender, DataGridViewCellEventArgs e) => _selectedRowPlaceID = GetDataGridRowPlaceID(e.RowIndex);
-
-		private void OnRowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-		{
-			foreach (DataGridViewRow row in dgvPlan.Rows)
-				RemovePlace(GetDataGridRowPlaceID(row.Index));
-		}
-
-		private void OnCellValueChanged(object sender, DataGridViewCellEventArgs e)
-		{
-			if (e.ColumnIndex != 0)
-				return;
-			PlanController.EditPlace(_currentPlanId, _selectedRowPlaceID, GetDataGridRowPlaceID(e.RowIndex));
-		}
-
-		private void RemovePlace(int placeID) => PlanController.RemovePlace(_currentPlanId, placeID);
-
-		private void CurrentCellDirtyStateChanged(object sender, EventArgs e)
-		{
-			if (dgvPlan.IsCurrentCellDirty)
-			{
-				// This fires the cell value changed event
-				dgvPlan.CommitEdit(DataGridViewDataErrorContexts.Commit);
-			}
-		}
-
-		private int GetDataGridRowPlaceID(int rowIndex) => (int)(dgvPlan.Rows[rowIndex].Cells[0].Value ?? -1);
+		private int GetDataGridRowPlaceID(int rowIndex) => _placesIndexIdMap[rowIndex];
 
 		private void CreatePlan()
 		{
