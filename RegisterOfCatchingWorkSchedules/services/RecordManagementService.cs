@@ -26,7 +26,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 				var plan = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
 				var planDate = plan.PlanDate.Value;
 				var recordDate = new DateTime(planDate.Year, planDate.Month, day);
-				var record = plan.Records.FirstOrDefault(x => x.RecordDate == recordDate);
+				var record = plan.Records.FirstOrDefault(x => x.RecordDate == recordDate && x.PlaceID == placeID);
 				dbContext.Records.Remove(record);
 				dbContext.SaveChanges();
 			}

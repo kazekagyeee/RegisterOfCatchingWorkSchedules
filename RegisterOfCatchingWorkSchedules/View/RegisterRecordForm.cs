@@ -163,7 +163,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 			_hasSomeRecords = true;
 			var areaId = GetDataGridRowPlaceID(e.RowIndex);
 			var cell = dgvPlan.Rows[e.RowIndex].Cells[e.ColumnIndex];
-			if ((bool)cell.Value)
+			if (cell.Value == null || !(bool)cell.Value)
 				PlanController.AddRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
 			else
 				PlanController.RemoveRecord(_currentPlanId, areaId, int.Parse(dgvPlan.Columns[e.ColumnIndex].DataPropertyName));
