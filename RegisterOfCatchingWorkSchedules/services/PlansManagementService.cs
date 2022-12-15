@@ -62,7 +62,12 @@ namespace RegisterOfCatchingWorkSchedules
 		{
 			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
 			{
-				var planToRemove = dbContext.Plans.FirstOrDefault(x => x.ID == planID);
+				var planToRemove = dbContext.Plans
+					.Include(x => x.Municipality)
+					.Include(x => x.Statuses)
+					.Include(x => x.Organisation)
+					.Include(x => x.Records.Select(p => p.Places))
+					.FirstOrDefault(x => x.ID == planID);
 				dbContext.Plans.Remove(planToRemove);
 				dbContext.SaveChanges();
 			}
