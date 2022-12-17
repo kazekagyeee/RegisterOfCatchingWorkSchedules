@@ -23,7 +23,6 @@ namespace RegisterOfCatchingWorkSchedules.Services
 
         public static List<Plans> GetAllowedPlans(Filter filter, int page)
         {
-            var plans = new List<Plans>();
             using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
             {
                 var availableStatuses = new List<Statuses>();
@@ -41,9 +40,21 @@ namespace RegisterOfCatchingWorkSchedules.Services
                     availableStatuses = new List<Statuses>() { StatusesService.GetFinished() };
                 }
 
-                plans = GetPlansWithStatuses(availableStatuses);
+                var plans = GetPlansWithStatuses(availableStatuses)
+                    .Where(x => x.PlanDate >= filter.MinPlanDate 
+                    && x.PlanDate <= filter.MaxPlanDate)
+                    .Where(x => x.StatusChangeDate >= filter.MinPlanStatusChangeDate 
+                    && x.StatusChangeDate <= filter.MaxPlanStatusChangeDate);
+                if (filter.StatusID > 0)
+                {
+                    plans = plans.Where(x => x.PlanStatusID == filter.StatusID);
+                }
+                if (filter.MunicipalityID > 0)
+                {
+                    plans = plans.Where(x => x.PlanMunicipalityID == filter.MunicipalityID);
+                }
+                return plans.Skip(page * 10).Take(10).ToList();
             }
-            return plans.Skip(page * 10).Take(10).ToList();
         }
 
         private static List<Plans> GetPlansWithStatuses(List<Statuses> availableStatuses)
