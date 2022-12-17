@@ -30,5 +30,17 @@ namespace RegisterOfCatchingWorkSchedules.Services
 				return dbContext.Statuses.Local.ToBindingList();
 			}
 		}
+
+		public static BindingList<Statuses> GetAllowedStatuses()
+        {
+			using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
+            {
+				var userRole = Program.Session.User.Roles;
+				var rolePowers = dbContext.RolePowers
+						.Where(x => x.RoleID == userRole.ID);
+				var availableStatuses = rolePowers.Select(x => x.Statuses).ToList();
+				return new BindingList<Statuses>(availableStatuses);
+			}
+        }
 	}
 }

@@ -43,7 +43,7 @@ namespace RegisterOfCatchingWorkSchedules.View
 
 		private void InitComboboxes()
 		{
-			_statuses = StatusesController.GetStatusesBindingList();
+			_statuses = StatusesController.GetAllowedStatuses();
 			cbStatus.DataSource = _statuses;
 			cbStatus.ValueMember = "ID";
 			cbStatus.DisplayMember = "StatusName";
