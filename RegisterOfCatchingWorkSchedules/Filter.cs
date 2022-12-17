@@ -1,6 +1,6 @@
 ﻿namespace RegisterOfCatchingWorkSchedules
 {
-	public class Sort
+	public class Filter
 	{
 	}
 }
