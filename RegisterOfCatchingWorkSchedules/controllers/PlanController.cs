@@ -6,7 +6,7 @@ namespace RegisterOfCatchingWorkSchedules.Coltrollers
 {
 	public static class PlanController
 	{
-		public static List<Plans> GetAllPlans() => PlansManagementService.GetAllowedPlans();
+		public static List<Plans> GetAllPlans(Filter filter, int page) => PlansManagementService.GetAllowedPlans(filter, page);
 
 		public static Plans GetPlan(int planID) => PlansManagementService.GetById(planID);
 
