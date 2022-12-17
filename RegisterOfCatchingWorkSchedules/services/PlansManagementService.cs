@@ -21,7 +21,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
             }
         }
 
-        public static List<Plans> GetAllowedPlans()
+        public static List<Plans> GetAllowedPlans(Filter filter, int page)
         {
             var plans = new List<Plans>();
             using (var dbContext = new RegisterOfCathingWorkSchedulesEntities())
@@ -43,7 +43,7 @@ namespace RegisterOfCatchingWorkSchedules.Services
 
                 plans = GetPlansWithStatuses(availableStatuses);
             }
-            return plans;
+            return plans.Skip(page * 10).Take(10).ToList();
         }
 
         private static List<Plans> GetPlansWithStatuses(List<Statuses> availableStatuses)
