@@ -123,7 +123,7 @@
     <Compile Include="Services\AutorizationService.cs" />
     <Compile Include="Services\StatusesService.cs" />
     <Compile Include="Session.cs" />
-    <Compile Include="Sort.cs" />
+    <Compile Include="Filter.cs" />
     <Compile Include="View\StatusHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
